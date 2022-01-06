@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cn-z201-redisson
+  profiles:
+    active: dev
+logging:
+  config: classpath:logback-dev.xml
+
