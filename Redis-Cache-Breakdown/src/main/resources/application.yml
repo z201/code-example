@@ -9,7 +9,7 @@ spring:
     resources:
       add-mappings: false # 关闭资源映射
 server:
-  port: 0
+  port: 9001
   servlet:
     context-path: /redis
 

@@ -39,111 +39,27 @@ import java.util.concurrent.locks.ReentrantLock;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AppApplicationTest {
 
-    public static final String INFO = "INFO:";
-
-    private static String LOCK_PREFIX = "LOCK:P";
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public volatile ReentrantLock lock = new ReentrantLock();
-
-    /**
-     * 根据用户组件获取数据
-     *
-     * @param id
-     * @return
-     */
-    private Map<String, Object> findById(String id) {
-        String sql = "SELECT * FROM person WHERE id = ?";
-        Map<String, Object> person = jdbcTemplate.queryForMap(sql, id);
-        return person;
-    }
-
-    private List<Map<String, Object>> all() {
-        List<Map<String, Object>> personList =
-                jdbcTemplate.queryForList("SELECT * FROM person");
-        return personList;
-    }
-
-
-    private boolean lock(String key, long timeout) {
-        Boolean result = redisTemplate.opsForValue().setIfAbsent(LOCK_PREFIX, key, Duration.ofSeconds(timeout));
-        if (result) {
-            log.info("lock");
-        }
-        return result;
-    }
-
-    private boolean unlock(String key) {
-        String script = "if redis.call('get',KEYS[1]) == ARGV[1]"
-                + "then"
-                + "     return redis.call('del',KEYS[1])"
-                + "else "
-                + "     return 0 "
-                + "end";
-        String[] args = new String[]{key};
-        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
-        Object result = redisTemplate.execute(redisScript, Collections.singletonList(LOCK_PREFIX), args);
-        if (Objects.equals(result, 1L)) {
-            log.info("unlock ok");
-            return true;
-        }
-        return false;
-    }
-
-
-    private void clean() {
-        Set<String> keys =
-                redisTemplate.keys("*");
-        redisTemplate.delete(keys);
-    }
-
+    @Autowired
+    AppApplicationServiceImpl appApplicationService;
 
     @Test
     @Disabled
     public void dataView() {
         List<Map<String, Object>> personList =
-                all();
+                appApplicationService.all();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         log.info("personList \n {}", gson.toJson(personList));
-        Map<String, Object> objectMap = findById(personList.get(0).get("id").toString());
+        Map<String, Object> objectMap = appApplicationService.findById(personList.get(0).get("id").toString());
         log.info("person \n {}", gson.toJson(objectMap));
     }
 
-    private Map<String, Object> findCacheById(String id,Long timeout) {
-        Map<String, Object> result = new HashMap<>();
-        Gson gson = new GsonBuilder().create();
-        String key = INFO + id;
-        Object data = redisTemplate.opsForValue().get(key);
-        if (data == null) {
-            try {
-                if (lock(id, timeout)) {
-                    log.info("init data ");
-                    result = findById(id);
-                    if (CollectionUtils.isEmpty(result)) {
-                        // 插入一个空格进去
-                        log.info("set empty ");
-                        result = new HashMap<>();
-                        redisTemplate.opsForValue().set(key, gson.toJson(result), 500, TimeUnit.MILLISECONDS);
-                    } else {
-                        log.info("set data ");
-                        redisTemplate.opsForValue().set(key, gson.toJson(result));
-                    }
-                }
-            } finally {
-                unlock(id);
-            }
-        } else {
-            result = gson.fromJson(data.toString(), Map.class);
-            if (!CollectionUtils.isEmpty(result)) {
-                log.info("get cache");
-            }
-        }
-        return result;
+    private void clean() {
+        Set<String> keys =
+                redisTemplate.keys("*");
+        redisTemplate.delete(keys);
     }
 
     private void testCacheBreakdownInfo() {
@@ -153,7 +69,7 @@ public class AppApplicationTest {
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         for (int i = 0; i < count; i++) {
             executorService.execute(() -> {
-                log.info(" user {} ", findCacheById(id,1000L));
+                log.info(" user {} ", appApplicationService.findCacheById(id,1000L));
                 try {
                     Thread.sleep(1000L);
                 } catch (InterruptedException e) {
@@ -168,8 +84,6 @@ public class AppApplicationTest {
             e.printStackTrace();
         }
         executorService.shutdown();
-
-
     }
 
     @Test
