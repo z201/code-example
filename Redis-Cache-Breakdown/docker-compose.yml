@@ -1,10 +1,33 @@
-\version : '3'
+version : '3'
 
 networks:
   network-redis-cache-breakdown:
     driver: bridge
 
 services:
+  web:
+    container_name: cn.z201.docker-redis-cache-breakdown
+    build:
+      context: .
+      dockerfile: .
+    image: cn.z201.docker-redis-cache-breakdown
+    networks:
+      - network-redis-cache-breakdown
+    expose:
+      - '9001'
+    ports:
+      - '9001:9001'
+    depends_on: # 等待其它服务启动完成
+      - mysql
+      - redis
+    links:
+      - mysql
+      - redis
+    healthcheck:
+      test: "/bin/netstat -anpt|grep 9001"
+      interval: 30s
+      timeout: 3s
+      retries: 1
   mysql:
     image: mysql:5.7
     container_name: mysql5.7-dev-5
