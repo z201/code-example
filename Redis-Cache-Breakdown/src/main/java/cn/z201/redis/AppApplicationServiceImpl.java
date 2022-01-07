@@ -13,11 +13,9 @@ import org.springframework.util.CollectionUtils;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author z201.coding@gmail.com
- * @date 2022/1/8
  **/
 @Service
 @Slf4j
@@ -76,21 +74,21 @@ public class AppApplicationServiceImpl {
         return false;
     }
 
-    public Map<String, Object> findCacheById(String id,Long timeout) {
+    public Map<String, Object> findCacheById(String id, Long lockOutTime, Long emptyOutTime) {
         Map<String, Object> result = new HashMap<>();
         Gson gson = new GsonBuilder().create();
         String key = INFO + id;
         Object data = redisTemplate.opsForValue().get(key);
         if (data == null) {
             try {
-                if (lock(id, timeout)) {
+                if (lock(id, lockOutTime)) {
                     log.info("init data ");
                     result = findById(id);
                     if (CollectionUtils.isEmpty(result)) {
                         // 插入一个空格进去
                         log.info("set empty ");
                         result = new HashMap<>();
-                        redisTemplate.opsForValue().set(key, gson.toJson(result), 500, TimeUnit.MILLISECONDS);
+                        redisTemplate.opsForValue().set(key, gson.toJson(result), emptyOutTime, TimeUnit.MILLISECONDS);
                     } else {
                         log.info("set data ");
                         redisTemplate.opsForValue().set(key, gson.toJson(result));

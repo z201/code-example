@@ -69,7 +69,7 @@ public class AppApplicationTest {
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         for (int i = 0; i < count; i++) {
             executorService.execute(() -> {
-                log.info(" user {} ", appApplicationService.findCacheById(id,1000L));
+                log.info(" user {} ", appApplicationService.findCacheById(id, 1000L, 10000L));
                 try {
                     Thread.sleep(1000L);
                 } catch (InterruptedException e) {

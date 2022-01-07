@@ -29,7 +29,7 @@ public class AppApplicationController {
         if (null == id) {
             data.put("data", "请求参数不合法");
         }else{
-            data.put("data", appApplicationService.findCacheById(id,1000L));
+            data.put("data", appApplicationService.findCacheById(id,1000L,10000L));
         }
         return data;
     }
