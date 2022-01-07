@@ -1,0 +1,31 @@
+version : '3'
+
+networks:
+  network-redis:
+    driver: bridge
+
+services:
+  master:
+    image: redis:5.0.5
+    container_name: redis5.0.6-master
+    networks:
+      - network-redis
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass redis_pwd  --masterauth redis_pwd # 启动redis命令
+  slaves1:
+    image: redis:5.0.5
+    container_name: redis5.0.6-slaves1
+    networks:
+      - network-redis
+    ports:
+      - '6380:6379'
+    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass redis_pwd --masterauth redis_pwd # 启动redis命令
+  slaves2:
+    image: redis:5.0.5
+    container_name: redis5.0.6-slaves2
+    networks:
+      - network-redis
+    ports:
+      - '6381:6379'
+    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass redis_pwd --masterauth redis_pwd # 启动redis命令
