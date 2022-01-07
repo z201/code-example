@@ -22,7 +22,6 @@ import java.util.*;
                 MappedStatement.class, Object.class
         }),
 })
-@Component
 public class MybatisInterceptor implements Interceptor {
 
     @Override

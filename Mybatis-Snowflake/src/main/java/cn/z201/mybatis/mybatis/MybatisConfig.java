@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisConfig {
 
     /**
-     *  #开启返回map结果集的下划线转驼峰
+     * #开启返回map结果集的下划线转驼峰
+     *
      * @return
      */
     @Bean
@@ -28,6 +30,15 @@ public class MybatisConfig {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         return interceptor;
+    }
+
+    //     可以直接在插件上增加Component 也可以在此处声明
+    @Bean
+    public String localInterceptor(SqlSessionFactory sqlSessionFactory) {
+        //实例化插件
+        MybatisInterceptor sqlInterceptor = new MybatisInterceptor();
+        sqlSessionFactory.getConfiguration().addInterceptor(sqlInterceptor);
+        return "interceptor";
     }
 
 }
