@@ -1,7 +1,6 @@
 package cn.z201.redis;
 
 
-import cn.hutool.core.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.RedisSystemException;
@@ -21,52 +20,6 @@ import java.util.Objects;
 @Slf4j
 public class BloomTool {
 
-
-//    /**
-//     * 初始化
-//     *
-//     * @param key
-//     * @param rate 准确度
-//     * @param size 大小
-//     */
-//    public Boolean init(String key, double rate, Integer size) {
-//        RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter(key);
-//        return bloomFilter.tryInit(size,rate);
-//    }
-//
-//    /**
-//     * 添加元素
-//     *
-//     * @param key
-//     * @param value
-//     */
-//    public Boolean add(String key, Object value) {
-//        RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter(key);
-//        return bloomFilter.add(value);
-//    }
-//
-//    /**
-//     * 是否存在
-//     *
-//     * @param key
-//     * @param value
-//     * @return
-//     */
-//    public Boolean exists(String key, Object value) {
-//        RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter(key);
-//        return bloomFilter.contains(value);
-//    }
-//
-//    /**
-//     * 数量
-//     *
-//     * @param key
-//     * @return
-//     */
-//    public long count(String key) {
-//        RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter(key);
-//        return bloomFilter.count();
-//    }
 
     @Autowired
     private RedisTemplate redisTemplate;

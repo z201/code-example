@@ -41,7 +41,7 @@ public class AppApplicationTest {
         String key = "u";
         log.info("init 异常或者错误都会报错 {}", bloomTool.init(key, "0.001", "10000000"));
         List<String> values = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Integer value = RandomUtil.randomInt(1000, 20000000);
             values.add(value.toString());
             Boolean result =  bloomTool.add(key, value.toString());
