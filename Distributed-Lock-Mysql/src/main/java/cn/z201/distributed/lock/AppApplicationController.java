@@ -32,14 +32,14 @@ public class AppApplicationController {
         return data;
     }
 
-    @RequestMapping(value = "del/{key}")
-    public Object unlock(@PathVariable(value = "key") String key) {
+    @RequestMapping(value = "del/{key}/{value}")
+    public Object unlock(@PathVariable(value = "key") String key, @PathVariable(value = "value") String value) {
         if (StringUtils.isEmpty(key)) {
            throw new IllegalArgumentException("参数不正确");
         }
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
-        data.put("data", distributedLockTool.unLock(key));
+        data.put("data", distributedLockTool.unLock(key,value));
         return data;
     }
 }

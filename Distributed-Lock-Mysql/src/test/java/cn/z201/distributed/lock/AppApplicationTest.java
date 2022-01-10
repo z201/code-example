@@ -41,7 +41,6 @@ public class AppApplicationTest {
             executorService.execute(() -> {
                 Boolean result = distributedLockTool.lock(key, value);
                 log.info("lock result {} {} {} ", result, key, value);
-
                 countDownLatch.countDown();
             });
         }
@@ -51,11 +50,11 @@ public class AppApplicationTest {
             e.printStackTrace();
         }
         executorService.shutdown();
-        unLock(key);
+        unLock(key,value);
     }
 
-    public void unLock(String key) {
-        Boolean result = distributedLockTool.unLock(key);
+    public void unLock(String key,String value) {
+        Boolean result = distributedLockTool.unLock(key,value);
         log.info("unLock result {} {}  ", result, key);
     }
 }
