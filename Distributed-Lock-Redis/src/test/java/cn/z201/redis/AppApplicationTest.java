@@ -42,7 +42,7 @@ public class AppApplicationTest {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
                     String key = UUID.randomUUID().toString();
-                    log.info(" lick {} key  {} ", distributedLockRedisTool.lock(key, key, 10L), key);
+                    log.info(" lock {} key  {} ", distributedLockRedisTool.lock(key, key, 10L), key);
                     countDownLatch.countDown();
                 });
             }
