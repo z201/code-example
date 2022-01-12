@@ -37,11 +37,11 @@ public class AppApplicationTest {
     public void testLock() {
         int count = 10;
         CountDownLatch countDownLatch = new CountDownLatch(count);
+        String key = UUID.randomUUID().toString();
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         try {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
-                    String key = UUID.randomUUID().toString();
                     log.info(" lock {} key  {} ", distributedLockRedisTool.lock(key, key, 10L), key);
                     countDownLatch.countDown();
                 });
@@ -52,8 +52,8 @@ public class AppApplicationTest {
         }
         Set<String> keys = redisTemplate.keys("*");
         log.info("keys {}", keys.toString());
-        for (String key : keys) {
-            key = key.replace("lock:","");
+        for (String item : keys) {
+            item = item.replace("lock:","");
             log.info("unlock {} {}", distributedLockRedisTool.unlock(key, key),key);
         }
         executorService.shutdown();

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author z201.coding@gmail.com
@@ -21,6 +22,15 @@ public class DistributedLockRedisTool {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /**
+     * 尝试获取分布式锁,设置重试次数
+     *
+     * @param key
+     * @param value
+     * @param retries
+     * @param timeout
+     * @return
+     */
     public boolean lock(String key, String value, int retries, long timeout) {
         Boolean result = Boolean.FALSE;
         // 最多重试三次
@@ -39,13 +49,53 @@ public class DistributedLockRedisTool {
         return result;
     }
 
+    /**
+     * 设置锁，设置过期时间
+     *
+     * @param key
+     * @param value
+     * @param timeout
+     * @return
+     */
     public boolean lock(String key, String value, long timeout) {
-        Boolean result = redisTemplate.opsForValue().setIfAbsent(LOCK_PREFIX + key, value, Duration.ofSeconds(timeout));
-        if (result) {
-            log.info("lock ok");
-        }
-        return result;
+        return tryLock(key, value, timeout, TimeUnit.SECONDS, 1, TimeUnit.SECONDS);
     }
+
+    /**
+     * 尝试获取分布式锁,并设置获取锁的超时时间
+     *
+     * @param key                分布式锁 key
+     * @param value              分布式锁 value
+     * @param expireTime         锁的超时时间,防止死锁
+     * @param expireTimeUnit     锁的超时时间单位
+     * @param acquireTimeout     尝试获取锁的等待时间,如果在时间范围内获取锁失败,就结束获取锁
+     * @param acquireTimeoutUnit 尝试获取锁的等待时间单位
+     * @return 是否成功获取分布式锁
+     */
+    public boolean tryLock(String key, String value, long expireTime, TimeUnit expireTimeUnit, int acquireTimeout, TimeUnit acquireTimeoutUnit) {
+        try {
+            // 尝试自旋获取锁,等待配置的一段时间,如果在时间范围内获取锁失败,就结束获取锁
+            long end = System.currentTimeMillis() + acquireTimeoutUnit.toMillis(acquireTimeout);
+            while (System.currentTimeMillis() < end) {
+                // 尝试获取锁
+                Boolean result = redisTemplate.opsForValue().setIfAbsent(LOCK_PREFIX + key, value, expireTime, expireTimeUnit);
+                // 验证是否成功获取锁
+                if (Objects.equals(Boolean.TRUE, result)) {
+                    log.info("tryLock success   {}  {}  ", key, value);
+                    return true;
+                }
+                // 睡眠 50 毫秒
+                Thread.sleep(100);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            log.error("tryLock {} {} error {}", key, value, e.getMessage());
+        }
+        log.info("tryLock fail  {}  {}  ", key, value);
+        return false;
+    }
+
 
     public boolean unlock(String key, String value) {
         String script = "if redis.call('get',KEYS[1]) == ARGV[1]"
