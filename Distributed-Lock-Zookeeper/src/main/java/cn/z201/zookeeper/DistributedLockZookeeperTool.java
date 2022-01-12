@@ -62,6 +62,7 @@ public class DistributedLockZookeeperTool {
     public boolean createSortNode(String path, String data) {
         try {
             zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
+            return true;
         } catch (Exception e) {
             log.error("创建持久化顺序节点 异常 {} {} {}", path, data, e.getMessage());
             return false;
