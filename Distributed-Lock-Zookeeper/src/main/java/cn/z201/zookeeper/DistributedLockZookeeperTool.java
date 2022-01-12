@@ -6,6 +6,7 @@ import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -53,22 +54,6 @@ public class DistributedLockZookeeperTool {
     }
 
     /**
-     * 创建持久化节点
-     *
-     * @param path
-     * @param data
-     */
-    public boolean createNode(String path, String data) {
-        try {
-            zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-            return true;
-        } catch (Exception e) {
-            log.error("创建持久化节点 异常 {} {} {}", path, data, e.getMessage());
-            return false;
-        }
-    }
-
-    /**
      * 创建持久化顺序节点
      *
      * @param path
@@ -77,7 +62,6 @@ public class DistributedLockZookeeperTool {
     public boolean createSortNode(String path, String data) {
         try {
             zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
-            return true;
         } catch (Exception e) {
             log.error("创建持久化顺序节点 异常 {} {} {}", path, data, e.getMessage());
             return false;

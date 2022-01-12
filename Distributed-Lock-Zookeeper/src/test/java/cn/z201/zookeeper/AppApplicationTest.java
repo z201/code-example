@@ -34,26 +34,18 @@ public class AppApplicationTest {
     @Autowired
     DistributedLockZookeeperTool distributedLockZookeeperTool;
 
-    @Test
-    @Disabled
-    public void testExists() {
-        Stat stat = distributedLockZookeeperTool.exists("/node", new ZookeeperWatcher());
-        if (Validator.isNotNull(stat)) {
-            log.info("stat {}", JsonTool.toString(stat));
-        }
-    }
 
     @Test
     @Disabled
     public void createNode() {
-        Boolean result = distributedLockZookeeperTool.createNode("/node", "1");
+        Boolean result = distributedLockZookeeperTool.createSortNode("/node", "1");
         log.info("result {}", result);
     }
 
     @Test
     @Disabled
     public void updateNode() {
-        Boolean result = distributedLockZookeeperTool.createNode("/node", "2");
+        Boolean result = distributedLockZookeeperTool.updateNode("/node", "2");
         log.info("result {}", result);
     }
 
@@ -88,7 +80,7 @@ public class AppApplicationTest {
         try {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
-                    log.info(" lock {} key  {} ", distributedLockZookeeperTool.createNode("/"+key, key),key);
+                    log.info(" lock {} key  {} ", distributedLockZookeeperTool.createSortNode("/"+key, key),key);
                     countDownLatch.countDown();
                 });
             }
