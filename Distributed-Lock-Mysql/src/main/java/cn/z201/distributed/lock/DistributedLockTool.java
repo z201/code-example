@@ -1,10 +1,10 @@
 package cn.z201.distributed.lock;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
@@ -33,8 +33,9 @@ public class DistributedLockTool {
         return false;
     }
 
+    @Transactional
     public Boolean unLock(String key,String value) {
-        String sql = "SELECT * FROM distributed_lock WHERE lock_id = ? LOCK IN SHARE MODE";
+        String sql = "SELECT * FROM distributed_lock WHERE lock_id = ? FOR UPDATE";
         Map<String, Object> lock = new HashMap<>();
         try {
             lock = jdbcTemplate.queryForMap(sql, key);

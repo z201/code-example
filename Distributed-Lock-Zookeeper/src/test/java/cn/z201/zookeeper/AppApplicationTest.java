@@ -3,6 +3,7 @@ package cn.z201.zookeeper;
 import cn.hutool.core.lang.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -31,56 +33,30 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AppApplicationTest {
 
-    @Autowired
-    DistributedLockZookeeperTool distributedLockZookeeperTool;
 
+    @Resource
+    private ZooKeeper zkClient;
 
-    @Test
-    @Disabled
-    public void createNode() {
-        Boolean result = distributedLockZookeeperTool.createNode("/node", "1");
-        log.info("result {}", result);
-    }
-
-    @Test
-    @Disabled
-    public void updateNode() {
-        Boolean result = distributedLockZookeeperTool.updateNode("/node", "2");
-        log.info("result {}", result);
-    }
-
-    @Test
-    @Disabled
-    public void deleteNode() {
-        Boolean result = distributedLockZookeeperTool.deleteNode("/node");
-        log.info("result {}", result);
-    }
-
-    @Test
-    @Disabled
-    public void getChildren() throws InterruptedException, KeeperException {
-        List<String> result = distributedLockZookeeperTool.getChildren("/node");
-        log.info("result {}", result);
-    }
-
-    @Test
-    @Disabled
-    public void getData() {
-        String result = distributedLockZookeeperTool.getData("/node",new ZookeeperWatcher());
-        log.info("result {}", result);
-    }
 
     @Test
     @Disabled
     public void testLock() {
-        int count = 10;
-        String key = UUID.randomUUID().toString();
+        int count = 2;
+        String key = "1";
         CountDownLatch countDownLatch = new CountDownLatch(count);
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         try {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
-                    log.info(" lock {} key  {} ", distributedLockZookeeperTool.createNode("/"+key, key),key);
+                    try {
+                        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient,key);
+                        log.info(" lock {} key  {} ", distributedLockZookeeperTool.lock(key), key);
+                        // 执行业务
+                        Thread.sleep(1000);
+                        distributedLockZookeeperTool.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     countDownLatch.countDown();
                 });
             }

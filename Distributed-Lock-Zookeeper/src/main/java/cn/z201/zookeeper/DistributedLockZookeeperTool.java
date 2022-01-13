@@ -1,175 +1,83 @@
 package cn.z201.zookeeper;
 
+import cn.hutool.core.lang.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.locks.LockSupport;
 
 
 /**
  * @author z201.coding@gmail.com
  **/
-@Service
 @Slf4j
-public class DistributedLockZookeeperTool {
+public class DistributedLockZookeeperTool implements Watcher, AutoCloseable {
 
-    @Autowired
     private ZooKeeper zkClient;
+    private String path;
+    private String zNode;
 
-    /**
-     * 判断指定节点是否存在
-     *
-     * @param path
-     * @param needWatch 指定是否复用zookeeper中默认的Watcher
-     * @return
-     */
-    public Stat exists(String path, boolean needWatch) {
-        try {
-            return zkClient.exists(path, needWatch);
-        } catch (Exception e) {
-            log.error("断指定节点是否存在异常{},{}", path, e);
-            return null;
-        }
-    }
+    private final Thread currentThread = Thread.currentThread();
 
-    /**
-     * 检测结点是否存在 并设置监听事件
-     * 三种监听类型： 创建，删除，更新
-     *
-     * @param path
-     * @param watcher 传入指定的监听类
-     * @return
-     */
-    public Stat exists(String path, Watcher watcher) {
-        try {
-            return zkClient.exists(path, watcher);
-        } catch (Exception e) {
-            log.error("断指定节点是否存在 异常 {} {}", path, e.getMessage());
-            return null;
-        }
+    public DistributedLockZookeeperTool(ZooKeeper zooKeeper, String path) {
+        this.zkClient = zooKeeper;
+        this.path = path;
     }
 
     /**
      * 创建持久化顺序节点
      *
      * @param path
-     * @param data
      */
-    public boolean createNode(String path, String data) {
-        try {
-            String result = zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-            return true;
-        } catch (Exception e) {
-            log.error("创建持久化顺序节点 异常 {} {} {}", path, data, e.getMessage());
-            return false;
+    public boolean lock(String path) throws InterruptedException, KeeperException {
+        Stat existsNode = zkClient.exists("/" + path, false);
+        if (existsNode == null) {
+            zkClient.create("/" + path, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        }
+        this.zNode = zkClient.create("/" + path + "/" + path + "_", new byte[0],
+                ZooDefs.Ids.OPEN_ACL_UNSAFE,
+                CreateMode.EPHEMERAL_SEQUENTIAL);
+        this.zNode = this.zNode.substring(zNode.lastIndexOf("/") + 1);
+        List<String> childrenNodes = zkClient.getChildren("/" + path, false);
+        Collections.sort(childrenNodes);
+        String firstNode = childrenNodes.get(0);
+        if (!firstNode.equals(zNode)) {
+            String lastNode = firstNode;
+            for (String node : childrenNodes) {
+                if (!zNode.equals(node)) {
+                    lastNode = node;
+                } else {
+                    Stat stat =  zkClient.exists("/" + path + "/" + lastNode, this);
+                    if (null != stat) {
+                        LockSupport.park();
+                    }
+                    break;
+                }
+            }
+        }
+        log.info("zNode {}", zNode);
+        return true;
+    }
+
+
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+        if (watchedEvent.getType() == Event.EventType.NodeDeleted) {
+            log.info("释放锁-将当前线程唤醒");
+            LockSupport.unpark(currentThread);  //将当前线程唤醒
         }
     }
 
-    /**
-     * 创建持久化节点
-     *
-     * @param path
-     * @param data
-     */
-    public boolean createTempNode(String path, String data) {
-        try {
-            zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-            return true;
-        } catch (Exception e) {
-            log.error("创建持久化节点异常{},{},{}", path, data, e.getMessage());
-            return false;
+
+    @Override
+    public void close() throws Exception {
+        if (Validator.isNotEmpty(zNode)) {
+            log.info("释放锁");
+            zkClient.delete("/" + path + "/" + zNode, -1);
         }
     }
 
-    /**
-     * 创建临时顺序节点
-     *
-     * @param path
-     * @param data
-     */
-    public boolean createSortTempNode(String path, String data) {
-        try {
-            zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-            return true;
-        } catch (Exception e) {
-            log.error("创建持久化节点异常{},{},{}", path, data, e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * 修改持久化节点
-     *
-     * @param path
-     * @param data
-     */
-    public boolean updateNode(String path, String data) {
-        try {
-            //zk的数据版本是从0开始计数的。如果客户端传入的是-1，则表示zk服务器需要基于最新的数据进行更新。如果对zk的数据节点的更新操作没有原子性要求则可以使用-1.
-            //version参数指定要更新的数据的版本, 如果version和真实的版本不同, 更新操作将失败. 指定version为-1则忽略版本检查
-            zkClient.setData(path, data.getBytes(), -1);
-            return true;
-        } catch (Exception e) {
-            log.error("【修改持久化节点异常】{},{},{}", path, data, e);
-            return false;
-        }
-    }
-
-    /**
-     * 删除持久化节点
-     *
-     * @param path
-     */
-    public boolean deleteNode(String path) {
-        try {
-            //version参数指定要更新的数据的版本, 如果version和真实的版本不同, 更新操作将失败. 指定version为-1则忽略版本检查
-            zkClient.delete(path, -1);
-            return true;
-        } catch (Exception e) {
-            log.error("【删除持久化节点异常】{},{}", path, e);
-            return false;
-        }
-    }
-
-    /**
-     * 获取当前节点的子节点(不包含孙子节点)
-     *
-     * @param path 父节点path
-     */
-    public List<String> getChildren(String path) throws KeeperException, InterruptedException {
-        List<String> list = zkClient.getChildren(path, false);
-        return list;
-    }
-
-    /**
-     * 获取指定节点的值
-     *
-     * @param path
-     * @return
-     */
-    public String getData(String path, Watcher watcher) {
-        try {
-            Stat stat = new Stat();
-            byte[] bytes = zkClient.getData(path, watcher, stat);
-            return new String(bytes);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * 获取指定节点的值
-     *
-     * @param path
-     * @return
-     */
-    public void del(String path, Watcher watcher) throws InterruptedException, KeeperException {
-        zkClient.delete(path, -1);
-    }
 }
