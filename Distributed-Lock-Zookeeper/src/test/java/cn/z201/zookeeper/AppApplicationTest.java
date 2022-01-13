@@ -38,7 +38,7 @@ public class AppApplicationTest {
     @Test
     @Disabled
     public void createNode() {
-        Boolean result = distributedLockZookeeperTool.createSortNode("/node", "1");
+        Boolean result = distributedLockZookeeperTool.createNode("/node", "1");
         log.info("result {}", result);
     }
 
@@ -80,7 +80,7 @@ public class AppApplicationTest {
         try {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
-                    log.info(" lock {} key  {} ", distributedLockZookeeperTool.createSortNode("/"+key, key),key);
+                    log.info(" lock {} key  {} ", distributedLockZookeeperTool.createNode("/"+key, key),key);
                     countDownLatch.countDown();
                 });
             }

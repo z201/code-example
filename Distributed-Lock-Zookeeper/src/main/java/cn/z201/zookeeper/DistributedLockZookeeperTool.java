@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -59,9 +60,9 @@ public class DistributedLockZookeeperTool {
      * @param path
      * @param data
      */
-    public boolean createSortNode(String path, String data) {
+    public boolean createNode(String path, String data) {
         try {
-            zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
+            String result = zkClient.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             return true;
         } catch (Exception e) {
             log.error("创建持久化顺序节点 异常 {} {} {}", path, data, e.getMessage());
