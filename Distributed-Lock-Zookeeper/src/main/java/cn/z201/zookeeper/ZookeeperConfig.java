@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
 public class ZookeeperConfig {
 
     private static final String LOCK_ROOT = "/LOCKS";   //锁的根路径
-    private static final String LOCK_NODE_NAME = "/LOCK_";  //锁的名称，使用临时顺序节点
+    private static final String LOCK_NODE_NAME = "/L_";  //锁的名称，使用临时顺序节点
 
     @Value("${zookeeper.address}")
     private String connectString;
