@@ -1,6 +1,7 @@
 package cn.z201.zookeeper;
 
 import cn.hutool.core.lang.Validator;
+import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
@@ -40,19 +41,17 @@ public class AppApplicationTest {
 
     @Test
     @Disabled
-    public void testLock() {
-        int count = 2;
-        String key = "1";
+    public void testLock() throws InterruptedException, KeeperException {
+        int count = 10;
         CountDownLatch countDownLatch = new CountDownLatch(count);
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         try {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
                     try {
-                        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient,key);
-                        log.info(" lock {} key  {} ", distributedLockZookeeperTool.lock(key), key);
-                        // 执行业务
+                        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient);
                         Thread.sleep(1000);
+                        log.info(" lock {} ", distributedLockZookeeperTool.tryLock());
                         distributedLockZookeeperTool.close();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -65,6 +64,8 @@ public class AppApplicationTest {
             e.printStackTrace();
         }
         executorService.shutdown();
+        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient);
+        log.info("{}",distributedLockZookeeperTool.list());
     }
 
 }

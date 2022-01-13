@@ -1,9 +1,8 @@
 package cn.z201.zookeeper;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +15,9 @@ import java.util.concurrent.CountDownLatch;
 @Configuration
 @Slf4j
 public class ZookeeperConfig {
+
+    private static final String LOCK_ROOT = "/LOCKS";   //锁的根路径
+    private static final String LOCK_NODE_NAME = "/LOCK_";  //锁的名称，使用临时顺序节点
 
     @Value("${zookeeper.address}")
     private String connectString;
@@ -40,11 +42,25 @@ public class ZookeeperConfig {
                 }
             });
             countDownLatch.await();
-            log.info("init zookeeper success {}",zooKeeper.getState());
+            init(zooKeeper);
+            log.info("init zookeeper success {}", zooKeeper.getState());
         } catch (Exception e) {
             throw new IllegalArgumentException("init zookeeper error " + e.getMessage());
         }
         return zooKeeper;
     }
+
+    public void init(ZooKeeper zooKeeper) throws InterruptedException, KeeperException {
+        Stat existsNode = zooKeeper.exists(LOCK_ROOT, false);
+        if (existsNode == null) {
+            zooKeeper.create(LOCK_ROOT, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        }
+        String key = LOCK_ROOT.concat(LOCK_NODE_NAME);
+        existsNode = zooKeeper.exists(key, false);
+        if (existsNode == null) {
+            zooKeeper.create(key, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        }
+    }
+
 
 }
