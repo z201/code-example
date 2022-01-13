@@ -15,4 +15,9 @@ server:
 
 logging:
   config: classpath:logback.xml
+  level:
+    cn:
+      z201:
+        redis:
+          RedisAdvice: debug
 

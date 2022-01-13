@@ -1,6 +1,7 @@
 
 package cn.z201.redis;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -18,7 +19,7 @@ public class RedisConfig {
 
     @Bean
     public RedisTemplate redisTemplate(LettuceConnectionFactory connectionFactory) {
-        RedisTemplate template = new RedisTemplate();
+        RedisTemplate<String,String> template = new RedisTemplate<String,String>();
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         template.setConnectionFactory(connectionFactory);
         // key序列化方式
@@ -31,9 +32,10 @@ public class RedisConfig {
     }
 
     @Bean
-    public StringRedisTemplate stringRedisTemplate(LettuceConnectionFactory connectionFactory) {
+    public StringRedisTemplate stringRedisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(connectionFactory);
+        stringRedisTemplate.setConnectionFactory(lettuceConnectionFactory);
         return stringRedisTemplate;
     }
+
 }
