@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-test-mock
+  profiles:
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true # 处理404
+  web:
+    resources:
+      add-mappings: false # 关闭资源映射
+server:
+  port: 9011
+  servlet:
+    context-path: /test
+
+logging:
+  config: classpath:logback.xml
