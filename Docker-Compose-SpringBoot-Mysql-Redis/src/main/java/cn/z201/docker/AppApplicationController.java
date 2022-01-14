@@ -2,7 +2,6 @@ package cn.z201.docker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +10,6 @@ import java.util.*;
 
 /**
  * @author z201.coding@gmail.com
- * @date 2022/1/7
  **/
 @RestController
 public class AppApplicationController {

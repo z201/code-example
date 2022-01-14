@@ -10,7 +10,6 @@ import java.util.UUID;
 
 /**
  * @author z201.coding@gmail.com
- * @date 2022/1/7
  **/
 @RestController
 public class AppApplicationController {
