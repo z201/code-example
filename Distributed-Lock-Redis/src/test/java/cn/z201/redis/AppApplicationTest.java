@@ -54,7 +54,7 @@ public class AppApplicationTest {
         log.info("keys {}", keys.toString());
         for (String item : keys) {
             item = item.replace("lock:","");
-            log.info("unlock {} {}", distributedLockRedisTool.unlock(key, key),key);
+            log.info("unlock {} {}", distributedLockRedisTool.unlock(item, item),item);
         }
         executorService.shutdown();
     }
