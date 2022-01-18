@@ -70,7 +70,4 @@ public class AppApplicationTest {
         log.info("{}", result);
     }
 
-
-
-
 }

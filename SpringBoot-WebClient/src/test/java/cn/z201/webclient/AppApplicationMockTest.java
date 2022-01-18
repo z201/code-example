@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("dev")
-@WebFluxTest(controllers = AppController.class)
+@WebFluxTest
 public class AppApplicationMockTest {
 
     @Autowired
@@ -63,31 +63,6 @@ public class AppApplicationMockTest {
                 .expectBodyList(UserVo.class)
                 .returnResult();
         log.info("{}", result);
-    }
-
-    @Test
-    @Disabled
-    public void i() {
-        String url = "https://myip.ipip.net/";
-        WebClient webClient = WebClient.create();
-        String body = webClient.get()
-                .uri(url)
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // 响应的格式json
-                .acceptCharset(StandardCharsets.UTF_8) // 编码集 utf-8
-                .exchangeToMono(response -> {
-                    if (response.statusCode().equals(HttpStatus.OK)) {
-                        log.info("doOnSuccess");
-                        return response.bodyToMono(String.class);
-                    } else {
-                        log.info("doOnError");
-                        return response.createException().flatMap(Mono::error);
-                    }
-                })
-                .doOnError(t -> log.error("Error: ", t)) // 异常回调
-                .doFinally(s -> log.info("Finally ")) // Finally 回调
-                .doOnSuccess(s -> log.info("{}", s))
-                .subscribeOn(Schedulers.single())
-                .block();
     }
 
 }
