@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-webclient
+  profiles:
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true # 处理404
+  web:
+    resources:
+      add-mappings: false # 关闭资源映射
+server:
+  port: 9015
+  servlet:
+    context-path: /webclient
+
+logging:
+  config: classpath:logback.xml
