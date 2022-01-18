@@ -33,21 +33,11 @@ public class AppApplicationTest {
     @Autowired
     RedisTemplate redisTemplate;
 
-    public void batchInsert(Map<String, String> saveMap, TimeUnit unit, int timeout) {
-        /* 插入多条数据 */
-        redisTemplate.executePipelined(new SessionCallback<Object>() {
-            @Override
-            public <K, V> Object execute(RedisOperations<K, V> redisOperations) throws DataAccessException {
-                Iterator<Map.Entry<String, String>> iterator = saveMap.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry<String, String> entry = iterator.next();
-                    redisTemplate.opsForValue().set(entry.getKey(), entry.getValue(), timeout, unit);
-                }
-                return null;
-            }
-        });
-    }
-
+    /**
+     * 批量获取
+     * @param keys
+     * @return
+     */
     public Map<String, String> batchGet(List<String> keys) {
         Map<String, String> saveMap = new HashMap<>();
         redisTemplate.executePipelined(
@@ -65,6 +55,33 @@ public class AppApplicationTest {
         return saveMap;
     }
 
+    /**
+     * string 批量写入
+     * @param saveMap
+     * @param unit
+     * @param timeout
+     */
+    public void batchInsert(Map<String, String> saveMap, TimeUnit unit, int timeout) {
+        /* 插入多条数据 */
+        redisTemplate.executePipelined(new SessionCallback<Object>() {
+            @Override
+            public <K, V> Object execute(RedisOperations<K, V> redisOperations) throws DataAccessException {
+                Iterator<Map.Entry<String, String>> iterator = saveMap.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, String> entry = iterator.next();
+                    redisTemplate.opsForValue().set(entry.getKey(), entry.getValue(), timeout, unit);
+                }
+                return null;
+            }
+        });
+    }
+
+    /**
+     * set 批量写入
+     * @param key
+     * @param list
+     * @return
+     */
     public Boolean sAdd(String key, List<String> list) {
         return (Boolean) redisTemplate.execute((RedisCallback<Boolean>) connection -> {
                     RedisSerializer<String> stringRedisSerializer
@@ -80,6 +97,12 @@ public class AppApplicationTest {
         );
     }
 
+    /**
+     * hash批量写入
+     * @param key
+     * @param fieldMap
+     * @return
+     */
     public Boolean hMSet(String key, Map fieldMap) {
         return (Boolean) redisTemplate.execute((RedisCallback<Boolean>) connection -> {
                     RedisSerializer<String> stringRedisSerializer
@@ -101,6 +124,12 @@ public class AppApplicationTest {
         );
     }
 
+    /**
+     * zset 批量写入
+     * @param key
+     * @param fieldMap
+     * @return
+     */
     public Boolean zMSet(String key, Map<String, Long> fieldMap) {
         return (Boolean) redisTemplate.execute((RedisCallback<Boolean>) connection -> {
                     RedisSerializer<String> stringRedisSerializer
@@ -162,5 +191,6 @@ public class AppApplicationTest {
         Set<String> userSMap = scanTool.sScan("sUser", "1*", 10);
         log.info("{}", userSMap.size());
         log.info("{}", userSMap);
+
     }
 }
