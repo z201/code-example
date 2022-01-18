@@ -1,13 +1,18 @@
 package cn.z201.webclient;
 
 
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
@@ -43,7 +48,6 @@ public class AppController {
     @GetMapping("/ip/info")
     public Mono<String> ip() {
         String url = "https://myip.ipip.net/";
-        WebClient webClient = WebClient.create();
         Mono<String> body = webClient.get()
                 .uri(url)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // 响应的格式json
@@ -60,32 +64,5 @@ public class AppController {
                 .subscribeOn(Schedulers.single());
         return body;
     }
-
-    // 基于函数编程
-//    @Bean
-//    public RouterFunction<ServerResponse> ip() {
-//        return RouterFunctions.route(RequestPredicates.GET("/ip"),
-//                request -> {
-//                    String url = "https://myip.ipip.net/";
-//                    String body = webClient.get()
-//                            .uri(url)
-//                            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // 响应的格式json
-//                            .acceptCharset(StandardCharsets.UTF_8) // 编码集 utf-8
-//                            .exchangeToMono(response -> {
-//                                if (response.statusCode().equals(HttpStatus.OK)) {
-//                                    return response.bodyToMono(String.class);
-//                                } else {
-//                                    return response.createException().flatMap(Mono::error);
-//                                }
-//                            })
-//                            .doOnError(t -> log.error("Error: ", t)) // 异常回调
-//                            .doFinally(s -> log.error("Finally ")) // Finally 回调
-//                            .subscribeOn(Schedulers.single()) // 在task线程中执行
-//                            .block();
-//                    // 返回列表
-//                    return ServerResponse.ok().bodyValue(body);
-//                });
-//    }
-
 
 }

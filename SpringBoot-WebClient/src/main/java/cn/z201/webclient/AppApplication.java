@@ -1,6 +1,7 @@
 package cn.z201.webclient;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -22,5 +23,6 @@ public class AppApplication {
     public WebClient register() {
         return WebClient.create();
     }
+
 
 }
