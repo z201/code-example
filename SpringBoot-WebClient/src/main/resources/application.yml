@@ -8,10 +8,10 @@ spring:
   web:
     resources:
       add-mappings: false # 关闭资源映射
+  webflux:
+    base-path: /webclient
 server:
   port: 9015
-  servlet:
-    context-path: /webclient
 
 logging:
   config: classpath:logback.xml
