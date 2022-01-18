@@ -3,7 +3,9 @@ package cn.z201.webclient;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -38,19 +40,18 @@ public class AppController {
         return Mono.just(new UserVo(id, "某某"));
     }
 
-    @GetMapping("/ip")
+    @GetMapping("/ip/info")
     public Mono<String> ip() {
         String url = "https://myip.ipip.net/";
+        WebClient webClient = WebClient.create();
         Mono<String> body = webClient.get()
                 .uri(url)
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // 响应的格式json
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE) // 响应的格式json
                 .acceptCharset(StandardCharsets.UTF_8) // 编码集 utf-8
                 .exchangeToMono(response -> {
                     if (response.statusCode().equals(HttpStatus.OK)) {
-                        log.info("doOnSuccess");
                         return response.bodyToMono(String.class);
                     } else {
-                        log.info("doOnError");
                         return response.createException().flatMap(Mono::error);
                     }
                 })
