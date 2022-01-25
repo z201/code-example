@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring-test-email
+  profiles:
+    active: dev
+
+logging:
+  config: classpath:logback.xml
