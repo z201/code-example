@@ -8,7 +8,6 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -128,7 +127,7 @@ public class SpiderProxyTools {
      * @return
      */
     public static Map<String, String> parse(String url) {
-        Map<String, String> map = Collections.EMPTY_MAP;
+        Map<String, String> map = new HashMap<>();
         if (url == null) {
             return map;
         }
