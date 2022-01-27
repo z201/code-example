@@ -10,7 +10,6 @@
 
     <properties>
         <hutool.version>5.7.18</hutool.version>
-        <mysql.version>5.1.49</mysql.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
