@@ -1,11 +1,9 @@
 package learning02.common;
 
-import cn.z201.netty.learning02.uitl.JsonUtil;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
+import learning02.uitl.JsonUtil;
 import lombok.*;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**

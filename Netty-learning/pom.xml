@@ -24,10 +24,10 @@
 
     <properties>
         <junit.version>4.13.1</junit.version>
-        <lmbok.version>1.18.4</lmbok.version>
+        <lmbok.version>1.18.16</lmbok.version>
         <h2.version>1.4.197</h2.version>
         <netty.version>4.1.42.Final</netty.version>
-        <guava.version>21.0</guava.version>
+        <guava.version>28.2-jre</guava.version>
         <gson.version>2.8.7</gson.version>
         <logback.version>1.2.3</logback.version>
         <!-- pom文件需要指定打包编码集，[WARNING] File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent!  -->
@@ -71,7 +71,42 @@
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
-
     </dependencies>
+
+    <!-- 其他仓库,按设定顺序进行查找. -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Framework Maven Milestone Repository</name>
+            <url>https://maven.springframework.org/milestone</url>
+        </repository>
+        <!-- 阿里云的maven仓库 -->
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <!-- 腾讯云指定的仓库地址 -->
+        <repository>
+            <id>nexus-tencentyun</id>
+            <name>Nexus tencentyun</name>
+            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </repository>
+        <!-- 华为云指定的仓库地址 -->
+        <repository>
+            <id>huaweicloud</id>
+            <name>Nexus huaweicloud</name>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+        </repository>
+        <repository>
+            <id>com.e-iceblue</id>
+            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
 </project>
