@@ -8,6 +8,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +46,12 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
                 }
             }
         });
+    }
+
+    @PreDestroy
+    public void destroy(){
+        DELAY_QUEUE.clear();
+        threadPoolTaskExecutor.shutdown();
     }
 
     /**
