@@ -10,8 +10,7 @@ spring:
       add-mappings: false # 关闭资源映射
   webflux:
     base-path: /delayed
-server:
-  port: 9016
+
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
