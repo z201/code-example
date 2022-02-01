@@ -2,8 +2,7 @@
 <configuration debug="false" scan="true" scanPeriod="1 seconds">
     <!-- 配置参数logDir读取application.yml中的spring.application.name属性，如果没有配置，默认是只logback -->
     <property name="log.path" value="data/logs/"/>
-
-    <contextName>spring-test-mock</contextName>
+    <contextName>spring-test-delayed</contextName>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>[%t]  %msg%n</pattern>
