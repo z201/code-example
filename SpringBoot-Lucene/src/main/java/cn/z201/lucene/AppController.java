@@ -23,7 +23,6 @@ import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +48,7 @@ public class AppController {
 
     @RequestMapping(value = "add")
     public Object add() {
-        ArticleEntity articleEntity = new ArticleEntity();
+        ArticleVo articleEntity = new ArticleVo();
         String test = RandomUtil.randomString(10);
         articleEntity.setId(test);
         articleEntity.setTitle(test);
@@ -66,7 +65,7 @@ public class AppController {
         if (StrUtil.isEmpty(keyWord)) {
             keyWord = Strings.EMPTY;
         }
-        List<ArticleEntity> articleEntityList = fullTextSearch(keyWord, 1, 10);
+        List<ArticleVo> articleEntityList = fullTextSearch(keyWord, 1, 10);
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
         data.put("data", articleEntityList);
@@ -76,7 +75,7 @@ public class AppController {
 
     @RequestMapping(value = "search")
     public Object search() {
-        List<ArticleEntity> articleEntityList = fullTextSearch(null, 1, 10);
+        List<ArticleVo> articleEntityList = fullTextSearch(null, 1, 10);
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
         data.put("data", articleEntityList);
@@ -95,7 +94,7 @@ public class AppController {
         return data;
     }
 
-    private void addOrUpIndex(ArticleEntity entity) {
+    private void addOrUpIndex(ArticleVo entity) {
         IndexWriter indexWriter = null;
         IndexReader indexReader = null;
         Directory directory = null;
@@ -176,8 +175,8 @@ public class AppController {
      * @param limit   页大小
      * @return
      */
-    public List<ArticleEntity> fullTextSearch(String keyWord, Integer page, Integer limit) {
-        List<ArticleEntity> searchList = new ArrayList<>(10);
+    public List<ArticleVo> fullTextSearch(String keyWord, Integer page, Integer limit) {
+        List<ArticleVo> searchList = new ArrayList<>(10);
         File indexFile = new File(path);
         File[] files = indexFile.listFiles();
         //沒有索引文件，不然沒有查詢結果
@@ -228,7 +227,7 @@ public class AppController {
             for (ScoreDoc sd : tds.scoreDocs) {
                 Document doc = indexSearcher.doc(sd.doc);
                 float score = sd.score;
-                ArticleEntity articleEntity = new ArticleEntity();
+                ArticleVo articleEntity = new ArticleVo();
                 String id = doc.get("id");
                 articleEntity.setId(id);
                 articleEntity.setScore(score);

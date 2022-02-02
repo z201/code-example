@@ -6,7 +6,7 @@ import lombok.Data;
  * @author z201.coding@gmail.com
  **/
 @Data
-public class ArticleEntity {
+public class ArticleVo {
 
     private String id;
 
