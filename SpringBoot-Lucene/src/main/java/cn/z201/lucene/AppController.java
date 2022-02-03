@@ -72,7 +72,6 @@ public class AppController {
         return data;
     }
 
-
     @RequestMapping(value = "search")
     public Object search() {
         List<ArticleVo> articleEntityList = fullTextSearch(null, 1, 10);
@@ -81,7 +80,6 @@ public class AppController {
         data.put("data", articleEntityList);
         return data;
     }
-
 
     @RequestMapping(value = "del/{id}")
     public Object del(@PathVariable(required = false) String id) {
