@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <netty.version>4.1.6.Final</netty.version>
+        <netty.version>4.1.42.Final</netty.version>
         <caffeine.version>2.6.2</caffeine.version>
         <lombok.version>1.18.20</lombok.version>
         <gson.version>2.4</gson.version>
