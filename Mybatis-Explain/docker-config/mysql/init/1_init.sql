@@ -1,8 +1,8 @@
 -- 创建数据库
-CREATE DATABASE IF NOT EXISTS `docker_mybatis_snowflake` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `docker_mybatis_explain` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
-CREATE TABLE IF NOT EXISTS  docker_mybatis_snowflake.`account`
+CREATE TABLE IF NOT EXISTS  docker_mybatis_explain.`account`
 (
     `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
     `is_enable`     bit(1) NOT NULL                  DEFAULT b'1' COMMENT '数据是否有效 1 有效 0 无效',

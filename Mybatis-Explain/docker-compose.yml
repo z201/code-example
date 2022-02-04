@@ -1,17 +1,17 @@
 version : '3'
 networks:
-  network-docker-mybatis-snowflake:
+  network-docker-mybatis-explain:
     driver: bridge
 
 services:
   web:
-    container_name: cn.z201.docker-mybatis-snowflake
+    container_name: cn.z201.docker-mybatis-explain
     build:
       context: .
       dockerfile: .
-    image: cn.z201.docker-docker-mybatis-snowflake
+    image: cn.z201.docker-docker-mybatis-explain
     networks:
-      - network-docker-mybatis-snowflake
+      - network-docker-mybatis-explain
     expose:
       - '9002'
     ports:
@@ -29,7 +29,7 @@ services:
     image: mysql:5.7
     container_name: mysql5.7-dev-6
     networks:
-      - network-docker-mybatis-snowflake
+      - network-docker-mybatis-explain
     expose:
       - '3306'
     ports:

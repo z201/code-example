@@ -1,6 +1,5 @@
 package cn.z201.mybatis;
 
-import cn.z201.mybatis.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -11,6 +10,8 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,8 @@ import java.util.Map;
  * https://baomidou.com/config/#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE
  **/
 @Slf4j
-public class CodeGeneratorTest {
+@ActiveProfiles("dev")
+public class CodeGeneratorTest extends AppApplicationTest {
 
     @Test
     @Disabled
@@ -43,8 +45,8 @@ public class CodeGeneratorTest {
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/docker_mybatis_snowflake?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/docker_mybatis_explain?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
         mpg.setDataSource(dsc);
@@ -101,8 +103,6 @@ public class CodeGeneratorTest {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass(BaseEntity.class);
-        strategy.setSuperEntityColumns(BaseEntity.BASE_ENTITY);
         strategy.setEntityLombokModel(true);
         // 逻辑删除字段
         strategy.setLogicDeleteFieldName(null);
