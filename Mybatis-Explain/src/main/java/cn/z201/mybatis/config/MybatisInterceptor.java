@@ -1,5 +1,7 @@
 package cn.z201.mybatis.config;
 
+import cn.hutool.db.sql.SqlUtil;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -51,7 +53,7 @@ public class MybatisInterceptor implements Interceptor {
                     boundSql = (BoundSql) args[5];
                 }
                 String sql = getSql(boundSql, mappedStatement);
-                log.info("EXPLAIN  {}", sql);
+                log.info("EXPLAIN  \n {}", SqlUtil.formatSql(sql));
                 Statement stmt = executor.getTransaction().getConnection().createStatement();
                 stmt.execute("EXPLAIN " + sql + " ;");
                 ResultSet rs = stmt.getResultSet();
@@ -77,7 +79,7 @@ public class MybatisInterceptor implements Interceptor {
         } finally {
             Long timeConsuming = Clock.systemDefaultZone().millis() - startTime;
             if (!CollectionUtils.isEmpty(explainResultList)) {
-                log.info("{}",JsonTool.toString(explainResultList));
+                log.info("{}", JsonTool.toString(explainResultList));
             }
             log.info("SQL RunTime {} ms", timeConsuming);
         }
@@ -86,6 +88,7 @@ public class MybatisInterceptor implements Interceptor {
 
     /**
      * 生成要执行的SQL命令
+     *
      * @param boundSql
      * @param ms
      * @return
@@ -105,8 +108,6 @@ public class MybatisInterceptor implements Interceptor {
                     if (boundSql.hasAdditionalParameter(propertyName)) {
                         //获取参数值
                         value = boundSql.getAdditionalParameter(propertyName);
-                    } else if (parameterObject == null) {
-                        value = null;
                     } else if (ms.getConfiguration().getTypeHandlerRegistry().hasTypeHandler(parameterObject.getClass())) {
                         //如果是单个值则直接赋值
                         value = parameterObject;
@@ -114,7 +115,6 @@ public class MybatisInterceptor implements Interceptor {
                         MetaObject metaObject = ms.getConfiguration().newMetaObject(parameterObject);
                         value = metaObject.getValue(propertyName);
                     }
-                    log.info("value = {}", value);
                     sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(getParameter(value)));
                 }
             }
@@ -129,7 +129,6 @@ public class MybatisInterceptor implements Interceptor {
         }
         return parameter.toString();
     }
-
 
 
 }

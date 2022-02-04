@@ -2,6 +2,7 @@ package cn.z201.mybatis;
 
 import cn.z201.mybatis.dao.AccountDao;
 import cn.z201.mybatis.entity.Account;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
@@ -70,7 +71,11 @@ public class AppApplicationTest {
     @Test
     @Disabled
     public void select(){
-        accountDao.selectList(null);
+        QueryWrapper<Account> accountQueryWrapper = new QueryWrapper<>();
+        accountQueryWrapper.select("id");
+        accountQueryWrapper.eq("id",1);
+        accountQueryWrapper.last("LIMIT 0 , 100");
+        accountDao.selectList(accountQueryWrapper);
     }
 
 }

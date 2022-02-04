@@ -10,6 +10,7 @@
 
     <properties>
         <com.baomidou.mybatis.version>3.4.3.4</com.baomidou.mybatis.version>
+        <hutool.version>5.7.18</hutool.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -121,6 +122,18 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+        <!-- 工具包 https://github.com/looly/hutool/-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!-- 工具包 https://github.com/looly/hutool/-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-db</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
         <!-- test -->
         <dependency>
