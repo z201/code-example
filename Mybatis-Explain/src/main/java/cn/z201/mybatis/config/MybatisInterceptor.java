@@ -1,4 +1,4 @@
-package cn.z201.mybatis.mybatis;
+package cn.z201.mybatis.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
@@ -8,7 +8,6 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
-import org.springframework.stereotype.Component;
 
 import java.time.Clock;
 import java.util.*;

@@ -1,6 +1,6 @@
 package cn.z201.mybatis;
 
-import cn.z201.mybatis.config.BaseEntity;
+import cn.z201.mybatis.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -44,7 +44,7 @@ public class CodeGeneratorTest {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://127.0.0.1:3306/docker_mybatis_snowflake?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
         mpg.setDataSource(dsc);

@@ -1,6 +1,6 @@
 package cn.z201.mybatis.entity;
 
-import cn.z201.mybatis.mybatis.BaseEntity;
+import cn.z201.mybatis.config.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,4 +1,4 @@
-package cn.z201.mybatis.mybatis;
+package cn.z201.mybatis.config;
 
 import java.time.Clock;
 
