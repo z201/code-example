@@ -13,10 +13,8 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.Clock;
@@ -125,7 +123,7 @@ public class MybatisInterceptor implements Interceptor {
 
     public String getParameter(Object parameter) {
         if (parameter instanceof String) {
-            return "'" + parameter.toString() + "'";
+            return "'" + parameter + "'";
         }
         return parameter.toString();
     }

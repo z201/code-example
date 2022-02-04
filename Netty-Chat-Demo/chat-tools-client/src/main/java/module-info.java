@@ -1,2 +1,4 @@
-module $MODULE_NAME$ {
+module chat.tools.client {
+
+
 }
