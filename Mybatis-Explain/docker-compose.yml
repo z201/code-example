@@ -13,9 +13,9 @@ services:
     networks:
       - network-docker-mybatis-explain
     expose:
-      - '9002'
+      - '80'
     ports:
-      - '9002:9002'
+      - '80:9023'
     depends_on: # 等待其它服务启动完成
       - mysql
     links:
