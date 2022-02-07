@@ -20,13 +20,13 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
     private ArrayBlockingQueueManager arrayBlockingQueueManager;
 
-    private LinkedBlockingDequeManager linkedBlockingDequeManager;
+    private LinkedBlockingQueueManager linkedBlockingDequeManager;
 
     private PriorityBlockingQueueManager priorityBlockingQueueManager;
 
     @Autowired
     public AppCommandLineRunner(ArrayBlockingQueueManager arrayBlockingQueueManager,
-                                LinkedBlockingDequeManager linkedBlockingDequeManager,
+                                LinkedBlockingQueueManager linkedBlockingDequeManager,
                                 PriorityBlockingQueueManager priorityBlockingQueueManager) {
         this.arrayBlockingQueueManager = arrayBlockingQueueManager;
         this.linkedBlockingDequeManager = linkedBlockingDequeManager;

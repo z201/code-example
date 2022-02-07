@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author z201.coding@gmail.com
@@ -15,9 +15,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 @Lazy(false)
 @Component
 @Slf4j
-public class LinkedBlockingDequeManager {
+public class LinkedBlockingQueueManager {
 
-    private final static BlockingQueue<BlockingDto> blockingQueue = new LinkedBlockingDeque<>();
+    private final static BlockingQueue<BlockingDto> blockingQueue = new LinkedBlockingQueue<>();
 
     @PostConstruct
     public void setup() {
@@ -26,7 +26,7 @@ public class LinkedBlockingDequeManager {
             for (; ; ) {
                 try {
                     blockingDto = blockingQueue.take();
-                    log.info("LinkedBlockingDequeManager tate {}", blockingDto.getId());
+                    log.info("linkedBlockingQueue tate {}", blockingDto.getId());
                 } catch (Exception e) {
                     log.error("执行队列_异常:" + e);
                 }

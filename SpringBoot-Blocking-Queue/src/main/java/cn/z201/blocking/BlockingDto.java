@@ -25,5 +25,4 @@ public class BlockingDto implements Comparable<BlockingDto> {
         return -1;
     }
 
-
 }
