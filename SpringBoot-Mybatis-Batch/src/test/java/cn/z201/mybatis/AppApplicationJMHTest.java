@@ -69,7 +69,7 @@ public class AppApplicationJMHTest {
                 .timeUnit(TimeUnit.MILLISECONDS) // 毫秒
                 // 不使用多线程
                 .forks(0) // 进行 fork 的次数。如果 fork 数是2的话，则 JMH 会 fork 出两个进程来进行测试。
-                .threads(8) // 每个进程中的测试线程，这个非常好理解，根据具体情况选择，一般为cpu乘以2。
+                .threads(1) // 每个进程中的测试线程，这个非常好理解，根据具体情况选择，一般为cpu乘以2。
                 .mode(Mode.AverageTime)
                 .shouldDoGC(true)
                 .shouldFailOnError(true)
