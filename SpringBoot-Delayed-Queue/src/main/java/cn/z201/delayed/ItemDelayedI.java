@@ -41,15 +41,24 @@ public class ItemDelayedI<T> implements Delayed {
         this.expire = expire;
     }
 
+
     @Override
     public int compareTo(Delayed o) {
-        // 入队时需要判断任务放到队列的哪个位置，过期时间短的放在前面
-        return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
+        // 入队时需要判断任务放到队列的哪个位置，过期时间短放在前面
+        // 过期时间长放置在队列尾部
+        if (this.getDelay(TimeUnit.MICROSECONDS) > o.getDelay(TimeUnit.MICROSECONDS)) {
+            return 1;
+        }
+        // 过期时间短放置在队列头
+        if (this.getDelay(TimeUnit.MICROSECONDS) < o.getDelay(TimeUnit.MICROSECONDS)) {
+            return -1;
+        }
+        return 0;
     }
 
     @Override
     public long getDelay(TimeUnit unit) {
-        // 和当前时间比较，判断是否过期。
+        // 和当前时间比较，判断是否过期。 大于 0 说明未过期
         return unit.convert(this.expire - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     }
 

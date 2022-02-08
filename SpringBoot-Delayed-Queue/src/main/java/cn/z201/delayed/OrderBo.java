@@ -19,4 +19,6 @@ public class OrderBo {
 
     private Long orderDeadlineTime;
 
+
+
 }
