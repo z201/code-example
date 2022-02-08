@@ -12,5 +12,5 @@ server:
     context-path: /mdc
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
 
