@@ -9,10 +9,20 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+@State(Scope.Benchmark)
 public class SnowflakeDistributeIdTest {
 
-    private final static Integer MEASUREMENT_ITERATIONS = 10;
+    private final static Integer MEASUREMENT_ITERATIONS = 1;
     private final static Integer WARMUP_ITERATIONS = 1;
+
+    private SnowflakeDistributeId snowflakeDistributeId;
+
+    @Setup(Level.Trial)
+    public synchronized void initialize() {
+        if (null == snowflakeDistributeId) {
+            snowflakeDistributeId = new SnowflakeDistributeId(0, 0);
+        }
+    }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
@@ -30,12 +40,12 @@ public class SnowflakeDistributeIdTest {
                 // SampleTime: 随机取样，最后输出取样结果的分布，例如”99%的调用在xxx毫秒以内，99.99%的调用在xxx毫秒以内”
                 // SingleShotTime: 以上模式都是默认一次 iteration 是 1s，唯有 SingleShotTime 是只运行一次。往往同时把 warmup 次数设为0，用于测试冷启动时的性能。
                 // All(“all”, “All benchmark modes”);
-                .mode(Mode.AverageTime)
+                .mode(Mode.All)
                 .shouldDoGC(true)
                 .shouldFailOnError(true)             //
                 .resultFormat(ResultFormatType.JSON) // 输出格式化
 //                .result("/dev/null") // set this to a valid filename if you want reports
-                .result("benchmark.log")
+                .result("benchmark.json")
                 .shouldFailOnError(true)
                 .jvmArgs("-server")
                 .build();
@@ -47,10 +57,7 @@ public class SnowflakeDistributeIdTest {
      */
     @Benchmark
     public void testSnowflakeDistributeId() {
-        SnowflakeDistributeId idWorker = new SnowflakeDistributeId(0, 0);
-        for (int i = 0; i < 100; i++) {
-            long id = idWorker.nextId();
-            System.out.println(id);
-        }
+        long id = snowflakeDistributeId.nextId();
     }
+
 }
