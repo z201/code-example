@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.z201.mybatis.dao.TableDataDao">
+
+    <insert id="batchInsert">
+        INSERT INTO `table_data`(`create_time`)
+        VALUES
+        <foreach collection="tableDataList" item="item" index="index" separator=",">
+            (#{item.createTime})
+        </foreach>
+    </insert>
+
+    <update id="truncate">
+        TRUNCATE TABLE table_data;
+    </update>
+</mapper>
