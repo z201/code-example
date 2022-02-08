@@ -15,7 +15,7 @@ services:
     expose:
       - '80'
     ports:
-      - '80:80'
+      - '80:9030'
     depends_on: # 等待其它服务启动完成
       - mysql
     links:
