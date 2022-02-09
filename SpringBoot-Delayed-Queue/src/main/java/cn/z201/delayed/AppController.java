@@ -31,7 +31,7 @@ public class AppController {
         delayOrder.addToDelayQueue(orderBo);
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
-        data.put("data", JsonTool.toString(orderBo));
+        data.put("data", orderBo);
         return data;
     }
 

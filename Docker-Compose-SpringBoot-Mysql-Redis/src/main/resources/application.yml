@@ -14,5 +14,5 @@ server:
     context-path: /docker
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
 

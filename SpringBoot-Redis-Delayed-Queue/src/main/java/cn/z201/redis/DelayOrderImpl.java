@@ -46,21 +46,22 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
     public void init() {
         /*启动一个线程，去取延迟订单*/
         threadPoolTaskExecutor.execute(() -> {
-            log.info(" 待处理订单数量 count {} " , size());
+            log.info(" 待处理订单数量 count {} ", size());
             for (; ; ) {
                 try {
                     Long startTime = DateTool.conversion(DateTool.localDateTime().plusDays(-1));
                     // 测试下直接获取所有数据。
-                    Set<Integer> data = redisTemplate.opsForZSet().rangeByScore(ORDER_DELAY_KEY,0,DateTool.currentTimeMillis());
-                    data.stream().forEach(i->{
+                    Set<Integer> data = redisTemplate.opsForZSet().rangeByScore(ORDER_DELAY_KEY, 0, DateTool.currentTimeMillis());
+                    data.stream().forEach(i -> {
                         //处理超时订单
-                        log.info("处理订单 {} {}", i, DateTool.conversionNowFormat());
+                        log.info("处理订单 {}", i);
                         removeToOrderDelayQueueById(Long.valueOf(i));
                     });
                 } catch (Exception e) {
                     log.error("执行订单的_延迟队列_异常:" + e);
-                }finally {
+                } finally {
                     try {
+                        // 1秒执行一次，实际情况可以快点。
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         log.error("执行订单的_延迟队列_异常:" + e);
@@ -80,7 +81,7 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
      **/
     @Override
     public boolean addToOrderDelayQueue(ItemDelayedI<OrderBo> itemDelayed) {
-        log.info("添加订单超时列队 {} {} 移除时间 {}", JsonTool.toString(itemDelayed), DateTool.conversionNowFormat(),DateTool.conversionFormat(itemDelayed.getExpire()));
+        log.info("添加订单超时列队 {} ", itemDelayed.getDataId());
         return redisTemplate.opsForZSet().add(ORDER_DELAY_KEY, itemDelayed.getDataId(), itemDelayed.getExpire());
     }
 
@@ -110,7 +111,7 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
         if (id == null) {
             return;
         }
-        log.info("移除订单超时列队 {} {}", id, DateTool.conversionNowFormat());
+        log.info("移除订单超时列队 {}", id);
         redisTemplate.opsForZSet().remove(ORDER_DELAY_KEY, id);
     }
 
