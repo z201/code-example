@@ -2,11 +2,10 @@
 <configuration debug="false" scan="true" scanPeriod="1 seconds">
     <!-- 配置参数logDir读取application.yml中的spring.application.name属性，如果没有配置，默认是只logback -->
     <property name="log.path" value="data/logs/"/>
-
-    <contextName>spring-boot-mysql-redis</contextName>
+    <springProperty scope="context" name="contextName" source="spring.application.name" />
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date %level %logger{5} [%file : %line] [%X{AppTraceId}] %msg%n</pattern>
+            <pattern>[%t] [%file : %line] %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -18,7 +17,7 @@
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%date %level %logger{5} [%file : %line] [%X{AppTraceId}] %msg%n</pattern>
+            <pattern>[%t] [%file : %line] %msg%n</pattern>
         </encoder>
     </appender>
 

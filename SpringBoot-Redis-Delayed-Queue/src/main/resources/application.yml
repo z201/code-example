@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-boot-redis-delayed-queue
+  profiles:
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true # 处理404
+  web:
+    resources:
+      add-mappings: false # 关闭资源映射
+server:
+  port: 9033
+  servlet:
+    context-path: /
+
+logging:
+  config: classpath:logback-spring.xml
+
