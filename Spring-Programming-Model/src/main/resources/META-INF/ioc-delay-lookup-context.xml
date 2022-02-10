@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- more bean definitions go here -->
+    <bean id="delayLookup" class="cn.z201.spring.domain.DelayLookup">
+        <property name="name" value="spring"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="delayLookup"/>
+    </bean>
+
+    <!-- parent 继承等父类 primary 即使指定的 bean 标记为自动装配候选者。 -->
+    <bean id="annotationDelayLookup" class="cn.z201.spring.domain.AnnotationDelayLookup"
+          parent="delayLookup" primary="true">
+        <property name="address" value="杭州"/>
+    </bean>
+
+</beans>
