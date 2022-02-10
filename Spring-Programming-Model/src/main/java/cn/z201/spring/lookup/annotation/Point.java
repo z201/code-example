@@ -1,4 +1,4 @@
-package cn.z201.spring.annotation;
+package cn.z201.spring.lookup.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

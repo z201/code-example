@@ -1,6 +1,6 @@
-package cn.z201.spring.domain;
+package cn.z201.spring.lookup.domain;
 
-import cn.z201.spring.annotation.Point;
+import cn.z201.spring.lookup.annotation.Point;
 
 /**
  * @author z201.coding@gmail.com

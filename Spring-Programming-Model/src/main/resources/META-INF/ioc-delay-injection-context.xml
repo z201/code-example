@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- more bean definitions go here -->
+    <!--
+    1.在注入集合类等时候，引入util配置信息
+    xmlns:util="http://www.springframework.org/schema/util"
+    http://www.springframework.org/schema/util
+    https://www.springframework.org/schema/util/spring-util.xsd
+    -->
+
+    <bean id="injectionBean" class="cn.z201.spring.injection.domain.InjectionBean">
+        <property name="name" value="spring"/>
+    </bean>
+
+    <bean id="superInjectionBean" class="cn.z201.spring.injection.domain.SuperInjectionBean"
+          parent="injectionBean" primary="true">
+        <property name="address" value="杭州"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="injectionBean"/>
+    </bean>
+
+    <!-- 自动配置 Auto-Wiring -->
+    <bean id="injectionRepository" class="cn.z201.spring.injection.repository.InjectionRepository" autowire="byType">
+        <!--     手动配置  -->
+<!--        <property name="beans">-->
+<!--            <util:list>-->
+<!--                <ref bean="injectionBean"/>-->
+<!--                <ref bean="superInjectionBean"/>-->
+<!--            </util:list>-->
+<!--        </property>-->
+    </bean>
+
+
+</beans>

@@ -1,4 +1,4 @@
-package cn.z201.spring.domain;
+package cn.z201.spring.lookup.domain;
 
 /**
  * @author z201.coding@gmail.com

@@ -1,6 +1,6 @@
 package cn.z201.spring;
 
-import cn.z201.spring.domain.UserBeans;
+import cn.z201.spring.lookup.domain.UserBeans;
 import org.junit.jupiter.api.Test;
 
 import java.beans.BeanInfo;

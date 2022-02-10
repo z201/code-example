@@ -1,8 +1,8 @@
 package cn.z201.spring;
 
-import cn.z201.spring.annotation.Point;
-import cn.z201.spring.domain.AnnotationDelayLookup;
-import cn.z201.spring.domain.DelayLookup;
+import cn.z201.spring.lookup.annotation.Point;
+import cn.z201.spring.lookup.domain.AnnotationDelayLookup;
+import cn.z201.spring.lookup.domain.DelayLookup;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;

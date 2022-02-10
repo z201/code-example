@@ -1,10 +1,9 @@
-package cn.z201.spring.domain;
+package cn.z201.spring.injection.domain;
 
 /**
  * @author z201.coding@gmail.com
- * spring ioc 延时查找
  **/
-public class DelayLookup {
+public class InjectionBean {
 
     private String name;
 
@@ -18,7 +17,7 @@ public class DelayLookup {
 
     @Override
     public String toString() {
-        return "DelayLookup{" +
+        return "InjectionBean{" +
                 "name='" + name + '\'' +
                 '}';
     }
