@@ -41,7 +41,7 @@ public class DefaultInitFactory implements InitFactory, InitializingBean, Dispos
     }
 
     @Override
-    public void finalize() throws Throwable{
+    public void finalize() throws Throwable {
         System.out.println("gc  finalize ...");
     }
 
