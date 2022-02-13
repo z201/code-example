@@ -26,6 +26,7 @@ public class InitBeanInitializationTest {
         lookupCollectionType(config);
         // 关闭上下文
         config.close();
+        System.gc();
     }
 
     /**
@@ -44,7 +45,7 @@ public class InitBeanInitializationTest {
         }
     }
 
-    @Bean(initMethod = "initFactory")
+    @Bean(initMethod = "initBean",destroyMethod = "destroyBean")
     public DefaultInitFactory initialization(){
         return new DefaultInitFactory();
     }
