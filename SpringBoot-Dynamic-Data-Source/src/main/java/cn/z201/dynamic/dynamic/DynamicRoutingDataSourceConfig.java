@@ -57,8 +57,7 @@ public class DynamicRoutingDataSourceConfig {
     @ConditionalOnBean(name = {DynamicDataSourceConstant.MASTER})
     public DynamicRoutingDataSource dynamicRoutingDataSource(@Qualifier(DynamicDataSourceConstant.MASTER) DataSource dataSource) {
         DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
-        Map<Object, Object> dataSourceMap = new HashMap<>();
-        dynamicRoutingDataSource.setDynamicRoutingDataSource(dataSource, dataSourceMap);
+        dynamicRoutingDataSource.setDynamicRoutingDataSource(dataSource, new HashMap<>());
         return dynamicRoutingDataSource;
     }
 
@@ -91,7 +90,7 @@ public class DynamicRoutingDataSourceConfig {
                     hikariConfig.setIdleTimeout(600000);
                     hikariConfig.setConnectionTimeout(30000);
                     hikariConfig.setMaxLifetime(1800000);
-                    DataSource dataSource =  new HikariDataSource(hikariConfig);
+                    DataSource dataSource = new HikariDataSource(hikariConfig);
                     dataSourceMap.put(i.getTenantId(), dataSource);
                 }
         );
@@ -101,9 +100,11 @@ public class DynamicRoutingDataSourceConfig {
 
     @Bean
     @Primary
-    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) throws Exception {
+    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource
+    ) throws Exception {
         MybatisSqlSessionFactoryBean sessionFactory = new MybatisSqlSessionFactoryBean();
         sessionFactory.setDataSource(dynamicRoutingDataSource);
+        // 可以从配置文件中获取，这里演示暂时写死。
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         sessionFactory.setTypeAliasesPackage("cn.z201.dynamic.persistence.entity");
         MybatisConfiguration config = new MybatisConfiguration();
@@ -119,7 +120,6 @@ public class DynamicRoutingDataSourceConfig {
         // 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
         return new DataSourceTransactionManager(dynamicRoutingDataSource);
     }
-
 
 
 }
