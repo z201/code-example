@@ -3,7 +3,6 @@ package cn.z201.dynamic.dynamic;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author z201.coding@gmail.com
@@ -44,7 +43,6 @@ public class DynamicDataSourceContextHolder {
     public void setDataSourceKey(String key) {
         if (containDataSourceKey(key)) {
             if (!ObjectUtils.isEmpty(key)) {
-                System.out.println(contextHolder.get());
                 contextHolder.set(key);
             }
         }
@@ -56,7 +54,6 @@ public class DynamicDataSourceContextHolder {
      * @return
      */
     public String getDataSourceKey() {
-        System.out.println(contextHolder.get());
         return contextHolder.get();
     }
 

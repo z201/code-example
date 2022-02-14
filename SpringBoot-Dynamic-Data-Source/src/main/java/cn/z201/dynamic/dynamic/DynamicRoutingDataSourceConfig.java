@@ -47,7 +47,6 @@ public class DynamicRoutingDataSourceConfig {
     HikariDataSource hikariDataSource;
 
     @Bean(DynamicDataSourceConstant.MASTER)
-    @Primary
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public DataSource master() {
         return DataSourceBuilder.create().build();
@@ -68,7 +67,6 @@ public class DynamicRoutingDataSourceConfig {
         DynamicRoutingDataSource dynamicRoutingDataSource = applicationContext.getBean(DynamicRoutingDataSource.class);
         HikariDataSource master = (HikariDataSource) applicationContext.getBean(DynamicDataSourceConstant.MASTER);
         Map<Object, Object> dataSourceMap = new HashMap<>();
-        dataSourceMap.put(DynamicDataSourceConstant.MASTER, master);
         List<TenantInfo> tenantInfoList = tenantInfoDao.selectList(null);
         tenantInfoList.stream().forEach(i ->
                 {
@@ -99,7 +97,6 @@ public class DynamicRoutingDataSourceConfig {
     }
 
     @Bean
-    @Primary
     public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource
     ) throws Exception {
         MybatisSqlSessionFactoryBean sessionFactory = new MybatisSqlSessionFactoryBean();
@@ -114,11 +111,24 @@ public class DynamicRoutingDataSourceConfig {
         return sessionFactory;
     }
 
+    /**
+     * 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
+     * @param dynamicRoutingDataSource
+     * @return
+     */
     @Bean
-    @Primary
     public PlatformTransactionManager transactionManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
-        // 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
         return new DataSourceTransactionManager(dynamicRoutingDataSource);
+    }
+
+    /**
+     * jdbc 扩展
+     * @param dynamicRoutingDataSource
+     * @return
+     */
+    @Bean
+    public DynamicJdbcTemplateManager dynamicJdbcTemplateManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource){
+        return new DynamicJdbcTemplateManager(dynamicRoutingDataSource);
     }
 
 

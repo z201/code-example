@@ -1,20 +1,21 @@
 package cn.z201.dynamic.dynamic;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+
 
 /**
  * @author z201.coding@gmail.com
  **/
-//@Component
 public class DynamicJdbcTemplateManager {
 
     private DynamicRoutingDataSource dynamicRoutingDataSource;
 
-    @Autowired
     public DynamicJdbcTemplateManager(DynamicRoutingDataSource dynamicRoutingDataSource) {
         this.dynamicRoutingDataSource = dynamicRoutingDataSource;
+    }
+
+    public DynamicRoutingDataSource getDynamicRoutingDataSource() {
+        return dynamicRoutingDataSource;
     }
 
     /**

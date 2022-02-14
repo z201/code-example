@@ -40,8 +40,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      */
     public boolean toggleDataSource(String key){
         if (DynamicDataSourceContextHolder.getInstance().containDataSourceKey(key)) {
+            String concurrentDataBase = DynamicDataSourceContextHolder.getInstance().getDataSourceKey();
             DynamicDataSourceContextHolder.getInstance().setDataSourceKey(key);
             determineTargetDataSource();
+            logger.info("toggleDataSource {} -> {}",concurrentDataBase ,key);
             return true;
         }
         return false;
@@ -49,9 +51,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        String key = DynamicDataSourceContextHolder.getInstance().getDataSourceKey();
-        logger.info("determineCurrentLookupKey --->>>>>>>>>> {}",key);
-        return key;
+        return DynamicDataSourceContextHolder.getInstance().getDataSourceKey();
     }
 
 }
