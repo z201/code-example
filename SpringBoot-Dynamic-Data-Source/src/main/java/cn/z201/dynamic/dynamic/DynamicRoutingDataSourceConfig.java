@@ -58,12 +58,10 @@ public class DynamicRoutingDataSourceConfig {
     public DynamicRoutingDataSource dynamicRoutingDataSource(@Qualifier(DynamicDataSourceConstant.MASTER) DataSource dataSource) {
         DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
         Map<Object, Object> dataSourceMap = new HashMap<>();
-//        dataSourceMap.put(DynamicDataSourceConstant.MASTER, dataSource);
         dynamicRoutingDataSource.setDynamicRoutingDataSource(dataSource, dataSourceMap);
         return dynamicRoutingDataSource;
     }
 
-    //
     @PostConstruct
     @ConditionalOnBean(DynamicRoutingDataSource.class)
     public void initDynamicDataSource() throws Exception {

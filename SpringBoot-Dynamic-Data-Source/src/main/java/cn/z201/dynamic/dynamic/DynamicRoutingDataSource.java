@@ -33,11 +33,18 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         logger.info("setDynamicRoutingDataSource ... ");
     }
 
-    public void toggleDataSource(String key){
+    /**
+     * 切换数据源
+     * @param key
+     * @return
+     */
+    public boolean toggleDataSource(String key){
         if (DynamicDataSourceContextHolder.getInstance().containDataSourceKey(key)) {
             DynamicDataSourceContextHolder.getInstance().setDataSourceKey(key);
+            determineTargetDataSource();
+            return true;
         }
-        determineTargetDataSource();
+        return false;
     }
 
     @Override

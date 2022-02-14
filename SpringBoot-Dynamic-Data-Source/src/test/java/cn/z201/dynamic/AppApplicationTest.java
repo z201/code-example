@@ -39,16 +39,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AppApplicationTest {
 
     @Autowired
-    ApplicationContext applicationContext;
-
-    @Autowired
-    protected SqlSessionFactory sqlSessionFactory;
-
-    @Autowired
-    private DataSource dataSource;
+    private ApplicationContext applicationContext;
 
     @Resource
-    TenantInfoDao tenantInfoDao;
+    private TenantInfoDao tenantInfoDao;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -78,15 +72,6 @@ public class AppApplicationTest {
     @AfterEach
     public void after() {
         log.info("after");
-        List<TenantInfo> tenantInfoList = tenantInfoDao.selectList(null);
-//        if (!CollectionUtils.isEmpty(tenantInfoList)) {
-//            ClassPathResource classPathResource = new ClassPathResource("clean.sql");
-//            try {
-//                ScriptUtils.executeSqlScript(dataSource.getConnection(), classPathResource);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     @Test
@@ -98,6 +83,7 @@ public class AppApplicationTest {
         concurrentDataBase();
         log.info("dataSourceKey All {}", dataSourceKeys);
         for (Object dataSourceKey : dataSourceKeys) {
+            // 切换数据库
             dynamicRoutingDataSource.toggleDataSource(dataSourceKey.toString());
             // jdbcTemplate 在运行时需要重新指定 DataSource
             this.jdbcTemplate = new JdbcTemplate(dynamicRoutingDataSource.determineTargetDataSource());
