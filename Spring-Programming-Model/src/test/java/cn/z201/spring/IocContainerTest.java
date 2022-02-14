@@ -1,6 +1,5 @@
 package cn.z201.spring;
 
-import cn.z201.spring.beans.SpringBeans;
 import cn.z201.spring.container.IocContainer;
 import cn.z201.spring.container.IocImportContainer;
 import cn.z201.spring.injection.domain.SuperInjectionBean;

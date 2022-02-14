@@ -3,7 +3,6 @@ package cn.z201.mybatis;
 import cn.z201.mybatis.dao.BatchDao;
 import cn.z201.mybatis.dao.TableDataDao;
 import cn.z201.mybatis.entity.TableData;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.*;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.wildfly.common.lock.Locks;
 
 import javax.annotation.Resource;
 import java.time.Clock;
@@ -28,7 +26,6 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AppApplicationTest {
 
-
     @Resource
     protected TableDataDao tableDataDao;
 
@@ -37,7 +34,6 @@ public class AppApplicationTest {
 
     @Autowired
     protected  SqlSessionFactory sqlSessionFactory;
-
 
     @BeforeEach
     public void before() {
