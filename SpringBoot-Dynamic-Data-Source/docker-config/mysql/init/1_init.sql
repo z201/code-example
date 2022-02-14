@@ -20,8 +20,6 @@ CREATE TABLE docker_dynamic_data.`tenant_info`
     `system_project`      VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '系统PROJECT',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-SET
-FOREIGN_KEY_CHECKS = 1;
 
 CREATE UNIQUE INDEX tenant_id_unique on docker_dynamic_data.`tenant_info` (tenant_id);
 CREATE UNIQUE INDEX tenant_name_unique on docker_dynamic_data.`tenant_info` (tenant_name);

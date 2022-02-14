@@ -13,9 +13,9 @@ services:
     networks:
       - network-docker-dynamic-data
     expose:
-      - '80'
+      - '9033'
     ports:
-      - '80:9033'
+      - '9033:9033'
     depends_on: # 等待其它服务启动完成
       - mysql
     links:
@@ -27,7 +27,7 @@ services:
       retries: 1
   mysql:
     image: mysql:5.7
-    container_name: mysql5.7-dev-6
+    container_name: mysql5.7-dev-dynamic-data
     networks:
       - network-docker-dynamic-data
     expose:
