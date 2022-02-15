@@ -57,7 +57,6 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
             bizAuditLog.setOpTraceId(MdcTool.getInstance().get());
             auditRepository.add(bizAuditLog);
         }
-
         return result;
     }
 

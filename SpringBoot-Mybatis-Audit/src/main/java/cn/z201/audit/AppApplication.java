@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 @SpringBootApplication
 @MapperScan(basePackages = "cn.z201.audit.persistence.dao")
+@EnableAspectJAutoProxy
 public class AppApplication {
 
     public static void main(String[] args) {

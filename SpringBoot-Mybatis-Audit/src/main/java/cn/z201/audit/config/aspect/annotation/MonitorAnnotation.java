@@ -16,7 +16,7 @@ public @interface MonitorAnnotation {
     /**
      * 审计
      */
-    boolean audit();
+    boolean audit() default false;
 
     /**
      * 事件类型 insert update delete select 等等

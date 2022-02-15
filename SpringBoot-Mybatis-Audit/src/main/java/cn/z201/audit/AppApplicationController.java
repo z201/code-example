@@ -3,6 +3,9 @@ package cn.z201.audit;
 
 import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
 import cn.z201.audit.domain.param.ApiParam;
+import cn.z201.audit.service.AuditServiceI;
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -13,6 +16,9 @@ import java.util.*;
 @RestController
 public class AppApplicationController {
 
+    @Autowired
+    private AuditServiceI auditService;
+
     @MonitorAnnotation(audit = true, type = "查看", title = "首页")
     @RequestMapping(value = "")
     public Object index() {
@@ -21,9 +27,13 @@ public class AppApplicationController {
         return data;
     }
 
-    @MonitorAnnotation(audit = true, type = "查看", title = "首页", descriptionExpression = "#{[0]}")
+    @MonitorAnnotation
     @RequestMapping(value = "/add{key}")
     public Object add(@PathVariable(required = false) String key) {
+        if (Objects.isNull(key)) {
+            key = Strings.EMPTY;
+        }
+        auditService.test(key);
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
         data.put("data", key);
