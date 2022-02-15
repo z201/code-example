@@ -1,6 +1,6 @@
-package cn.z201.dynamic;
+package cn.z201.audit;
 
-import cn.z201.dynamic.mybatis.BaseEntity;
+import cn.z201.audit.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +23,7 @@ import java.util.Map;
  * https://baomidou.com/config/#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE
  **/
 @Slf4j
-@ActiveProfiles("dev")
-public class CodeGeneratorTest extends AppApplicationTest {
+public class CodeGeneratorTest {
 
     @Test
     @Disabled
@@ -45,7 +43,7 @@ public class CodeGeneratorTest extends AppApplicationTest {
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/docker_dynamic_data?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/docker_mybatis_audit?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
@@ -53,7 +51,7 @@ public class CodeGeneratorTest extends AppApplicationTest {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(null);
-        pc.setParent("cn.z201.dynamic.persistence");
+        pc.setParent("cn.z201.audit.persistence");
         pc.setMapper("dao");
         pc.setEntity("entity");
         mpg.setPackageInfo(pc);

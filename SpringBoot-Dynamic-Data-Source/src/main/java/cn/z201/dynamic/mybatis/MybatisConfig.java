@@ -1,4 +1,4 @@
-package cn.z201.dynamic.mybaits;
+package cn.z201.dynamic.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;

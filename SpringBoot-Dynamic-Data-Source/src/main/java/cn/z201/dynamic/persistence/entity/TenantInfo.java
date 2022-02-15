@@ -1,6 +1,6 @@
 package cn.z201.dynamic.persistence.entity;
 
-import cn.z201.dynamic.mybaits.BaseEntity;
+import cn.z201.dynamic.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

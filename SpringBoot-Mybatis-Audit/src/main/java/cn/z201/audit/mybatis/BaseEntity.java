@@ -1,4 +1,4 @@
-package cn.z201.dynamic.mybaits;
+package cn.z201.audit.mybatis;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
