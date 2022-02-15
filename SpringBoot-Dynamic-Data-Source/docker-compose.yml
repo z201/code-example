@@ -21,7 +21,7 @@ services:
     links:
       - mysql
     healthcheck:
-      test: "/bin/netstat -anpt|grep 9002"
+      test: "/bin/netstat -anpt|grep 9033"
       interval: 30s
       timeout: 3s
       retries: 1
@@ -36,7 +36,7 @@ services:
       - '3306:3306'
     volumes:
       - ./docker-config/mysql/my.cnf:/etc/mysql/my.cnf # 映射数据库配置文件
-      - ./docker-config/mysql/init:/docker-entrypoint-initdb.d # 初始化数据库
+      - ./docker-config/mysql/init:/docker-entrypoint-initdb.d/ # 初始化数据库
     command: [
       '--character-set-server=utf8mb4',
       '--collation-server=utf8mb4_unicode_ci',

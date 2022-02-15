@@ -18,13 +18,19 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,8 +61,18 @@ public class DynamicRoutingDataSourceConfig {
     @Bean
     @ConditionalOnBean(name = {DynamicDataSourceConstant.MASTER})
     public DynamicRoutingDataSource dynamicRoutingDataSource(@Qualifier(DynamicDataSourceConstant.MASTER) DataSource dataSource) {
+        List<String> dataBasesList = new JdbcTemplate(dataSource).queryForList("SELECT DATABASE()", String.class);
+        if (CollectionUtils.isEmpty(dataBasesList)) {
+            ClassPathResource classPathResource = new ClassPathResource("create.sql");
+            try {
+                ScriptUtils.executeSqlScript(dataSource.getConnection(), classPathResource);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
         dynamicRoutingDataSource.setDynamicRoutingDataSource(dataSource, new HashMap<>());
+
         return dynamicRoutingDataSource;
     }
 
@@ -113,6 +129,7 @@ public class DynamicRoutingDataSourceConfig {
 
     /**
      * 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
+     *
      * @param dynamicRoutingDataSource
      * @return
      */
@@ -123,11 +140,12 @@ public class DynamicRoutingDataSourceConfig {
 
     /**
      * jdbc 扩展
+     *
      * @param dynamicRoutingDataSource
      * @return
      */
     @Bean
-    public DynamicJdbcTemplateManager dynamicJdbcTemplateManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource){
+    public DynamicJdbcTemplateManager dynamicJdbcTemplateManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
         return new DynamicJdbcTemplateManager(dynamicRoutingDataSource);
     }
 

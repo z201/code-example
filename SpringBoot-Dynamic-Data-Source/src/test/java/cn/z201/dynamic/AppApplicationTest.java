@@ -1,6 +1,7 @@
 package cn.z201.dynamic;
 
 import cn.z201.dynamic.dynamic.DynamicDataSourceContextHolder;
+import cn.z201.dynamic.dynamic.DynamicJdbcTemplateManager;
 import cn.z201.dynamic.dynamic.DynamicRoutingDataSource;
 import cn.z201.dynamic.dynamic.DynamicRoutingDataSourceTool;
 import cn.z201.dynamic.mybaits.SnowflakeTool;
@@ -45,7 +46,7 @@ public class AppApplicationTest {
     private TenantInfoDao tenantInfoDao;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private DynamicJdbcTemplateManager jdbcTemplate;
 
     @BeforeEach
     public void before() {
@@ -80,19 +81,17 @@ public class AppApplicationTest {
         lookupCollectionType(applicationContext);
         DynamicRoutingDataSource dynamicRoutingDataSource = applicationContext.getBean(DynamicRoutingDataSource.class);
         Set<Object> dataSourceKeys = DynamicDataSourceContextHolder.getInstance().all();
-        concurrentDataBase();
         log.info("dataSourceKey All {}", dataSourceKeys);
         for (Object dataSourceKey : dataSourceKeys) {
             // 切换数据库
             dynamicRoutingDataSource.toggleDataSource(dataSourceKey.toString());
             // jdbcTemplate 在运行时需要重新指定 DataSource
-            this.jdbcTemplate = new JdbcTemplate(dynamicRoutingDataSource.determineTargetDataSource());
             concurrentDataBase();
         }
     }
 
     private void concurrentDataBase() {
-        List<String> dataBasesList = jdbcTemplate.queryForList("SELECT DATABASE();", String.class);
+        List<String> dataBasesList = jdbcTemplate.dynamicJdbcTemplate().queryForList("SELECT DATABASE();", String.class);
         log.info("concurrentDataBase {}", dataBasesList);
     }
 
