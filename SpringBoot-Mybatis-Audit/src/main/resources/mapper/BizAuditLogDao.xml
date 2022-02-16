@@ -3,10 +3,11 @@
 <mapper namespace="cn.z201.audit.persistence.dao.BizAuditLogDao">
 
     <insert id="batchInsert">
-        INSERT INTO `biz_audit_log`(`id`, `is_enable`, `create_time`, `update_time`, `event_type`, `event_title`, `event_description`, `op_trace_id`, `user_id`)
+        INSERT INTO `biz_audit_log`(`id`, `is_enable`, `create_time`, `update_time`, `event_type`, `event_title`, `event_description`, `event_time`, `op_trace_id`, `user_id`)
         VALUES
         <foreach collection="bizAuditLogList" item="item" index="index" separator=",">
-            (#{item.id},#{item.isEnable},#{item.createTime},#{item.updateTime},#{item.eventType},#{item.eventTitle},#{item.eventDescription},#{item.opTraceId},#{item.userId})
+            (#{item.id},#{item.isEnable},#{item.createTime},#{item.updateTime},#{item.eventType},#{item.eventTitle},#{item.eventDescription},#{item.eventTime},#{item.opTraceId},#{item.userId})
         </foreach>
     </insert>
+
 </mapper>

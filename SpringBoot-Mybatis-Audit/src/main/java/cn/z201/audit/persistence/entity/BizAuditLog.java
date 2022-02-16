@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author z201.coding@gmail.com
- * @since 2022-02-15
+ * @since 2022-02-16
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -34,6 +34,11 @@ public class BizAuditLog extends BaseEntity {
     private String eventDescription;
 
     /**
+     * 时间记录时间
+     */
+    private Long eventTime;
+
+    /**
      * 操作标志
      */
     private String opTraceId;
@@ -41,17 +46,7 @@ public class BizAuditLog extends BaseEntity {
     /**
      * 操作用户id
      */
-    private Long userId = 0L;
+    private Long userId;
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("BizAuditLog{");
-        sb.append("eventType='").append(eventType).append('\'');
-        sb.append(", eventTitle='").append(eventTitle).append('\'');
-        sb.append(", eventDescription='").append(eventDescription).append('\'');
-        sb.append(", opTraceId='").append(opTraceId).append('\'');
-        sb.append(", userId=").append(userId);
-        sb.append('}');
-        return sb.toString();
-    }
+
 }

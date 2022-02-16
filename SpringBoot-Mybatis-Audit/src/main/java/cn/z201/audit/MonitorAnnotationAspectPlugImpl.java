@@ -2,18 +2,12 @@ package cn.z201.audit;
 
 import cn.z201.audit.config.aspect.MonitorAnnotationAspectPlugI;
 import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
-import cn.z201.audit.config.mdc.MdcTool;
-import cn.z201.audit.persistence.entity.BizAuditLog;
 import cn.z201.audit.repository.AuditRepository;
 import cn.z201.audit.utils.AnnotationTools;
 import cn.z201.audit.utils.JsonFormatTool;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.Expression;
-import org.springframework.expression.common.TemplateParserContext;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -38,25 +32,14 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
 
     @Override
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object[] args = joinPoint.getArgs();
         Method method = AnnotationTools.getDeclaredAnnotation(joinPoint);
         MonitorAnnotation monitorAnnotation = method.getDeclaredAnnotation(MonitorAnnotation.class);
         logHttp();
         logArgs(joinPoint);
         Object result = joinPoint.proceed();
         logHttpAfter();
-        if (monitorAnnotation.audit()) {
-            String type = monitorAnnotation.type();
-            String title = monitorAnnotation.title();
-            String descriptionExpression = monitorAnnotation.descriptionExpression();
-            //格式化描述表达式得到易读的描述
-            String description = parseDescriptionExpression(joinPoint.getArgs(), descriptionExpression);
-            BizAuditLog bizAuditLog = new BizAuditLog();
-            bizAuditLog.setEventType(type);
-            bizAuditLog.setEventTitle(title);
-            bizAuditLog.setEventDescription(description);
-            bizAuditLog.setOpTraceId(MdcTool.getInstance().get());
-            auditRepository.add(bizAuditLog);
-        }
+        auditRepository.add(monitorAnnotation,args);
         return result;
     }
 
@@ -90,11 +73,7 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
         log.info(" Args   : {}", JsonFormatTool.toString(arguments));
     }
 
-    private String parseDescriptionExpression(Object[] args, String descriptionExpression) {
-        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-        Expression expression = spelExpressionParser.parseExpression(descriptionExpression, new TemplateParserContext());
-        return expression.getValue(new StandardEvaluationContext(args), String.class);
-    }
+
 
 
 }

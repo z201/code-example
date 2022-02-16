@@ -19,6 +19,10 @@ public class AppApplicationController {
     @Autowired
     private AuditServiceI auditService;
 
+    /**
+     * 无参数
+     * @return
+     */
     @MonitorAnnotation(audit = true, type = "查看", title = "首页")
     @RequestMapping(value = "")
     public Object index() {
@@ -27,7 +31,11 @@ public class AppApplicationController {
         return data;
     }
 
-    @MonitorAnnotation
+    /**
+     * url占位符
+     * @param key
+     * @return
+     */
     @RequestMapping(value = "/add{key}")
     public Object add(@PathVariable(required = false) String key) {
         if (Objects.isNull(key)) {
@@ -40,8 +48,12 @@ public class AppApplicationController {
         return data;
     }
 
-
-    @MonitorAnnotation(audit = true, type = "查看", title = "api", descriptionExpression = "解析json #{[0].id}")
+    /**
+     * url参数
+     * @param apiParam
+     * @return
+     */
+    @MonitorAnnotation(audit = true, type = "查看", title = "api", descriptionExpression = "解析参数 #{[0].id}")
     @RequestMapping(value = "/path")
     public Object path(ApiParam apiParam) {
         Map<String, Object> data = new HashMap<>();
@@ -50,6 +62,11 @@ public class AppApplicationController {
         return data;
     }
 
+    /**
+     * json参数
+     * @param apiParam
+     * @return
+     */
     @MonitorAnnotation(audit = true, type = "查看", title = "api", descriptionExpression = "解析json #{[0].id}")
     @RequestMapping(value = "/api")
     public Object api(@RequestBody ApiParam apiParam) {

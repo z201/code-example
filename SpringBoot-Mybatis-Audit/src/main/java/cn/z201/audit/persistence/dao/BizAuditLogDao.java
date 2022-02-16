@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author z201.coding@gmail.com
- * @since 2022-02-15
+ * @since 2022-02-16
  */
 public interface BizAuditLogDao extends BaseMapper<BizAuditLog> {
 

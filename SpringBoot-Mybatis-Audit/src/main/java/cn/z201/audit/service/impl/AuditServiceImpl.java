@@ -1,8 +1,9 @@
 package cn.z201.audit.service.impl;
 
-import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
+import cn.z201.audit.repository.AuditRepository;
 import cn.z201.audit.service.AuditServiceI;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +13,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AuditServiceImpl implements AuditServiceI {
 
-    @Override
-    @MonitorAnnotation(audit = true, type = "查看", title = "首页", descriptionExpression = "#{[0]}")
-    public void test(String key) {
+    private AuditRepository auditRepository;
 
+    @Autowired
+    public AuditServiceImpl(AuditRepository auditRepository) {
+        this.auditRepository = auditRepository;
+    }
+
+    @Override
+    public void test(String key) {
+        auditRepository.add("查看","测试方法写入","#{[0]}",key);
     }
 }
