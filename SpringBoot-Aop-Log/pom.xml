@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.z201.mybaits</groupId>
-    <artifactId>SpringBoot-Mybatis-Batch</artifactId>
+    <groupId>cn.z201.spring</groupId>
+    <artifactId>SpringBoot-Aop-Log</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <com.baomidou.mybatis.version>3.4.3.4</com.baomidou.mybatis.version>
+        <hutool.version>5.8.5</hutool.version>
         <jmh.version>1.21</jmh.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -60,6 +60,10 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- SpringBoot web undertow -->
@@ -73,60 +77,25 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- lombok annotation  -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <!-- mybatis -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${com.baomidou.mybatis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-            <version>${com.baomidou.mybatis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter-test</artifactId>
-            <version>${com.baomidou.mybatis.version}</version>
-        </dependency>
-        <!--mp代码生成器-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <scope>test</scope>
-            <version>3.3.2</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>mybatis-plus-extension</artifactId>
-                    <groupId>com.baomidou</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <scope>test</scope>
-            <version>2.3.31</version>
-        </dependency>
         <!-- SpringBoot aop -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- com.zaxxer.hikari.HikariDataSource -->
         <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
-        <!-- mysql driver-->
+        <!-- 工具包 https://github.com/looly/hutool/ -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
         <!-- test -->
         <dependency>
@@ -215,5 +184,4 @@
             <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
         </repository>
     </repositories>
-
 </project>

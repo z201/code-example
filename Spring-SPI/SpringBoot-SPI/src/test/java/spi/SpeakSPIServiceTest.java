@@ -67,6 +67,7 @@ class SpeakSPIServiceTest {
 
 
     /**
+     * 循环遍历 {@link ServiceLoader} 获取
      * 根据LanguageType 注解上的信息，作为bean的id。进行注册。
      * @param applicationContext
      */

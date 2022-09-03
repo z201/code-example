@@ -1,0 +1,7 @@
+logging:
+  level:
+    cn:
+      z201:
+        spring:
+          config:
+            aspect: debug

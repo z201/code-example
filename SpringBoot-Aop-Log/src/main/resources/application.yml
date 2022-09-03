@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: spring-boot-aop-log
+  profiles:
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true # 处理404
+  web:
+    resources:
+      add-mappings: false # 关闭资源映射
+server:
+  port: 9031
+  servlet:
+    context-path: /
+
+# sql
+mybatis-plus:
+  configuration:
+    # 指定日志实现
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    #开启下划线转驼峰
+    map-underscore-to-camel-case: true
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    cn:
+      z201:
+        mybatis:
+          dao: info
+    org:
+      springframework: info
