@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -75,7 +76,6 @@ public class MonitorAnnotationAspect {
         if (Objects.isNull(httpServletRequest)) {
             httpRequest = false;
         }
-
         MonitorAnnotation monitorAnnotation = getDeclaredAnnotation(joinPoint);
         Object[] arguments = getArgs(joinPoint);
         if (httpRequest && null != monitorAnnotation) {
