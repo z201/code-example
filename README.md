@@ -12,9 +12,11 @@ blog related code
 
 4. Docker-Compose-Redis-Master-Slave
 
-   
 
-   
+#### 使用说明
 
+* `mvn clean test -P dev  `         => 只执行单侧
+* `mvn clean verify -P integration-test`  => 只执行集测
+* `mvn clean test -P test`          => 执行单侧+集测
    
 

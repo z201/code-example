@@ -1,4 +1,0 @@
-module chat.tools.client {
-
-
-}

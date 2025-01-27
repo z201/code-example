@@ -20,13 +20,8 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     #开启下划线转驼峰
     map-underscore-to-camel-case: true
-    type-aliases-package: cn.z201.mybatis.entity
-    mapper-locations: classpath:mybatis/*.xml
 
 logging:
   config: classpath:logback.xml
   level:
-    cn:
-      z201:
-        mybatis:
-          dao: debug
+    cn.z201.example.snowflake.dao: debug

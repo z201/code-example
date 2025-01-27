@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.z201.example</groupId>
+    <artifactId>example-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <url>https://z201.cn</url>
+    <name>example-parent</name>
+    <description>z201 example project</description>
+
+    <modules>
+        <module>bom</module>
+        <module>jmh</module>
+        <module>junit</module>
+        <module>snowflake</module>
+        <!--        <module>Distributed-Lock-Mysql</module>-->
+        <!--        <module>Distributed-Lock-Redis</module>-->
+        <!--        <module>Distributed-Lock-Zookeeper</module>-->
+        <!--        <module>Distributed-Lock-Zookeeper-Curator</module>-->
+        <!--        <module>Distributed-Lock-Zookeeper-Curator</module>-->
+        <module>Mybatis-Explain</module>
+        <module>Mybatis-Snowflake</module>
+        <module>Netty-learning</module>
+        <!--        <module>Redis-Cache-Breakdown</module>-->
+        <!--        <module>Redis-Geo</module>-->
+        <!--        <module>Redisson</module>-->
+        <!--        <module>Selenium-Tool</module>-->
+        <!--        <module>Spring-Aop-Annotation</module>-->
+        <!--        <module>Spring-Programming-Model</module>-->
+        <!--        <module>Spring-SPI</module>-->
+        <!--        <module>SpringBoot-Aop-Log</module>-->
+        <!--        <module>SpringBoot-Blocking-Queue</module>-->
+        <!--        <module>SpringBoot-Delayed-Queue</module>-->
+        <!--        <module>SpringBoot-Drone-CI</module>-->
+        <!--        <module>SpringBoot-Dynamic-Data-Source</module>-->
+        <!--        <module>SpringBoot-Email</module>-->
+        <!--        <module>SpringBoot-JMH</module>-->
+        <!--        <module>SpringBoot-Lucene</module>-->
+        <!--        <module>SpringBoot-Mdc-Log</module>-->
+        <!--        <module>SpringBoot-Mybatis-Audit</module>-->
+        <!--        <module>SpringBoot-Mybatis-Batch</module>-->
+        <!--        <module>SpringBoot-Redis-Bloom</module>-->
+        <!--        <module>SpringBoot-Redis-Delayed-Queue</module>-->
+        <!--        <module>SpringBoot-Redis-Scan</module>-->
+        <!--        <module>SpringBoot-Scheduling-Tasks</module>-->
+        <!--        <module>SpringBoot-Test-Mock</module>-->
+        <!--        <module>SpringBoot-WebClient</module>-->
+    </modules>
+
+    <!-- 项目属性配置：定义项目中使用的各种属性值和版本号 -->
+    <properties>
+        <!-- Java相关配置 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 开发工具和框架版本配置 -->
+        <!-- Spring Boot版本 -->
+        <spring-boot.version>2.7.6</spring-boot.version>
+        <!-- Git提交信息插件版本 -->
+        <git.commit.plugin>4.9.9</git.commit.plugin>
+        <!-- Spring代码格式检查插件版本 -->
+        <spring.checkstyle.plugin>0.0.34</spring.checkstyle.plugin>
+        <!-- Maven编译插件版本 -->
+        <maven-compiler-plugin>3.8.1</maven-compiler-plugin>
+        <!-- Maven资源处理插件版本 -->
+        <maven-resources-plugin>3.1.0</maven-resources-plugin>
+        <!-- Maven单元测试插件版本 -->
+        <maven-surefire-plugin>3.5.2</maven-surefire-plugin>
+        <!-- Maven集成测试插件版本 -->
+        <maven-failsafe-plugin>3.5.2</maven-failsafe-plugin>
+        <!-- Lombok插件版本 -->
+        <lombok.version>1.18.24</lombok.version>
+        <!-- JaCoCo代码覆盖率分析工具版本 -->
+        <jacoco.version>0.8.8</jacoco.version>
+        <!-- 集成测试覆盖率代理配置 -->
+        <itCoverageAgent/>
+    </properties>
+
+
+    <!-- 其他仓库,按设定顺序进行查找. -->
+    <repositories>
+        <!-- 官方maven仓库 -->
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
+        <!-- Spring 的maven仓库 -->
+        <repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Framework Maven Milestone Repository</name>
+            <url>https://maven.springframework.org/milestone</url>
+        </repository>
+
+        <!-- 阿里云的maven仓库 -->
+        <repository>
+            <id>nexus-ali-yun</id>
+            <name>Nexus ali yun</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+
+        <!-- 腾讯云指定的仓库地址 -->
+        <repository>
+            <id>nexus-tencent-yun</id>
+            <name>Nexus tencent yun</name>
+            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </repository>
+
+        <!-- 华为云指定的仓库地址 -->
+        <repository>
+            <id>huawei-cloud</id>
+            <name>Nexus huawei cloud</name>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+        </repository>
+    </repositories>
+
+    <!-- 依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.z201.example</groupId>
+                <artifactId>Bom</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- spring test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito inline -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 构建配置：用于定义项目构建过程中的各种配置和插件 -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Spring Boot Maven 插件：用于构建可执行的Spring Boot应用程序
+                     - 创建可执行的jar/war包
+                     - 提供开发时的热重载功能
+                     - 集成Spring Boot的特性和依赖管理 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+                <!-- Maven Resources 插件：用于处理项目资源文件
+                     - 复制和过滤项目资源
+                     - 处理资源文件的编码
+                     - 支持资源文件的过滤替换 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin}</version>
+                </plugin>
+                <!-- Maven打包插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin}</version>
+                </plugin>
+                <!-- JaCoCo 插件：用于Java代码覆盖率分析-->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Maven Surefire 插件：用于执行单元测试
+                 - 执行测试用例并生成报告
+                 - 配置测试执行的JVM参数
+                 - 支持测试用例的包含与排除
+                 - 控制测试执行的并行度 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin}</version>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipTests>${skip.unit.test}</skipTests>
+                    <includes>
+                        <include>**/*UnitTest.java</include>
+                    </includes>
+                    <argLine>
+                        -Xms512m -Xmx512m -Dfile.encoding=UTF-8 ${argLine}
+                    </argLine>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Failsafe 插件：专门用于执行集成测试
+                 - 在集成测试阶段执行测试用例
+                 - 支持与外部资源（数据库、网络服务等）的交互测试
+                 - 确保多个组件或模块之间的协同工作
+                 - 提供独立的测试生命周期 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipITs>${skip.integration.test}</skipITs>
+                    <includes>
+                        <include>**/*IntegrationTCase.java</include>
+                    </includes>
+                    <argLine>
+                        -Xms512m -Xmx512m -Dfile.encoding=UTF-8 ${argLine}
+                    </argLine>
+                </configuration>
+            </plugin>
+
+            <!-- JaCoCo 插件：用于Java代码覆盖率分析
+                 - 收集单元测试和集成测试的覆盖率数据
+                 - 生成详细的覆盖率报告
+                 - 支持覆盖率数据的合并
+                 - 可以设置覆盖率检查规则
+
+                 主要参数说明：
+                 - version: JaCoCo插件版本号，建议使用稳定版本
+                 - executions: 定义插件执行的生命周期和目标
+                 - prepare-agent: 准备JaCoCo运行时代理，用于收集覆盖率数据
+                 - propertyName: 存储代理配置的属性名称，用于在其他插件中引用
+                 - report: 生成覆盖率报告，支持HTML、XML、CSV等格式
+                 - check: 检查覆盖率是否达到设定的阈值
+
+                 使用场景：
+                 1. 单元测试覆盖率分析
+                 2. 集成测试覆盖率分析
+                 3. 合并多个测试的覆盖率数据
+                 4. 在CI/CD流程中进行质量门禁检查 -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- 单元测试执行前准备 -->
+                    <execution>
+                        <id>prepare-unit-tests</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <propertyName>itCoverageAgent</propertyName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Spring Java Format 插件：确保代码风格统一
+                 - 强制执行Spring项目的代码格式规范
+                 - 自动格式化Java源代码
+                 - 确保团队代码风格的一致性 -->
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>${spring.checkstyle.plugin}</version>
+            </plugin>
+            <!-- Git Commit ID 插件：将Git信息集成到构建过程
+                 - 收集Git仓库的状态信息
+                 - 生成包含Git信息的属性文件
+                 - 支持构建版本追踪和问题排查
+                 - 提供构建与源代码的关联 -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git.commit.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--因为项目定制了jackson的日期时间序列化/反序列化格式，因此这里要进行配置,不然通过management.info.git.mode=full进行完整git信息监控时会存在问题-->
+                    <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.(id|message|time).*$</includeOnlyProperty>
+                    </includeOnlyProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 环境标识，需要与配置文件的名称相对应 -->
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles.active>local</profiles.active>
+                <skip.unit.test>true</skip.unit.test>
+                <skip.integration.test>true</skip.integration.test>
+                <argLine>-Dspring.profiles.active=local</argLine>
+            </properties>
+        </profile>
+
+        <!-- 只运行单元测试的配置 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+                <skip.unit.test>false</skip.unit.test>
+                <skip.integration.test>true</skip.integration.test>
+                <argLine>-Dspring.profiles.active=dev</argLine>
+            </properties>
+        </profile>
+
+        <!-- 只运行集成测试的配置 -->
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+                <skip.unit.test>true</skip.unit.test>
+                <skip.integration.test>false</skip.integration.test>
+                <argLine>-Dspring.profiles.active=test</argLine>
+            </properties>
+        </profile>
+
+        <!-- 所有测试都运行的配置 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+                <skip.unit.test>false</skip.unit.test>
+                <skip.integration.test>false</skip.integration.test>
+                <argLine>-Dspring.profiles.active=test</argLine>
+            </properties>
+        </profile>
+
+        <!-- 生产环境不执行测试 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+                <skip.unit.test>true</skip.unit.test>
+                <skip.integration.test>true</skip.integration.test>
+                <argLine>-Dspring.profiles.active=prod</argLine>
+            </properties>
+        </profile>
+    </profiles>
+
+
+</project>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.z201.example</groupId>
+    <artifactId>Bom</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!-- 定义项目属性 -->
+    <properties>
+        <!-- 项目公共版本号 -->
+        <scaffold.common.version>1.0.0</scaffold.common.version>
+        <!-- java manager  -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+
+        <!-- Spring Boot 版本 -->
+        <spring-boot.version>2.7.6</spring-boot.version>
+        <!-- Spring Boot Admin 版本 -->
+        <spring-boot-admin.version>2.7.4</spring-boot-admin.version>
+        <!-- Spring Cloud 版本 -->
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <!-- Spring Cloud Alibaba 版本 -->
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+
+        <!-- MyBatis Plus 版本 -->
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+
+        <!-- P6Spy SQL 日志打印工具版本 -->
+        <p6spy.version>3.9.1</p6spy.version>
+        <!-- Fastjson JSON 处理库版本 -->
+        <fastjson.version>2.0.16</fastjson.version>
+
+        <!-- Google 相关工具版本 -->
+        <google-linkedhashmap.version>1.4.2</google-linkedhashmap.version>
+        <google-guava.version>20.0</google-guava.version>
+        <!-- 用户代理解析工具版本 -->
+        <user-agent-utils.version>1.21</user-agent-utils.version>
+
+        <!-- 验证码工具版本 -->
+        <kaptcha.version>2.3.2</kaptcha.version>
+
+        <!-- Apache Commons 工具库版本 -->
+        <commons-io.version>2.15.0</commons-io.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-codec.version>1.13</commons-codec.version>
+
+        <!-- JWT 工具版本 -->
+        <jjwt.version>0.9.1</jjwt.version>
+
+        <!-- Sa-Token 权限认证框架版本 -->
+        <sa-token.version>1.37.0</sa-token.version>
+        <!-- Hutool 工具库版本 -->
+        <hutool.version>5.7.22</hutool.version>
+
+        <!-- Velocity 模板引擎版本 -->
+        <velocity-engine-core.version>2.3</velocity-engine-core.version>
+        <velocity-tools.version>3.1</velocity-tools.version>
+        <!-- BouncyCastle 加密库版本 -->
+        <bcprov.version>1.59</bcprov.version>
+        <!-- jmh 基准测试 -->
+        <jmh.version>1.21</jmh.version>
+        <!-- Netty -->
+        <netty.version>4.1.42.Final</netty.version>
+        <!-- slf4j-log4j12 漏洞修复 slf4j-log4j12 依赖替换为 slf4j-reload4j 依赖。 -->
+        <slf4j-reload4j.version>1.7.36</slf4j-reload4j.version>
+    </properties>
+
+    <!-- 依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot 依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- spring cloud 依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- spring cloud alibaba 依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- MyBatis Plus 相关依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter-test</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- P6Spy SQL 日志打印工具 -->
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
+            </dependency>
+
+            <!-- Fastjson JSON 处理库 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- Google 并发哈希映射工具 -->
+            <dependency>
+                <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
+                <artifactId>concurrentlinkedhashmap-lru</artifactId>
+                <version>${google-linkedhashmap.version}</version>
+            </dependency>
+
+            <!-- 验证码工具 -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <!-- Google Guava 工具库 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google-guava.version}</version>
+            </dependency>
+
+            <!-- Apache Commons IO 工具库 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <!-- Apache Commons Lang3 工具库 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- Apache Commons Collections4 工具库 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <!-- Hutool 工具库 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- JMH基准测试 -->
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
+
+            <!-- Netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <!-- 漏洞修复后的slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-reload4j</artifactId>
+                <version>${slf4j-reload4j.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>

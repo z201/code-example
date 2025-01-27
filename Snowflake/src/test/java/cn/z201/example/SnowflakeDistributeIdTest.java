@@ -1,5 +1,8 @@
 package cn.z201.example;
 
+import cn.z201.example.snowflake.SnowflakeDistributeId;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -24,7 +27,9 @@ public class SnowflakeDistributeIdTest {
         }
     }
 
-    public static void main(String[] args) throws RunnerException {
+    @Test
+    @Disabled
+    public void executeJmhRunner() throws RunnerException {
         Options opt = new OptionsBuilder()
                 // 设置类名正则表达式基准为搜索当前类
                 .include("\\." + SnowflakeDistributeIdTest.class.getSimpleName() + "\\.")
