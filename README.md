@@ -208,6 +208,20 @@ volumes:
 ```
 
 
+## 项目配置信息
+
+| 项目名称 | 服务端口 | 数据库类型及版本 | 主要依赖库 |
+|---------|---------|----------------|------------|
+| springboot-redis-cache-breakdown | 9001 | Redis 6.0+ | Spring Boot, Redis |
+| springboot-redis-delayed-queue | 9033 | Redis 6.0+ | Spring Boot, Redis |
+| springboot-redis-geo | 随机端口 | Redis 6.0+ | Spring Boot, Redis |
+| springboot-redis-scan | 未指定 | Redis 6.0+ | Spring Boot, Redis |
+| springboot-mysql-redis | 9000 | MySQL 8.0+, Redis 6.0+ | Spring Boot, MySQL, Redis |
+| springboot-mybatis-batch | 9030 | MySQL 8.0+ | Spring Boot, MyBatis-Plus |
+| springboot-mybatis-explain | 9023 | MySQL 8.0+ | Spring Boot, MyBatis-Plus |
+| springboot-test-mock | 9011 | MySQL 8.0+ | Spring Boot, WebFlux |
+| springboot-webclient | 9015 | 无 | Spring Boot, WebFlux |
+
 ## 使用说明
 
 1. 先构建BOM项目;在回到项目根目录构建项目。

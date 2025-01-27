@@ -98,6 +98,38 @@
   - Redis：5.0.5
   - Zookeeper：3.7.1
 
+## 13. Dockerfile和docker-compose配置匹配检查
+
+- [ ] Dockerfile基础镜像版本与docker-compose服务版本一致
+- [ ] 端口配置匹配
+  - Dockerfile中EXPOSE的端口与docker-compose中的expose/ports配置一致
+  - 应用配置文件中的端口与容器映射端口一致
+- [ ] 环境变量配置
+  - Dockerfile中的ENV与docker-compose的environment配置同步
+  - 环境变量在应用配置文件中正确引用
+- [ ] 数据卷挂载点
+  - Dockerfile中的VOLUME与docker-compose的volumes配置匹配
+  - 挂载路径在容器内外一致
+- [ ] 健康检查机制
+  - Dockerfile的HEALTHCHECK与docker-compose的healthcheck配置一致
+  - 检查命令和参数匹配
+
+## 14. Java应用配置检查
+
+- [ ] application.yml/properties配置
+  - 数据库连接信息与docker-compose中的配置匹配
+  - Redis连接信息与容器配置一致
+  - 应用端口与容器映射端口对应
+  - 日志路径与容器卷挂载配置匹配
+- [ ] Spring Boot配置
+  - actuator端点配置与健康检查路径一致
+  - 应用上下文路径配置正确
+  - 数据源配置使用环境变量
+- [ ] 资源配置
+  - JVM参数配置与容器资源限制匹配
+  - 线程池配置合理
+  - 连接池配置适当
+
 ## 注意事项
 
 1. 在进行容器化部署前，请确保完成上述所有检查项
@@ -105,3 +137,5 @@
 3. 保持配置的一致性，避免环境差异导致的问题
 4. 重点关注资源限制和健康检查配置，确保容器的稳定运行
 5. 合理规划端口映射，避免端口冲突
+6. 确保Dockerfile和docker-compose配置文件的同步更新
+7. 定期验证Java应用配置与容器环境的兼容性

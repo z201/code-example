@@ -1,61 +1,103 @@
-version : '3'
-
-networks:
-  network-redis:
-    driver: bridge
-
-x-sentinel-common: &sentinel-common
-  image: redis:5.0.5
-  networks:
-    - network-redis
-  deploy:
-    resources:
-      limits:
-        cpus: '0.3'
-        memory: 256M
-      reservations:
-        cpus: '0.1'
-        memory: 128M
-  command: redis-sentinel /usr/local/etc/redis/sentinel.conf
-  restart: unless-stopped
-  logging:
-    driver: "json-file"
-    options:
-      max-size: "100m"
-      max-file: "3"
-  healthcheck:
-    test: ["CMD", "redis-cli", "-p", "26379", "ping"]
-    interval: 30s
-    timeout: 3s
-    retries: 3
+version: '3'
 
 services:
-  sentinel1:
-    <<: *sentinel-common
-    container_name: redis5.0.6-sentinel-1
+  redis-master:
+    image: redis:5.0.6
+    container_name: redis5.0.6-master
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis-master.conf:/usr/local/etc/redis/redis.conf
+      - ./data/master:/data
     ports:
-      - '26379:26379'
+      - "6379:6379"
+    networks:
+      - redis-net
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+
+  redis-slave1:
+    image: redis:5.0.6
+    container_name: redis5.0.6-slave1
+    command: redis-server /usr/local/etc/redis/redis.conf --replicaof redis5.0.6-master 6379
+    volumes:
+      - ./redis-slave.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave1:/data
+    ports:
+      - "6380:6379"
+    networks:
+      - redis-net
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+    depends_on:
+      - redis-master
+
+  redis-slave2:
+    image: redis:5.0.6
+    container_name: redis5.0.6-slave2
+    command: redis-server /usr/local/etc/redis/redis.conf --replicaof redis5.0.6-master 6379
+    volumes:
+      - ./redis-slave.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave2:/data
+    ports:
+      - "6381:6379"
+    networks:
+      - redis-net
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+    depends_on:
+      - redis-master
+
+  sentinel1:
+    image: redis:5.0.6
+    container_name: redis5.0.6-sentinel1
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel-base.conf:/usr/local/etc/redis/sentinel.conf
+    ports:
+      - "26379:26379"
+    networks:
+      - redis-net
     environment:
       - SENTINEL_PORT=26379
+    depends_on:
+      - redis-master
+      - redis-slave1
+      - redis-slave2
 
   sentinel2:
-    <<: *sentinel-common
-    container_name: redis5.0.6-sentinel-2
-    ports:
-      - '26380:26379'
+    image: redis:5.0.6
+    container_name: redis5.0.6-sentinel2
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel-base.conf:/usr/local/etc/redis/sentinel.conf
+    ports:
+      - "26380:26379"
+    networks:
+      - redis-net
     environment:
       - SENTINEL_PORT=26379
+    depends_on:
+      - redis-master
+      - redis-slave1
+      - redis-slave2
 
   sentinel3:
-    <<: *sentinel-common
-    container_name: redis5.0.6-sentinel-3
-    ports:
-      - '26381:26379'
+    image: redis:5.0.6
+    container_name: redis5.0.6-sentinel3
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel-base.conf:/usr/local/etc/redis/sentinel.conf
+    ports:
+      - "26381:26379"
+    networks:
+      - redis-net
     environment:
       - SENTINEL_PORT=26379
+    depends_on:
+      - redis-master
+      - redis-slave1
+      - redis-slave2
+
+networks:
+  redis-net:
+    driver: bridge

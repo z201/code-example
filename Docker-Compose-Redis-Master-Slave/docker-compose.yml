@@ -1,79 +1,46 @@
-version : '3'
-
-networks:
-  network-redis:
-    driver: bridge
+version: '3'
 
 services:
-  master:
-    image: redis:5.0.5
+  redis-master:
+    image: redis:5.0.6
     container_name: redis5.0.6-master
-    networks:
-      - network-redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis-master.conf:/usr/local/etc/redis/redis.conf
+      - ./data/master:/data
     ports:
-      - '6379:6379'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-    environment:
-      - REDIS_PASSWORD=redis_pwd
-    command: redis-server --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
-  slaves1:
-    image: redis:5.0.5
-    container_name: redis5.0.6-slaves1
+      - "6379:6379"
     networks:
-      - network-redis
+      - redis-net
+
+  redis-slave1:
+    image: redis:5.0.6
+    container_name: redis5.0.6-slave1
+    command: redis-server /usr/local/etc/redis/redis.conf --replicaof redis5.0.6-master 6379
+    volumes:
+      - ./redis-slave.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave1:/data
     ports:
-      - '6380:6379'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-    environment:
-      - REDIS_PASSWORD=redis_pwd
-    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
-  slaves2:
-    image: redis:5.0.5
-    container_name: redis5.0.6-slaves2
+      - "6380:6379"
     networks:
-      - network-redis
+      - redis-net
+    depends_on:
+      - redis-master
+
+  redis-slave2:
+    image: redis:5.0.6
+    container_name: redis5.0.6-slave2
+    command: redis-server /usr/local/etc/redis/redis.conf --replicaof redis5.0.6-master 6379
+    volumes:
+      - ./redis-slave.conf:/usr/local/etc/redis/redis.conf
+      - ./data/slave2:/data
     ports:
-      - '6381:6379'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-    environment:
-      - REDIS_PASSWORD=redis_pwd
-    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
+      - "6381:6379"
+    networks:
+      - redis-net
+    depends_on:
+      - redis-master
+
+networks:
+  redis-net:
+    driver: bridge
