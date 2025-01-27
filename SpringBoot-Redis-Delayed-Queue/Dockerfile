@@ -13,11 +13,11 @@ RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo Asia/Shanghai > /etc/timezone
 
 # 复制应用文件
-COPY target/SpringBoot-Mybatis-Batch-1.0.0-SNAPSHOT.jar docker-app.jar
+COPY target/SpringBoot-Redis-Delayed-Queue-1.0.0-SNAPSHOT.jar docker-app.jar
 
 # 配置健康检查
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:9030/actuator/health || exit 1
+  CMD curl -f http://localhost:8080/actuator/health || exit 1
 
 # 启动应用
 ENTRYPOINT ["sh","-c","java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=test -jar docker-app.jar"]

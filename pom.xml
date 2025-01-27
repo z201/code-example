@@ -13,7 +13,6 @@
 
     <modules>
         <module>Bom</module>
-        <module>Jmh</module>
         <module>Jmh-Snowflake</module>
         <module>Junit</module>
         <module>Selenium-Tool</module>

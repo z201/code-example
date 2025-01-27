@@ -8,6 +8,17 @@ spring:
   web:
     resources:
       add-mappings: false # 关闭资源映射
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
 server:
   port: 9004
   servlet:

@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari: # https://github.com/brettwooldridge/HikariCP (uses milliseconds for all time values)
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/docker_dynamic_data?useSSL=false&useUnicode=true&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf-8
+      jdbc-url: jdbc:mysql://127.0.0.1:3307/docker_dynamic_data?useSSL=false&useUnicode=true&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf-8
       username: root
-      password: 123456
+      password: root
       driver-class-name: com.mysql.cj.jdbc.Driver
       maximumPoolSize: 20 # 连接池最大连接数，默认是10
       minimumIdle: 5  # 最小空闲连接数量

@@ -1,0 +1,137 @@
+version: '3'
+
+networks:
+  network-distributed-lock-zookeeper-curator:
+    driver: bridge
+
+services:
+  zookeeper1:
+    image: zookeeper:3.7.1
+    container_name: zookeeper3.7.1-curator-1
+    networks:
+      - network-distributed-lock-zookeeper-curator
+    expose:
+      - '2181'
+    ports:
+      - '2181:2181'
+      - '2888:2888'
+      - '3888:3888'
+    volumes:
+      - ./docker-config/zookeeper1/data:/data
+      - ./docker-config/zookeeper1/datalog:/datalog
+    environment:
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+    healthcheck:
+      test: "/bin/netstat -anpt|grep 2181"
+      interval: 30s
+      timeout: 3s
+      retries: 1
+
+  zookeeper2:
+    image: zookeeper:3.7.1
+    container_name: zookeeper3.7.1-curator-2
+    networks:
+      - network-distributed-lock-zookeeper-curator
+    expose:
+      - '2181'
+    ports:
+      - '2182:2181'
+      - '2889:2888'
+      - '3889:3888'
+    volumes:
+      - ./docker-config/zookeeper2/data:/data
+      - ./docker-config/zookeeper2/datalog:/datalog
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+    healthcheck:
+      test: "/bin/netstat -anpt|grep 2181"
+      interval: 30s
+      timeout: 3s
+      retries: 1
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+    healthcheck:
+      test: "/bin/netstat -anpt|grep 2181"
+      interval: 30s
+      timeout: 3s
+      retries: 1
+
+  zookeeper3:
+    image: zookeeper:3.7.1
+    container_name: zookeeper3.7.1-curator-3
+    networks:
+      - network-distributed-lock-zookeeper-curator
+    expose:
+      - '2181'
+    ports:
+      - '2183:2181'
+      - '2890:2888'
+      - '3890:3888'
+    volumes:
+      - ./docker-config/zookeeper3/data:/data
+      - ./docker-config/zookeeper3/datalog:/datalog
+    environment:
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+    healthcheck:
+      test: "/bin/netstat -anpt|grep 2181"
+      interval: 30s
+      timeout: 3s
+      retries: 1
