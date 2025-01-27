@@ -14,42 +14,39 @@
     <modules>
         <module>Bom</module>
         <module>Jmh</module>
+        <module>Jmh-Snowflake</module>
         <module>Junit</module>
+        <module>Selenium-Tool</module>
+        <module>Spring-Aop-Annotation</module>
+        <module>Spring-Programming-Model</module>
+        <module>Spring-SPI</module>
         <module>Netty-Learning</module>
-        <module>Snowflake</module>
         <module>Distributed-Lock-Mysql</module>
         <module>Distributed-Lock-Redis</module>
         <module>Distributed-Lock-Zookeeper</module>
         <module>Distributed-Lock-Zookeeper-Curator</module>
-        <module>Docker-Compose-Mybatis-Explain</module>
-        <module>Docker-Compose-Mybatis-Snowflake</module>
-        <module>Docker-Compose-Redis-Cache-Breakdown</module>
-        <module>Docker-Compose-Redis-Geo</module>
-        <module>Docker-Compose-SpringBoot-Dynamic-Data-Source</module>
-        <module>Docker-Compose-SpringBoot-Mysql-Redis</module>
-        <module>Docker-Compose-SpringBoot-Redis-Bloom</module>
-        <!--        <module>Redisson</module>-->
-        <!--        <module>Selenium-Tool</module>-->
-        <!--        <module>Spring-Aop-Annotation</module>-->
-        <!--        <module>Spring-Programming-Model</module>-->
-        <!--        <module>Spring-SPI</module>-->
-        <!--        <module>SpringBoot-Aop-Log</module>-->
-        <!--        <module>SpringBoot-Blocking-Queue</module>-->
-        <!--        <module>SpringBoot-Delayed-Queue</module>-->
-        <!--        <module>SpringBoot-Drone-CI</module>-->
-
-        <!--        <module>SpringBoot-Email</module>-->
-        <!--        <module>SpringBoot-JMH</module>-->
-        <!--        <module>SpringBoot-Lucene</module>-->
-        <!--        <module>SpringBoot-Mdc-Log</module>-->
-        <!--        <module>SpringBoot-Mybatis-Audit</module>-->
-        <!--        <module>SpringBoot-Mybatis-Batch</module>-->
-        <!--        <module>SpringBoot-Redis-Bloom</module>-->
-        <!--        <module>SpringBoot-Redis-Delayed-Queue</module>-->
-        <!--        <module>SpringBoot-Redis-Scan</module>-->
-        <!--        <module>SpringBoot-Scheduling-Tasks</module>-->
-        <!--        <module>SpringBoot-Test-Mock</module>-->
-        <!--        <module>SpringBoot-WebClient</module>-->
+        <module>SpringBoot-Mybatis-Explain</module>
+        <module>SpringBoot-Mybatis-Snowflake</module>
+        <module>SpringBoot-Redis-Cache-Breakdown</module>
+        <module>SpringBoot-Redis-Geo</module>
+        <module>SpringBoot-Redis-Bloom</module>
+        <module>SpringBoot-Redis-Scan</module>
+        <module>SpringBoot-Redis-Delayed-Queue</module>
+        <module>SpringBoot-Redisson</module>
+        <module>SpringBoot-Dynamic-Data-Source</module>
+        <module>SpringBoot-Mysql-Redis</module>
+        <module>SpringBoot-Aop-Log</module>
+        <module>SpringBoot-Blocking-Queue</module>
+        <module>SpringBoot-Delayed-Message-Queue</module>
+        <module>SpringBoot-Email</module>
+        <module>SpringBoot-JMH</module>
+        <module>SpringBoot-Lucene</module>
+        <module>SpringBoot-Mdc-Log</module>
+        <module>SpringBoot-Mybatis-Audit</module>
+        <module>SpringBoot-Mybatis-Batch</module>
+        <module>SpringBoot-Scheduling-Tasks</module>
+        <module>SpringBoot-Test-Mock</module>
+        <module>SpringBoot-WebClient</module>
     </modules>
 
     <!-- 项目属性配置：定义项目中使用的各种属性值和版本号 -->

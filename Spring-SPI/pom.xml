@@ -4,40 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.5</version>
+        <groupId>cn.z201.example</groupId>
+        <artifactId>example-parent</artifactId>
+        <version>1.0.0</version>
     </parent>
-    <groupId>cn.z201.spi</groupId>
+
     <artifactId>Spring-SPI</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+
     <modules>
         <module>Jdk-SPI</module>
         <module>SpringBoot-SPI</module>
     </modules>
-    <packaging>pom</packaging>
-
-    <!-- 其他仓库,按设定顺序进行查找. -->
-    <repositories>
-        <repository>
-            <id>org.springframework.maven.milestone</id>
-            <name>Spring Framework Maven Milestone Repository</name>
-            <url>https://maven.springframework.org/milestone</url>
-        </repository>
-        <!-- 阿里云的maven仓库 -->
-        <repository>
-            <id>nexus-aliyun</id>
-            <name>Nexus aliyun</name>
-            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        <repository>
-            <id>com.e-iceblue</id>
-            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
-        </repository>
-    </repositories>
 </project>

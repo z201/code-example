@@ -3,49 +3,69 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>cn.z201.example</groupId>
         <artifactId>Spring-SPI</artifactId>
-        <groupId>cn.z201.spi</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>SpringBoot-SPI</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
     <!-- 引入的是spring 5.3.6 -->
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>cn.z201.spi</groupId>
+            <groupId>cn.z201.example</groupId>
             <artifactId>Jdk-SPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
         <!-- 单元测试 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

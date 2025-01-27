@@ -8,9 +8,9 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>Docker-Compose-SpringBoot-Redis-Bloom</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
+    <artifactId>SpringBoot-Mysql-Redis</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -33,17 +33,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>wildfly-client-config</artifactId>
-                    <groupId>org.wildfly.client</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- SpringBoot aop -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--  jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <!-- SpringBoot redis -->
         <dependency>
@@ -55,20 +54,15 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
-        <!-- lombok annotation  -->
+        <!-- com.zaxxer.hikari.HikariDataSource -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
-        <!-- 工具包 https://github.com/looly/hutool/-->
+        <!-- mysql driver-->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-        <!-- gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
         <!-- 单元测试 -->
         <dependency>
@@ -99,6 +93,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

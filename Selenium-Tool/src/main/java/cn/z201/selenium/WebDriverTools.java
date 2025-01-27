@@ -1,6 +1,5 @@
 package cn.z201.selenium;
 
-import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

@@ -9,31 +9,41 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>snowflake</artifactId>
+    <artifactId>SpringBoot-Redisson</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <slf4j.version>1.7.21</slf4j.version>
+        <org.testcontainers.version>1.16.2</org.testcontainers.version>
+    </properties>
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.16.0</version>
+        </dependency>
         <!-- 单元测试 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-
-        <!-- JMH基准测试 -->
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -50,5 +60,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

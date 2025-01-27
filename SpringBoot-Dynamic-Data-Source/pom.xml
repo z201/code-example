@@ -8,10 +8,15 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>Docker-Compose-Mybatis-Snowflake</artifactId>
+    <artifactId>SpringBoot-Dynamic-Data-Source</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- SpringBoot web starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -23,11 +28,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- SpringBoot web undertow -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>wildfly-client-config</artifactId>
+                    <groupId>org.wildfly.client</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- mybatis -->
@@ -45,85 +55,49 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter-test</artifactId>
         </dependency>
-
-        <!-- mysql driver-->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-        </dependency>
-
-        <!-- H2 数据库 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- test -->
+        <!-- SpringBoot aop -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
         <!-- com.zaxxer.hikari.HikariDataSource -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>
-
+        <!-- mysql driver-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
         <!-- 单元测试 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- 生成测试数据 -->
-        <dependency>
-            <groupId>io.codearte.jfairy</groupId>
-            <artifactId>jfairy</artifactId>
-            <version>0.5.9</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.code.gson</groupId>
-                    <artifactId>gson</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 中文转换拼音 -->
-        <dependency>
-            <groupId>com.github.stuxuhai</groupId>
-            <artifactId>jpinyin</artifactId>
-            <version>1.1.8</version>
-        </dependency>
-
     </dependencies>
-
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
-
 
 </project>
