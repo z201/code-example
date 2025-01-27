@@ -1,9 +1,9 @@
-package cn.z201.example.snowflake;
+package cn.z201.example.spring.mybatis.snowflake;
 
-import cn.z201.example.mybatis.snowflake.AccountToolService;
-import cn.z201.example.mybatis.snowflake.AppApplication;
-import cn.z201.example.mybatis.snowflake.dao.AccountDao;
-import cn.z201.example.mybatis.snowflake.entity.Account;
+import cn.z201.example.spring.mybatis.snowflake.AccountToolService;
+import cn.z201.example.spring.mybatis.snowflake.AppApplication;
+import cn.z201.example.spring.mybatis.snowflake.dao.AccountDao;
+import cn.z201.example.spring.mybatis.snowflake.entity.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;

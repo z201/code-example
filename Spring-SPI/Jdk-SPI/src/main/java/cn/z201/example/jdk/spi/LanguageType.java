@@ -1,4 +1,4 @@
-package cn.z201.example.spring.spi.jdk;
+package cn.z201.example.jdk.spi;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,4 +13,5 @@ import java.lang.annotation.Target;
 public @interface LanguageType {
 
     String language();
+
 }

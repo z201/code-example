@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>SpringBoot-Mybatis-Audit</artifactId>
+    <artifactId>springboot-mybatis-audit</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

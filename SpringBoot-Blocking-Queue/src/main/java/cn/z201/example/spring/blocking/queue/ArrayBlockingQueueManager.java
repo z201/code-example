@@ -1,4 +1,4 @@
-package cn.z201.example.blocking.queue;
+package cn.z201.example.spring.blocking.queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
@@ -16,17 +16,18 @@ import java.util.concurrent.BlockingQueue;
 @Slf4j
 public class ArrayBlockingQueueManager {
 
-    private final static BlockingQueue<BlockingDto>  blockingQueue = new ArrayBlockingQueue(1000);
+    private final static BlockingQueue<BlockingDto> blockingQueue = new ArrayBlockingQueue(1000);
 
     @PostConstruct
     public void setup() {
         new Thread(() -> {
             BlockingDto blockingDto = null;
-            for (; ; ) {
+            for (;;) {
                 try {
                     blockingDto = blockingQueue.take();
                     log.info("ArrayBlockingQueueManager  tate {}", blockingDto.getId());
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     log.error("执行队列_异常:" + e);
                 }
             }

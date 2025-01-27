@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.audit.config.aspect.processor;
+package cn.z201.example.spring.mybatis.audit.config.aspect.processor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -14,11 +14,13 @@ public abstract class MonitorAnnotationAspectProcessor {
     public MonitorAnnotationAspectProcessor(ProceedingJoinPoint proceedingJoinPoint) {
         this.proceedingJoinPoint = proceedingJoinPoint;
     }
+
     public MonitorAnnotationAspectProcessor getNextMonitorAnnotationAspectProcessor() {
         return nextMonitorAnnotationAspectProcessor;
     }
 
-    public void setNextMonitorAnnotationAspectProcessor(MonitorAnnotationAspectProcessor nextMonitorAnnotationAspectProcessor) {
+    public void setNextMonitorAnnotationAspectProcessor(
+            MonitorAnnotationAspectProcessor nextMonitorAnnotationAspectProcessor) {
         this.nextMonitorAnnotationAspectProcessor = nextMonitorAnnotationAspectProcessor;
     }
 
@@ -30,7 +32,7 @@ public abstract class MonitorAnnotationAspectProcessor {
         this.proceedingJoinPoint = proceedingJoinPoint;
     }
 
-    public void execute(){
+    public void execute() {
         before();
         if (null != nextMonitorAnnotationAspectProcessor && null != proceedingJoinPoint) {
             nextMonitorAnnotationAspectProcessor.execute();

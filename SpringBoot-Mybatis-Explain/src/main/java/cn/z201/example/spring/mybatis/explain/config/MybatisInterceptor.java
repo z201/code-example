@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.explain.config;
+package cn.z201.example.spring.mybatis.explain.config;
 
 import cn.hutool.db.sql.SqlUtil;
 import lombok.extern.slf4j.Slf4j;

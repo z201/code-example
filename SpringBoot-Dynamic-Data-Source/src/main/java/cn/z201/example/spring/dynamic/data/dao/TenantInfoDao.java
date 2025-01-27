@@ -1,11 +1,11 @@
-package cn.z201.example.dynamic.data.dao;
+package cn.z201.example.spring.dynamic.data.dao;
 
-import cn.z201.example.dynamic.data.entity.TenantInfo;
+import cn.z201.example.spring.dynamic.data.entity.TenantInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author z201.coding@gmail.com

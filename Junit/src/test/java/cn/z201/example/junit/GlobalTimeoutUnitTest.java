@@ -11,8 +11,9 @@ import java.util.concurrent.TimeUnit;
 // 使用自定义扩展类
 @ExtendWith(GlobalTimeoutExtension.class)
 public class GlobalTimeoutUnitTest {
-    
+
     public static String log;
+
     private final CountDownLatch latch = new CountDownLatch(1);
 
     @Test
@@ -29,4 +30,5 @@ public class GlobalTimeoutUnitTest {
         // 设置等待超时时间为2秒
         latch.await(2, TimeUnit.SECONDS);
     }
+
 }

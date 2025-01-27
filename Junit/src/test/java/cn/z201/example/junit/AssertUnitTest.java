@@ -8,7 +8,7 @@ import org.hamcrest.core.CombinableMatcher;
 import java.util.Arrays;
 
 public class AssertUnitTest {
-    
+
     @Test
     public void testAssertArrayEquals() {
         byte[] expected = "trial".getBytes();
@@ -77,4 +77,5 @@ public class AssertUnitTest {
     public void testAssertTrue() {
         assertTrue(true, "failure - should be true");
     }
+
 }

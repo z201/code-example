@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>cn.z201.example</groupId>
-        <artifactId>Spring-SPI</artifactId>
+        <artifactId>spring-spi</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springBoot-SPI</artifactId>
+    <artifactId>springBoot-spi</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <!-- 引入的是spring 5.3.6 -->
@@ -33,7 +33,7 @@
 
         <dependency>
             <groupId>cn.z201.example</groupId>
-            <artifactId>jdk-SPI</artifactId>
+            <artifactId>jdk-spi</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 

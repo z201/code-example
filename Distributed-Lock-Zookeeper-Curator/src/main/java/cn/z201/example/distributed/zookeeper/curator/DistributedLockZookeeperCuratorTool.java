@@ -36,7 +36,8 @@ public class DistributedLockZookeeperCuratorTool implements InitializingBean {
             if (curatorFramework.checkExists().forPath(path) != null) {
                 curatorFramework.delete().forPath(path);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error("failed to release lock");
             return false;
         }
@@ -64,16 +65,14 @@ public class DistributedLockZookeeperCuratorTool implements InitializingBean {
         String path = "/" + ROOT_PATH_LOCK;
         try {
             if (curatorFramework.checkExists().forPath(path) == null) {
-                curatorFramework
-                        .create()
-                        .creatingParentsIfNeeded()
-                        .withMode(CreateMode.PERSISTENT)
-                        .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
-                        .forPath(path);
+                curatorFramework.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT)
+                        .withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE).forPath(path);
             }
             addWatcher(path);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error("connect zookeeper fail，please check the log >> {}", e.getMessage(), e);
         }
     }
+
 }

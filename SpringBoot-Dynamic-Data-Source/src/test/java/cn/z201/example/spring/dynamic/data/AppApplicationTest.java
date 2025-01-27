@@ -1,13 +1,12 @@
-package cn.z201.example.dynamic.data;
+package cn.z201.example.spring.dynamic.data;
 
-import cn.z201.example.dynamic.data.AppApplication;
-import cn.z201.example.dynamic.data.manager.DynamicDataSourceContextHolder;
-import cn.z201.example.dynamic.data.manager.DynamicJdbcTemplateManager;
-import cn.z201.example.dynamic.data.manager.DynamicRoutingDataSource;
-import cn.z201.example.dynamic.data.manager.DynamicRoutingDataSourceTool;
-import cn.z201.example.dynamic.data.mybatis.SnowflakeTool;
-import cn.z201.example.dynamic.data.dao.TenantInfoDao;
-import cn.z201.example.dynamic.data.entity.TenantInfo;
+import cn.z201.example.spring.dynamic.data.manager.DynamicDataSourceContextHolder;
+import cn.z201.example.spring.dynamic.data.manager.DynamicJdbcTemplateManager;
+import cn.z201.example.spring.dynamic.data.manager.DynamicRoutingDataSource;
+import cn.z201.example.spring.dynamic.data.manager.DynamicRoutingDataSourceTool;
+import cn.z201.example.spring.dynamic.data.mybatis.SnowflakeTool;
+import cn.z201.example.spring.dynamic.data.dao.TenantInfoDao;
+import cn.z201.example.spring.dynamic.data.entity.TenantInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +22,6 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.*;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -50,7 +48,8 @@ public class AppApplicationTest {
             TenantInfo tenantInfo = new TenantInfo();
             int i = 3;
             for (int j = 0; j < i; j++) {
-                String sql = "CREATE DATABASE IF NOT EXISTS `docker_dynamic_data_${db}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;".replace("${db}", String.valueOf(j));
+                String sql = "CREATE DATABASE IF NOT EXISTS `docker_dynamic_data_${db}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+                        .replace("${db}", String.valueOf(j));
                 log.info("sql {} \n", sql);
                 tenantInfo.setTenantId(String.valueOf(SnowflakeTool.getInstance().nextId()));
                 tenantInfo.setTenantName(Base64.getEncoder().encodeToString(tenantInfo.getTenantId().getBytes()));
@@ -62,7 +61,6 @@ public class AppApplicationTest {
             }
         }
     }
-
 
     @AfterEach
     public void after() {
@@ -85,13 +83,13 @@ public class AppApplicationTest {
     }
 
     private void concurrentDataBase() {
-        List<String> dataBasesList = jdbcTemplate.dynamicJdbcTemplate().queryForList("SELECT DATABASE();", String.class);
+        List<String> dataBasesList = jdbcTemplate.dynamicJdbcTemplate().queryForList("SELECT DATABASE();",
+                String.class);
         log.info("concurrentDataBase {}", dataBasesList);
     }
 
     /**
      * 单一类型集合查找
-     *
      * @param beanFactory
      */
     private void lookupCollectionType(BeanFactory beanFactory) {
@@ -103,6 +101,5 @@ public class AppApplicationTest {
             });
         }
     }
-
 
 }

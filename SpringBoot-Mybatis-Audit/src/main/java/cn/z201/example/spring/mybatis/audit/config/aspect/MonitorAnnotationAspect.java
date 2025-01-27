@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.audit.config.aspect;
+package cn.z201.example.spring.mybatis.audit.config.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 
 /**
  * @author z201.coding@gmail.com
@@ -19,8 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MonitorAnnotationAspect {
 
-    private static final String EXECUTION_FIX = "execution (* cn.z201..*..*.*(..)) " +
-            "&& @annotation(cn.z201.audit.config.aspect.annotation.MonitorAnnotation)";
+    private static final String EXECUTION_FIX = "execution (* cn.z201..*..*.*(..)) "
+            + "&& @annotation(cn.z201.audit.config.aspect.annotation.MonitorAnnotation)";
 
     @Autowired(required = false)
     MonitorAnnotationAspectPlugI monitorAnnotationAspectPlugI;

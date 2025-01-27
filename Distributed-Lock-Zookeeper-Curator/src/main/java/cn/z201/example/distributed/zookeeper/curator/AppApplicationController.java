@@ -20,4 +20,5 @@ public class AppApplicationController {
         data.put("data", "请求参数不合法");
         return data;
     }
+
 }

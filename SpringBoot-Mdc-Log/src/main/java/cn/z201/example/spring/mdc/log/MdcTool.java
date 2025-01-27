@@ -1,4 +1,4 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -10,9 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MdcTool {
 
     private static class SingletonHolder {
+
         private static final MdcTool INSTANCE = new MdcTool();
+
     }
-    private MdcTool (){}
+
+    private MdcTool() {
+    }
 
     public static final MdcTool getInstance() {
         return SingletonHolder.INSTANCE;
@@ -30,4 +34,5 @@ public class MdcTool {
         }
         return st.toString();
     }
+
 }

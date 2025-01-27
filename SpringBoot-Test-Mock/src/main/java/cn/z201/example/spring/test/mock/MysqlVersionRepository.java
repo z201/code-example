@@ -1,4 +1,4 @@
-package cn.z201.test.mock;
+package cn.z201.example.spring.test.mock;
 
 import cn.hutool.core.collection.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;

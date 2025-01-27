@@ -1,4 +1,4 @@
-package cn.z201.audit.config.mdc;
+package cn.z201.example.spring.mybatis.audit.config.mdc;
 
 import org.slf4j.MDC;
 
@@ -13,15 +13,19 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MdcTool {
 
     private static class SingletonHolder {
+
         private static final MdcTool INSTANCE = new MdcTool();
+
     }
-    private MdcTool (){}
+
+    private MdcTool() {
+    }
 
     public static MdcTool getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    private  static synchronized String currentTraceId() {
+    private static synchronized String currentTraceId() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         UUID uuid = new UUID(random.nextInt(), random.nextInt());
         StringBuilder st = new StringBuilder(uuid.toString().replace("-", "").toLowerCase());
@@ -64,4 +68,5 @@ public class MdcTool {
         }
         return true;
     }
+
 }

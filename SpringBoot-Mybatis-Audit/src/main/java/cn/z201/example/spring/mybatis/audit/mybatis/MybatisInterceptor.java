@@ -1,4 +1,4 @@
-package cn.z201.audit.mybatis;
+package cn.z201.example.spring.mybatis.audit.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
@@ -16,11 +16,7 @@ import java.util.*;
  * @author z201.coding@gmail.com
  **/
 @Slf4j
-@Intercepts({
-        @Signature(type = Executor.class, method = "update", args = {
-                MappedStatement.class, Object.class
-        }),
-})
+@Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }), })
 public class MybatisInterceptor implements Interceptor {
 
     @Override
@@ -37,7 +33,8 @@ public class MybatisInterceptor implements Interceptor {
                 for (Object object : entitySet) {
                     insertProcess(object);
                 }
-            } else if (SqlCommandType.UPDATE.name().equalsIgnoreCase(mappedStatement.getSqlCommandType().name())) {
+            }
+            else if (SqlCommandType.UPDATE.name().equalsIgnoreCase(mappedStatement.getSqlCommandType().name())) {
                 // 获取实体集合
                 List<Object> entitySet = getEntitySet(entity);
                 for (Object object : entitySet) {
@@ -45,15 +42,15 @@ public class MybatisInterceptor implements Interceptor {
                 }
             }
             return invocation.proceed();
-        } finally {
+        }
+        finally {
             Long timeConsuming = Clock.systemDefaultZone().millis() - startTime;
             log.info("SQL RunTime {} ms", timeConsuming);
         }
     }
 
     /**
-     * object是需要插入的实体数据,它可能是对象,也可能是批量插入的对象。
-     * 如果是单个对象,那么object就是当前对象
+     * object是需要插入的实体数据,它可能是对象,也可能是批量插入的对象。 如果是单个对象,那么object就是当前对象
      * 如果是批量插入对象，那么object就是一个map集合,key值为"list",value为ArrayList集合对象
      */
     private List<Object> getEntitySet(Object object) {
@@ -65,12 +62,14 @@ public class MybatisInterceptor implements Interceptor {
                 Object value = entry.getValue();
                 if (value instanceof Collection) {
                     set.addAll((Collection<?>) value);
-                } else {
+                }
+                else {
                     set.add(value);
                 }
             }
-        } else {
-            //单个插入对象
+        }
+        else {
+            // 单个插入对象
             set.add(object);
         }
         return set;

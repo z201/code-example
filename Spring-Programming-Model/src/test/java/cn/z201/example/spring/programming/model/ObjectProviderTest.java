@@ -1,7 +1,6 @@
-package cn.z201.spring;
+package cn.z201.example.spring.programming.model;
 
-import cn.z201.spring.initialization.DefaultInitFactory;
-import cn.z201.spring.initialization.InitBean;
+import cn.z201.example.spring.programming.model.initialization.InitBean;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -13,11 +12,9 @@ import org.springframework.context.annotation.Bean;
 /**
  * @author z201.coding@gmail.com
  * <p>
- * BeanFactory#getBean 会抛出bean不存在异常
- * ObjectFactory#getObject 会抛出bean不存在异常
- * ObjectProvider#getIfAvailable 不抛出bean不存在异常
- * ListableBeanFactory#getBeansOfType 不抛出bean不存在异常
- * ObjectProvider#stream 不抛出bean不存在异常
+ * BeanFactory#getBean 会抛出bean不存在异常 ObjectFactory#getObject 会抛出bean不存在异常
+ * ObjectProvider#getIfAvailable 不抛出bean不存在异常 ListableBeanFactory#getBeansOfType
+ * 不抛出bean不存在异常 ObjectProvider#stream 不抛出bean不存在异常
  **/
 public class ObjectProviderTest {
 
@@ -34,11 +31,11 @@ public class ObjectProviderTest {
         lookupBeanFactoryGetBean(config);
         // ObjectFactory#getObject 演示操作，找不到定义需求相关Bean报错
         lookupByObjectProviderGetBean(config);
-        // ObjectProvider#getIfAvailable 安全  找不到定义需求相关Bean不会报错
+        // ObjectProvider#getIfAvailable 安全 找不到定义需求相关Bean不会报错
         lookupByObjectProviderGetIfAvailable(config);
         // ListableBeanFactory#getBeansOfType 安全 找不到定义需求相关Bean不会报错
         lookupByListableBeanFactoryGetBeansOfType(config);
-        // ObjectProvider#stream 安全  找不到定义需求相关Bean不会报错
+        // ObjectProvider#stream 安全 找不到定义需求相关Bean不会报错
         lookupByObjectProviderStream(config);
         config.close();
     }
@@ -49,16 +46,19 @@ public class ObjectProviderTest {
 
     private void lookupByObjectProviderGetBean(AnnotationConfigApplicationContext annotationConfigApplicationContext) {
         ObjectProvider<InitBean> objectProvider = annotationConfigApplicationContext.getBeanProvider(InitBean.class);
-        execException("lookupByObjectProviderGetBean", () -> objectProvider.getObject());
+        execException("lookupByObjectProviderGetBean", objectProvider::getObject);
     }
 
-    private void lookupByObjectProviderGetIfAvailable(AnnotationConfigApplicationContext annotationConfigApplicationContext) {
+    private void lookupByObjectProviderGetIfAvailable(
+            AnnotationConfigApplicationContext annotationConfigApplicationContext) {
         ObjectProvider<InitBean> objectProvider = annotationConfigApplicationContext.getBeanProvider(InitBean.class);
-        execException("lookupByObjectProviderGetIfAvailable", () -> objectProvider.getIfAvailable(InitBean::createInitBean));
+        execException("lookupByObjectProviderGetIfAvailable",
+                () -> objectProvider.getIfAvailable(InitBean::createInitBean));
     }
 
     private void lookupByListableBeanFactoryGetBeansOfType(ListableBeanFactory listableBeanFactory) {
-        execException("lookupByListableBeanFactoryGetBeansOfType", () -> listableBeanFactory.getBeansOfType(InitBean.class));
+        execException("lookupByListableBeanFactoryGetBeansOfType",
+                () -> listableBeanFactory.getBeansOfType(InitBean.class));
     }
 
     private void lookupByObjectProviderStream(AnnotationConfigApplicationContext annotationConfigApplicationContext) {
@@ -68,7 +68,6 @@ public class ObjectProviderTest {
 
     /**
      * Bean 的名称默认是 method名称
-     *
      * @return
      */
     @Bean
@@ -77,9 +76,8 @@ public class ObjectProviderTest {
     }
 
     /**
-     * 基于 ObjectProvider 获取bean
-     * ObjectProvider 是间接的依赖查找，ObjectProvider 相当于一个代理，实际依赖查找发生在ObjectProvider#get 等方法时。
-     *
+     * 基于 ObjectProvider 获取bean ObjectProvider 是间接的依赖查找，ObjectProvider
+     * 相当于一个代理，实际依赖查找发生在ObjectProvider#get 等方法时。
      * @param annotationConfigApplicationContext
      */
     public void lookupByObjectProvider(AnnotationConfigApplicationContext annotationConfigApplicationContext) {
@@ -88,12 +86,10 @@ public class ObjectProviderTest {
     }
 
     /**
-     * 单一类型集合查找
-     * ListableBeanFactory可以通过某个类型去查找一个集合的列表，集合列表可能有两种情况，一种是查询Bean的名称、
+     * 单一类型集合查找 ListableBeanFactory可以通过某个类型去查找一个集合的列表，集合列表可能有两种情况，一种是查询Bean的名称、
      * 还有一种是查询Bean的实例。推荐使用Bean的名称来判断Bean是否存在，这种方式可以避免提早初始化Bean，产生一些不确定的因素。
      * 对于集合类型依赖查找，通过BeanFactory#getBeanNamesForType 和BeanFactory#getBeansForType，
      * 两个依赖查找方法，前者不会强制bean的初始化，而是通过BeanDefinition和FactoryBean的getClassType进行判断；后者会强制Bean的初始化。
-     *
      * @param beanFactory
      */
     private void lookupCollectionType(BeanFactory beanFactory) {
@@ -110,7 +106,8 @@ public class ObjectProviderTest {
         System.out.println("from : " + from);
         try {
             runnable.run();
-        } catch (BeansException throwable) {
+        }
+        catch (BeansException throwable) {
             System.err.println("trace : " + throwable.getMessage());
         }
     }

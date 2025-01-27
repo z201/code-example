@@ -1,4 +1,4 @@
-package cn.z201.audit.domain.param;
+package cn.z201.example.spring.mybatis.audit.domain.param;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -9,5 +9,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiParam {
+
     private Long id;
+
 }

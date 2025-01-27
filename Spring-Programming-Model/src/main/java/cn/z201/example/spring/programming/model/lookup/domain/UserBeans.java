@@ -1,4 +1,4 @@
-package cn.z201.spring.lookup.domain;
+package cn.z201.example.spring.programming.model.lookup.domain;
 
 /**
  * @author z201.coding@gmail.com
@@ -24,4 +24,5 @@ public class UserBeans {
     public void setAge(Integer age) {
         this.age = age;
     }
+
 }

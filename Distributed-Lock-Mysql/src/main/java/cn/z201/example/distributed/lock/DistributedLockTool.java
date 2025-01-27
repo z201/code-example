@@ -23,10 +23,10 @@ public class DistributedLockTool {
     public Boolean lock(String key, String value) {
         try {
             // 简单的sql执行
-            String insertSql = "INSERT INTO `distributed_lock`(`lock_id`, `lock_value`)" +
-                    " VALUES (?, ?)";
+            String insertSql = "INSERT INTO `distributed_lock`(`lock_id`, `lock_value`)" + " VALUES (?, ?)";
             return jdbcTemplate.update(insertSql, key, value) > 0;
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
 
         }
         return false;
@@ -38,13 +38,15 @@ public class DistributedLockTool {
         Map<String, Object> lock = new HashMap<>();
         try {
             lock = jdbcTemplate.queryForMap(sql, key);
-        } catch (EmptyResultDataAccessException e) {
+        }
+        catch (EmptyResultDataAccessException e) {
             // 防止查询不到数据报错
             return false;
         }
         if (CollectionUtils.isEmpty(lock)) {
             return false;
-        } else {
+        }
+        else {
             if (Objects.equals(lock.get("lock_value"), value)) {
                 sql = "DELETE FROM `distributed_lock` WHERE lock_id = ?";
                 return jdbcTemplate.update(sql, key) > 0;

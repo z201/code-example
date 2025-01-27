@@ -1,4 +1,4 @@
-package cn.z201.test.mock;
+package cn.z201.example.spring.test.mock;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;

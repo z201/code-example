@@ -1,5 +1,4 @@
-package cn.z201.spring.initialization;
-
+package cn.z201.example.spring.programming.model.initialization;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

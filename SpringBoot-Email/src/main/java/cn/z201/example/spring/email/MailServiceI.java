@@ -1,4 +1,4 @@
-package cn.z201.example.email;
+package cn.z201.example.spring.email;
 
 import org.thymeleaf.context.Context;
 

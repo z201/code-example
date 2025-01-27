@@ -1,5 +1,4 @@
-package cn.z201.spring;
-
+package cn.z201.example.spring.aop.log;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,4 +13,5 @@ public class AppApplication {
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(AppApplication.class, args);
     }
+
 }

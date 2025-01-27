@@ -1,4 +1,4 @@
-package cn.z201.audit.config.mdc;
+package cn.z201.example.spring.mybatis.audit.config.mdc;
 
 /**
  * @author z201.coding@gmail.com
@@ -6,6 +6,7 @@ package cn.z201.audit.config.mdc;
 public interface MdcApiConstant {
 
     String X_REAL_IP = "x-real-ip";
+
     /**
      * 请求头跟踪id名。
      */

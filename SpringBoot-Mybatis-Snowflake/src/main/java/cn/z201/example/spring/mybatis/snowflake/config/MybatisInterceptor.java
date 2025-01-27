@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.snowflake.config;
+package cn.z201.example.spring.mybatis.snowflake.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;

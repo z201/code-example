@@ -1,4 +1,4 @@
-package cn.z201.aop;
+package cn.z201.example.spring.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 @Slf4j
 public class LogsAspect {
 
-    @Pointcut("@annotation(cn.z201.aop.AnnotationAop)")
+    @Pointcut("@annotation(cn.z201.example.spring.aop.AnnotationAop)")
     private void cutMethod() {
 
     }
@@ -53,7 +53,6 @@ public class LogsAspect {
 
     /**
      * 获取方法中声明的注解
-     *
      * @param joinPoint
      * @return
      * @throws NoSuchMethodException

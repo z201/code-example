@@ -1,4 +1,4 @@
-package cn.z201.example.learning.client.codec;
+package cn.z201.example.netty.learning.client.codec;
 
 import io.netty.handler.codec.LengthFieldPrepender;
 
@@ -11,4 +11,5 @@ public class ClientFrameEncoder extends LengthFieldPrepender {
     public ClientFrameEncoder() {
         super(2);
     }
+
 }

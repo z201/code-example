@@ -1,5 +1,6 @@
 package cn.z201.redis;
 
+import cn.z201.example.spring.redis.geo.AppApplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -49,27 +49,26 @@ public class AppApplicationTest {
         List<Point> pointList = redisTemplate.opsForGeo().position("site", "1", "2");
         log.info("pointList -> {} ", gson.toJson(pointList));
         /**
-         * 	METERS(6378137, "m"),
-         * 	KILOMETERS(6378.137, "km"),
-         * 	MILES(3963.191, "mi"),
-         * 	FEET(20925646.325, "ft");
+         * METERS(6378137, "m"), KILOMETERS(6378.137, "km"), MILES(3963.191, "mi"),
+         * FEET(20925646.325, "ft");
          */
-        Distance distance = redisTemplate.opsForGeo().distance("site", "1", "2", RedisGeoCommands.DistanceUnit.KILOMETERS);
+        Distance distance = redisTemplate.opsForGeo().distance("site", "1", "2",
+                RedisGeoCommands.DistanceUnit.KILOMETERS);
         log.info("distance -> {} ", gson.toJson(distance));
-        Circle circle = new Circle(new Point(120.075338, 30.294845), new Distance(500, RedisGeoCommands.DistanceUnit.KILOMETERS));
+        Circle circle = new Circle(new Point(120.075338, 30.294845),
+                new Distance(500, RedisGeoCommands.DistanceUnit.KILOMETERS));
         RedisGeoCommands.GeoRadiusCommandArgs args = RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
-                .includeDistance()
-                .includeCoordinates()
-                .sortAscending();
+                .includeDistance().includeCoordinates().sortAscending();
         log.info("geoLocationGeoResults -> {} ", gson.toJson(args));
-        GeoResults<RedisGeoCommands.GeoLocation<String>> geoLocationGeoResults = redisTemplate.opsForGeo().radius("site", circle, args);
+        GeoResults<RedisGeoCommands.GeoLocation<String>> geoLocationGeoResults = redisTemplate.opsForGeo()
+                .radius("site", circle, args);
         log.info("geoLocationGeoResults -> {} ", gson.toJson(geoLocationGeoResults));
         keys.forEach(item -> {
-                    if (!Objects.equals("hz", item)) {
-                        redisTemplate.delete(item);
-                    }
-                    log.info(" keys - > {} ", item);
-                }
-        );
+            if (!Objects.equals("hz", item)) {
+                redisTemplate.delete(item);
+            }
+            log.info(" keys - > {} ", item);
+        });
     }
+
 }

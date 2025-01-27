@@ -1,14 +1,13 @@
-package cn.z201.example.mybatis.audit.config.aspect;
-
+package cn.z201.example.spring.mybatis.audit.config.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * @author z201.coding@gmail.com
- * @date 2020-09-10
- * 拦截器扩展
+ * @date 2020-09-10 拦截器扩展
  **/
 public interface MonitorAnnotationAspectPlugI {
 
     Object around(ProceedingJoinPoint joinPoint) throws Throwable;
+
 }

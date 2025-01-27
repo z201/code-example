@@ -1,4 +1,4 @@
-package cn.z201.audit.mybatis;
+package cn.z201.example.spring.mybatis.audit.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;
@@ -17,7 +17,6 @@ public class MybatisConfig {
 
     /**
      * #开启返回map结果集的下划线转驼峰
-     *
      * @return
      */
     @Bean
@@ -32,10 +31,10 @@ public class MybatisConfig {
         return interceptor;
     }
 
-    //     可以直接在插件上增加Component 也可以在此处声明
+    // 可以直接在插件上增加Component 也可以在此处声明
     @Bean
     public String localInterceptor(SqlSessionFactory sqlSessionFactory) {
-        //实例化插件
+        // 实例化插件
         MybatisInterceptor sqlInterceptor = new MybatisInterceptor();
         sqlSessionFactory.getConfiguration().addInterceptor(sqlInterceptor);
         return "interceptor";

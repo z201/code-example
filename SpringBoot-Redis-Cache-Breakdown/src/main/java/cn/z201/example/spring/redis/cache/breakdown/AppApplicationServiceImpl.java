@@ -1,4 +1,4 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.cache.breakdown;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

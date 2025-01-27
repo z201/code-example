@@ -1,5 +1,7 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
+import cn.z201.example.spring.mdc.log.AppApplication;
+import cn.z201.example.spring.mdc.log.MdcThreadTaskUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,7 +14,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.concurrent.CountDownLatch;
 
-
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = AppApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,15 +24,15 @@ public class AppApplicationTest {
 
     @Test
     @Disabled
-    public void testMdcTask(){
-        MdcThreadTaskUtils.run(()->{
+    public void testMdcTask() {
+        MdcThreadTaskUtils.run(() -> {
             log.info("");
         });
         int count = 10;
         CountDownLatch countDownLatch = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
-            MdcThreadTaskUtils.run(()->{
-                log.info("{}",Thread.currentThread().getId());
+            MdcThreadTaskUtils.run(() -> {
+                log.info("{}", Thread.currentThread().getId());
                 countDownLatch.countDown();
             });
         }

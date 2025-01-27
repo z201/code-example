@@ -1,5 +1,4 @@
-package cn.z201.example.dynamic.data;
-
+package cn.z201.example.spring.dynamic.data;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -16,4 +15,5 @@ public class AppApplication {
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(AppApplication.class, args);
     }
+
 }

@@ -1,6 +1,5 @@
-package cn.z201.example;
+package cn.z201.example.snowflake;
 
-import cn.z201.example.snowflake.SnowflakeDistributeId;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.*;
@@ -16,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SnowflakeDistributeIdTest {
 
     private final static Integer MEASUREMENT_ITERATIONS = 1;
+
     private final static Integer WARMUP_ITERATIONS = 1;
 
     private SnowflakeDistributeId snowflakeDistributeId;
@@ -43,17 +43,14 @@ public class SnowflakeDistributeIdTest {
                 // Throughput 整体吞吐量，例如”1秒内可以执行多少次调用”。
                 // AverageTime: 调用的平均时间，例如”每次调用平均耗时xxx毫秒”。
                 // SampleTime: 随机取样，最后输出取样结果的分布，例如”99%的调用在xxx毫秒以内，99.99%的调用在xxx毫秒以内”
-                // SingleShotTime: 以上模式都是默认一次 iteration 是 1s，唯有 SingleShotTime 是只运行一次。往往同时把 warmup 次数设为0，用于测试冷启动时的性能。
+                // SingleShotTime: 以上模式都是默认一次 iteration 是 1s，唯有 SingleShotTime
+                // 是只运行一次。往往同时把 warmup 次数设为0，用于测试冷启动时的性能。
                 // All(“all”, “All benchmark modes”);
-                .mode(Mode.All)
-                .shouldDoGC(true)
-                .shouldFailOnError(true)             //
+                .mode(Mode.All).shouldDoGC(true).shouldFailOnError(true) //
                 .resultFormat(ResultFormatType.JSON) // 输出格式化
-//                .result("/dev/null") // set this to a valid filename if you want reports
-                .result("benchmark.json")
-                .shouldFailOnError(true)
-                .jvmArgs("-server")
-                .build();
+                // .result("/dev/null") // set this to a valid filename if you want
+                // reports
+                .result("benchmark.json").shouldFailOnError(true).jvmArgs("-server").build();
         new Runner(opt).run();
     }
 

@@ -45,4 +45,5 @@ public class AppApplicationController {
         data.put("data", distributedLockTool.unLock(key, value));
         return data;
     }
+
 }

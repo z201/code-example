@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.z201.audit.persistence.dao.BizAuditLogDao">
+<mapper namespace="cn.z201.example.spring.mybatis.audit.persistence.dao.BizAuditLogDao">
 
     <insert id="batchInsert">
         INSERT INTO `biz_audit_log`(`id`, `is_enable`, `create_time`, `update_time`, `event_type`, `event_title`, `event_description`, `event_time`, `op_trace_id`, `user_id`)

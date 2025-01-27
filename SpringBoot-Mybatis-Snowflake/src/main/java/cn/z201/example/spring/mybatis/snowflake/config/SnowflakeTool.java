@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.snowflake.config;
+package cn.z201.example.spring.mybatis.snowflake.config;
 
 import java.time.Clock;
 

@@ -1,4 +1,4 @@
-package cn.z201.example.learning;
+package cn.z201.example.netty.learning;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
@@ -30,10 +30,12 @@ public class SyncFuture<MessageHolder> implements Future<MessageHolder> {
      * 因为请求和响应是一一对应的，因此初始化CountDownLatch值为1。
      */
     private CountDownLatch latch = new CountDownLatch(1);
+
     /**
      * 需要响应线程设置的响应结果
      */
     private MessageHolder response;
+
     // Futrue的请求时间，用于计算Future是否超时
     private long beginTime;
 
@@ -81,4 +83,5 @@ public class SyncFuture<MessageHolder> implements Future<MessageHolder> {
     public long getBeginTime() {
         return beginTime;
     }
+
 }

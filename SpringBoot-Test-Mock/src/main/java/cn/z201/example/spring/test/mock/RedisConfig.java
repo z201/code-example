@@ -1,5 +1,5 @@
 
-package cn.z201.test.mock;
+package cn.z201.example.spring.test.mock;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

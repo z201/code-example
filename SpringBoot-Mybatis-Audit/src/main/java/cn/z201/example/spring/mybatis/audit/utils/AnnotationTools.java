@@ -1,4 +1,4 @@
-package cn.z201.audit.utils;
+package cn.z201.example.spring.mybatis.audit.utils;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -27,10 +27,12 @@ public class AnnotationTools {
         Method objMethod = null;
         try {
             objMethod = targetClass.getMethod(methodName, parameterTypes);
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             return null;
         }
         // 拿到方法定义的注解信息
         return objMethod;
     }
+
 }

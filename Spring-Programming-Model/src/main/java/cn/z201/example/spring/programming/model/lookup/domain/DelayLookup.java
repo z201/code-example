@@ -1,8 +1,7 @@
-package cn.z201.spring.lookup.domain;
+package cn.z201.example.spring.programming.model.lookup.domain;
 
 /**
- * @author z201.coding@gmail.com
- * spring ioc 延时查找
+ * @author z201.coding@gmail.com spring ioc 延时查找
  **/
 public class DelayLookup {
 
@@ -18,8 +17,7 @@ public class DelayLookup {
 
     @Override
     public String toString() {
-        return "DelayLookup{" +
-                "name='" + name + '\'' +
-                '}';
+        return "DelayLookup{" + "name='" + name + '\'' + '}';
     }
+
 }

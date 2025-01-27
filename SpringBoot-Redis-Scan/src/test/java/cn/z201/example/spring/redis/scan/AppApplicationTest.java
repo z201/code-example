@@ -1,7 +1,5 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.scan;
 
-import cn.z201.example.spring.redis.scan.AppApplication;
-import cn.z201.example.spring.redis.scan.ScanTool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,11 +25,16 @@ import java.util.stream.Collectors;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AppApplicationTest {
 
-    @Autowired
-    private ScanTool scanTool;
+
+    private final ScanTool scanTool;
+
+    private final RedisTemplate redisTemplate;
 
     @Autowired
-    RedisTemplate redisTemplate;
+    public AppApplicationTest(ScanTool scanTool, RedisTemplate redisTemplate) {
+        this.scanTool = scanTool;
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 批量获取

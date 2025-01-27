@@ -1,4 +1,4 @@
-package cn.z201.example.dynamic.data.mybatis;
+package cn.z201.example.spring.dynamic.data.mybatis;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
@@ -12,7 +12,7 @@ public class BaseEntity {
     /**
      * Entity基类字段,这里是数据库的字段
      */
-    public static final String[] BASE_ENTITY = {"id", "is_enable", "create_time", "update_time"};
+    public static final String[] BASE_ENTITY = { "id", "is_enable", "create_time", "update_time" };
 
     /**
      * 主键
@@ -36,6 +36,5 @@ public class BaseEntity {
      */
     @TableField("update_time")
     private Long updateTime;
-
 
 }

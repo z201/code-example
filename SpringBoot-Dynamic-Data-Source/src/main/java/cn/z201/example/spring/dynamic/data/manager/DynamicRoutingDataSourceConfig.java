@@ -1,8 +1,8 @@
 
-package cn.z201.example.dynamic.data.manager;
+package cn.z201.example.spring.dynamic.data.manager;
 
-import cn.z201.example.dynamic.data.dao.TenantInfoDao;
-import cn.z201.example.dynamic.data.entity.TenantInfo;
+import cn.z201.example.spring.dynamic.data.dao.TenantInfoDao;
+import cn.z201.example.spring.dynamic.data.entity.TenantInfo;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
@@ -58,14 +58,16 @@ public class DynamicRoutingDataSourceConfig {
     }
 
     @Bean
-    @ConditionalOnBean(name = {DynamicDataSourceConstant.MASTER})
-    public DynamicRoutingDataSource dynamicRoutingDataSource(@Qualifier(DynamicDataSourceConstant.MASTER) DataSource dataSource) {
+    @ConditionalOnBean(name = { DynamicDataSourceConstant.MASTER })
+    public DynamicRoutingDataSource dynamicRoutingDataSource(
+            @Qualifier(DynamicDataSourceConstant.MASTER) DataSource dataSource) {
         List<String> dataBasesList = new JdbcTemplate(dataSource).queryForList("SELECT DATABASE()", String.class);
         if (CollectionUtils.isEmpty(dataBasesList)) {
             ClassPathResource classPathResource = new ClassPathResource("create.sql");
             try {
                 ScriptUtils.executeSqlScript(dataSource.getConnection(), classPathResource);
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -83,44 +85,42 @@ public class DynamicRoutingDataSourceConfig {
         HikariDataSource master = (HikariDataSource) applicationContext.getBean(DynamicDataSourceConstant.MASTER);
         Map<Object, Object> dataSourceMap = new HashMap<>();
         List<TenantInfo> tenantInfoList = tenantInfoDao.selectList(null);
-        tenantInfoList.stream().forEach(i ->
-                {
-                    /**
-                     *       maximumPoolSize: 20 # 连接池最大连接数，默认是10
-                     *       minimumIdle: 5  # 最小空闲连接数量
-                     *       idleTimeout: 600000 # 空闲连接存活最大时间，默认600000（10分钟）
-                     *       connectionTimeout: 30000 # 数据库连接超时时间,默认30秒，即30000
-                     *       maxLifetime: 1800000 # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
-                     */
-                    logger.info(" init  dataSource {}", i.getTenantName());
-                    HikariConfig hikariConfig = new HikariConfig();
-                    hikariConfig.setDriverClassName(i.getDatasourceDriver());
-                    hikariConfig.setJdbcUrl(i.getDatasourceUrl());
-                    hikariConfig.setUsername(i.getDatasourceUsername());
-                    hikariConfig.setPassword(i.getDatasourcePassword());
-                    hikariConfig.setMaximumPoolSize(20);
-                    hikariConfig.setMinimumIdle(2);
-                    hikariConfig.setIdleTimeout(600000);
-                    hikariConfig.setConnectionTimeout(30000);
-                    hikariConfig.setMaxLifetime(1800000);
-                    DataSource dataSource = new HikariDataSource(hikariConfig);
-                    dataSourceMap.put(i.getTenantId(), dataSource);
-                }
-        );
+        tenantInfoList.stream().forEach(i -> {
+            /**
+             * maximumPoolSize: 20 # 连接池最大连接数，默认是10 minimumIdle: 5 # 最小空闲连接数量 idleTimeout:
+             * 600000 # 空闲连接存活最大时间，默认600000（10分钟） connectionTimeout: 30000 #
+             * 数据库连接超时时间,默认30秒，即30000 maxLifetime: 1800000 #
+             * 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+             */
+            logger.info(" init  dataSource {}", i.getTenantName());
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setDriverClassName(i.getDatasourceDriver());
+            hikariConfig.setJdbcUrl(i.getDatasourceUrl());
+            hikariConfig.setUsername(i.getDatasourceUsername());
+            hikariConfig.setPassword(i.getDatasourcePassword());
+            hikariConfig.setMaximumPoolSize(20);
+            hikariConfig.setMinimumIdle(2);
+            hikariConfig.setIdleTimeout(600000);
+            hikariConfig.setConnectionTimeout(30000);
+            hikariConfig.setMaxLifetime(1800000);
+            DataSource dataSource = new HikariDataSource(hikariConfig);
+            dataSourceMap.put(i.getTenantId(), dataSource);
+        });
         // 设置数据源
         dynamicRoutingDataSource.setDynamicRoutingDataSource(master, dataSourceMap);
     }
 
     @Bean
-    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource
-    ) throws Exception {
+    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(
+            @Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) throws Exception {
         MybatisSqlSessionFactoryBean sessionFactory = new MybatisSqlSessionFactoryBean();
         sessionFactory.setDataSource(dynamicRoutingDataSource);
         // 可以从配置文件中获取，这里演示暂时写死。
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        sessionFactory
+                .setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         sessionFactory.setTypeAliasesPackage("cn.z201.dynamic.persistence.entity");
         MybatisConfiguration config = new MybatisConfiguration();
-        config.setMapUnderscoreToCamelCase(true);  //开启下划线转驼峰
+        config.setMapUnderscoreToCamelCase(true); // 开启下划线转驼峰
         config.setLogImpl(Slf4jImpl.class); // 日志输出实现
         sessionFactory.setConfiguration(config);
         return sessionFactory;
@@ -128,25 +128,24 @@ public class DynamicRoutingDataSourceConfig {
 
     /**
      * 配置事务管理, 使用事务时在方法头部添加@Transactional注解即可
-     *
      * @param dynamicRoutingDataSource
      * @return
      */
     @Bean
-    public PlatformTransactionManager transactionManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
+    public PlatformTransactionManager transactionManager(
+            @Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
         return new DataSourceTransactionManager(dynamicRoutingDataSource);
     }
 
     /**
      * jdbc 扩展
-     *
      * @param dynamicRoutingDataSource
      * @return
      */
     @Bean
-    public DynamicJdbcTemplateManager dynamicJdbcTemplateManager(@Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
+    public DynamicJdbcTemplateManager dynamicJdbcTemplateManager(
+            @Qualifier("dynamicRoutingDataSource") DynamicRoutingDataSource dynamicRoutingDataSource) {
         return new DynamicJdbcTemplateManager(dynamicRoutingDataSource);
     }
-
 
 }

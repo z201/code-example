@@ -1,8 +1,6 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.bloom;
 
 import cn.hutool.core.util.RandomUtil;
-import cn.z201.example.spring.redis.bloom.AppApplication;
-import cn.z201.example.spring.redis.bloom.BloomTool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;

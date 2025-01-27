@@ -1,4 +1,4 @@
-package cn.z201.example.redisson;
+package cn.z201.example.spring.redisson;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;

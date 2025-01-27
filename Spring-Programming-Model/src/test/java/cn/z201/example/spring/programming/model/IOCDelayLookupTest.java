@@ -1,8 +1,8 @@
-package cn.z201.spring;
+package cn.z201.example.spring.programming.model;
 
-import cn.z201.spring.lookup.annotation.Point;
-import cn.z201.spring.lookup.domain.AnnotationDelayLookup;
-import cn.z201.spring.lookup.domain.DelayLookup;
+import cn.z201.example.spring.programming.model.lookup.annotation.Point;
+import cn.z201.example.spring.programming.model.lookup.domain.AnnotationDelayLookup;
+import cn.z201.example.spring.programming.model.lookup.domain.DelayLookup;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
-
 
 public class IOCDelayLookupTest {
 
@@ -28,7 +27,6 @@ public class IOCDelayLookupTest {
 
     /**
      * 实时查找
-     *
      * @param beanFactory
      */
     private void lookup(BeanFactory beanFactory) {
@@ -40,7 +38,6 @@ public class IOCDelayLookupTest {
 
     /**
      * 延时查找
-     *
      * @param beanFactory
      */
     private void lookupLazy(BeanFactory beanFactory) {
@@ -52,7 +49,6 @@ public class IOCDelayLookupTest {
 
     /**
      * 单一类型查找
-     *
      * @param beanFactory
      */
     private void lookupType(BeanFactory beanFactory) {
@@ -62,17 +58,16 @@ public class IOCDelayLookupTest {
         System.out.println("单一类型查找  " + delayLookup);
     }
 
-
     /**
      * 单一类型集合查找
-     *
      * @param beanFactory
      */
     private void lookupCollectionType(BeanFactory beanFactory) {
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
             Map<String, DelayLookup> delayLookupMap = listableBeanFactory.getBeansOfType(DelayLookup.class);
-            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value 作为对象
+            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value
+            // 作为对象
             delayLookupMap.forEach((key, value) -> {
                 System.out.println("单一类型集合查找  " + key + " " + value);
             });
@@ -81,15 +76,15 @@ public class IOCDelayLookupTest {
 
     /**
      * Java注解查找
-     *
      * @param beanFactory
      */
     private void lookupAnnotationType(BeanFactory beanFactory) {
         // Point
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
-            Map<String, AnnotationDelayLookup> delayLookupMap = (Map) listableBeanFactory.getBeansWithAnnotation(Point.class);
-            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value 作为对象
+            Map<String, Object> delayLookupMap = listableBeanFactory.getBeansWithAnnotation(Point.class);
+            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value
+            // 作为对象
             delayLookupMap.forEach((key, value) -> {
                 System.out.println("Java注解 @Point 查找  " + key + " " + value);
             });

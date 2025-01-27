@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -18,7 +18,5 @@ public class OrderBo {
     private Long createTime;
 
     private Long orderDeadlineTime;
-
-
 
 }

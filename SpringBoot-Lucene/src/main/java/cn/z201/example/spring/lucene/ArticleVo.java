@@ -1,4 +1,4 @@
-package cn.z201.example.spring.lucene.lucene;
+package cn.z201.example.spring.lucene;
 
 import lombok.Data;
 

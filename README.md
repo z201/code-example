@@ -53,6 +53,8 @@ blog related code
 
 ## 使用说明
 
+1. 先构建BOM项目;在回到项目根目录构建项目。
+
 * `mvn clean test -P dev  `         => 只执行单侧
 * `mvn clean verify -P integration-test`  => 只执行集测
 * `mvn clean test -P test`          => 执行单侧+集测

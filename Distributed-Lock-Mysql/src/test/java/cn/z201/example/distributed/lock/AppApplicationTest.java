@@ -1,7 +1,5 @@
-package cn.z201.distributed.lock;
+package cn.z201.example.distributed.lock;
 
-import cn.z201.example.distributed.lock.AppApplication;
-import cn.z201.example.distributed.lock.DistributedLockTool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
@@ -17,7 +15,6 @@ import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -47,15 +44,17 @@ public class AppApplicationTest {
         }
         try {
             countDownLatch.await();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         executorService.shutdown();
-        unLock(key,value);
+        unLock(key, value);
     }
 
-    public void unLock(String key,String value) {
-        Boolean result = distributedLockTool.unLock(key,value);
+    public void unLock(String key, String value) {
+        Boolean result = distributedLockTool.unLock(key, value);
         log.info("unLock result {} {}  ", result, key);
     }
+
 }

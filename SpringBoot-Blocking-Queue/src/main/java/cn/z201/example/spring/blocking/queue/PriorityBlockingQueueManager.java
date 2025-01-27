@@ -1,4 +1,4 @@
-package cn.z201.example.blocking.queue;
+package cn.z201.example.spring.blocking.queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
@@ -22,11 +22,12 @@ public class PriorityBlockingQueueManager {
     public void setup() {
         new Thread(() -> {
             BlockingDto blockingDto = null;
-            for (; ; ) {
+            for (;;) {
                 try {
                     blockingDto = blockingQueue.take();
                     log.info("PriorityBlockingQueueManager tate {} ", blockingDto.getId());
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     log.error("执行队列_异常:" + e);
                 }
             }
@@ -38,4 +39,5 @@ public class PriorityBlockingQueueManager {
             blockingQueue.add(blockingDto);
         }
     }
+
 }

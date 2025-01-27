@@ -1,6 +1,6 @@
-package cn.z201.mybatis.dao;
+package cn.z201.example.spring.mybatis.batch.dao;
 
-import cn.z201.mybatis.entity.TableData;
+import cn.z201.example.spring.mybatis.batch.entity.TableData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 

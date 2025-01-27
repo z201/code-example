@@ -1,4 +1,4 @@
-package cn.z201.aop;
+package cn.z201.example.spring.aop;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,4 +19,5 @@ public class AppApplicationController {
         data.put("code", "200");
         return data;
     }
+
 }

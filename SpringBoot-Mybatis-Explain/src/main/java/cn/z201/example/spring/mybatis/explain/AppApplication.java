@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.explain;
+package cn.z201.example.spring.mybatis.explain;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

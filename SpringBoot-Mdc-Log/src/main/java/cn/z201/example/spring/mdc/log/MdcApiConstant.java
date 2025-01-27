@@ -1,4 +1,4 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
 /**
  * @author z201.coding@gmail.com
@@ -6,6 +6,7 @@ package cn.z201.mdc.log;
 public interface MdcApiConstant {
 
     String X_REAL_IP = "x-real-ip";
+
     /**
      * 请求头跟踪id名。
      */

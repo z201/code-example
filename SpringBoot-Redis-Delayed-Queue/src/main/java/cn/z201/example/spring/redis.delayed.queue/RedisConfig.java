@@ -1,5 +1,5 @@
 
-package cn.z201.redis;
+package cn.z201.example.spring.redis.delayed.queue;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

@@ -1,11 +1,11 @@
-package cn.z201.audit.repository;
+package cn.z201.example.spring.mybatis.audit.repository;
 
-import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
-import cn.z201.audit.config.mdc.MdcThreadPoolTaskExecutor;
-import cn.z201.audit.config.mdc.MdcTool;
-import cn.z201.audit.persistence.dao.BizAuditLogDao;
-import cn.z201.audit.persistence.entity.BizAuditLog;
-import cn.z201.audit.utils.JsonTool;
+import cn.z201.example.spring.mybatis.audit.config.aspect.annotation.MonitorAnnotation;
+import cn.z201.example.spring.mybatis.audit.config.mdc.MdcThreadPoolTaskExecutor;
+import cn.z201.example.spring.mybatis.audit.config.mdc.MdcTool;
+import cn.z201.example.spring.mybatis.audit.persistence.dao.BizAuditLogDao;
+import cn.z201.example.spring.mybatis.audit.persistence.entity.BizAuditLog;
+import cn.z201.example.spring.mybatis.audit.utils.JsonTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -58,9 +58,9 @@ public class AuditRepository {
      * @param descriptionExpression
      * @param args
      */
-    public void add(String type,String title,String descriptionExpression, Object args) {
-        //格式化描述表达式得到易读的描述
-        String description = parseDescriptionExpression(new Object[]{args}, descriptionExpression);
+    public void add(String type, String title, String descriptionExpression, Object args) {
+        // 格式化描述表达式得到易读的描述
+        String description = parseDescriptionExpression(new Object[] { args }, descriptionExpression);
         BizAuditLog bizAuditLog = new BizAuditLog();
         bizAuditLog.setEventType(type);
         bizAuditLog.setEventTitle(title);
@@ -80,7 +80,7 @@ public class AuditRepository {
             String type = monitorAnnotation.type();
             String title = monitorAnnotation.title();
             String descriptionExpression = monitorAnnotation.descriptionExpression();
-            //格式化描述表达式得到易读的描述
+            // 格式化描述表达式得到易读的描述
             String description = parseDescriptionExpression(args, descriptionExpression);
             BizAuditLog bizAuditLog = new BizAuditLog();
             bizAuditLog.setEventType(type);
@@ -95,11 +95,12 @@ public class AuditRepository {
     @PostConstruct
     public void init() {
         mdcThreadPoolTaskExecutor.execute(() -> {
-            for (; ; ) {
+            for (;;) {
                 try {
                     if (concurrentLinkedQueue.isEmpty()) {
                         Thread.sleep(500);
-                    } else {
+                    }
+                    else {
                         Iterator<BizAuditLog> iterator = concurrentLinkedQueue.iterator();
                         List<BizAuditLog> bizAuditLogList = new ArrayList<>();
                         while (iterator.hasNext()) {
@@ -112,7 +113,8 @@ public class AuditRepository {
                         bizAuditLogDao.batchInsert(bizAuditLogList);
                         Thread.sleep(500);
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     log.error("审计日志存储失败 :" + e);
                 }
             }
@@ -121,7 +123,8 @@ public class AuditRepository {
 
     private String parseDescriptionExpression(Object[] args, String descriptionExpression) {
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-        Expression expression = spelExpressionParser.parseExpression(descriptionExpression, new TemplateParserContext());
+        Expression expression = spelExpressionParser.parseExpression(descriptionExpression,
+                new TemplateParserContext());
         return expression.getValue(new StandardEvaluationContext(args), String.class);
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.z201.mybatis.dao.TableDataDao">
+<mapper namespace="cn.z201.example.spring.mybatis.batch.dao.TableDataDao">
 
     <insert id="batchInsert">
         INSERT INTO `table_data`(`create_time`)

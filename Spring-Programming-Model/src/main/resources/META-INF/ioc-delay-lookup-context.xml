@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- more bean definitions go here -->
-    <bean id="delayLookup" class="cn.z201.spring.lookup.domain.DelayLookup">
+    <bean id="delayLookup" class="cn.z201.model.lookup.domain.DelayLookup">
         <property name="name" value="spring"/>
     </bean>
 
@@ -13,7 +13,7 @@
     </bean>
 
     <!-- parent 继承等父类 primary 即使指定的 bean 标记为自动装配候选者。 -->
-    <bean id="annotationDelayLookup" class="cn.z201.spring.lookup.domain.AnnotationDelayLookup"
+    <bean id="annotationDelayLookup" class="cn.z201.model.lookup.domain.AnnotationDelayLookup"
           parent="delayLookup" primary="true">
         <property name="address" value="杭州"/>
     </bean>

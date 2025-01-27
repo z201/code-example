@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.explain.dao;
+package cn.z201.example.spring.mybatis.explain.dao;
 
-import cn.z201.example.mybatis.explain.entity.Account;
+import cn.z201.example.spring.mybatis.explain.entity.Account;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

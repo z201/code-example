@@ -1,4 +1,4 @@
-package cn.z201.example.spring.spi.jdk;
+package cn.z201.example.jdk.spi;
 
 /**
  * @author z201.coding@gmail.com
@@ -10,4 +10,5 @@ public class SpeakChinese implements SpeakSPIService {
     public Object echo() {
         return "chinese : 你好";
     }
+
 }

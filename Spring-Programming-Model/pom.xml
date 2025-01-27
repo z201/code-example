@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>Spring-Programming-Model</artifactId>
+    <artifactId>spring-programming-model</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <!-- 引入的是spring 5.3.6 -->

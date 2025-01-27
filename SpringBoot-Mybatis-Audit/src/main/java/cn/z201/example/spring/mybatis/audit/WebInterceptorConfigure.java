@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.audit;
+package cn.z201.example.spring.mybatis.audit;
 
-import cn.z201.audit.config.mdc.MdcTraceContextFilter;
+import cn.z201.example.spring.mybatis.audit.config.mdc.MdcTraceContextFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

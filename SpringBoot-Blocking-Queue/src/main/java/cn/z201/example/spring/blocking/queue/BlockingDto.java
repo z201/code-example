@@ -1,4 +1,4 @@
-package cn.z201.example.blocking.queue;
+package cn.z201.example.spring.blocking.queue;
 
 import lombok.Getter;
 import lombok.Setter;

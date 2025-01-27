@@ -1,4 +1,4 @@
-package cn.z201.example.redisson;
+package cn.z201.example.spring.redisson;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

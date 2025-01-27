@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +17,17 @@ public class ItemDelayedI<T> implements Delayed {
      * 数据id
      */
     private Long dataId;
+
     /**
      * 开始时间
      */
     private long startTime;
+
     /**
      * 到期时间
      */
     private long expire;
+
     /**
      * 泛型data
      */
@@ -40,7 +43,6 @@ public class ItemDelayedI<T> implements Delayed {
         this.startTime = startTime;
         this.expire = expire;
     }
-
 
     @Override
     public int compareTo(Delayed o) {
@@ -65,8 +67,10 @@ public class ItemDelayedI<T> implements Delayed {
     // 重写 equals 和 hashcode方法用id作为唯一标志，添加列队的时候做防重复判断。
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         ItemDelayedI<?> that = (ItemDelayedI<?>) o;
 
@@ -77,4 +81,5 @@ public class ItemDelayedI<T> implements Delayed {
     public int hashCode() {
         return dataId.hashCode();
     }
+
 }

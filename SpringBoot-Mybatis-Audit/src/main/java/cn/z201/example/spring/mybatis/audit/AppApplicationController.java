@@ -1,9 +1,9 @@
 
-package cn.z201.example.mybatis.audit;
+package cn.z201.example.spring.mybatis.audit;
 
-import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
-import cn.z201.audit.domain.param.ApiParam;
-import cn.z201.audit.service.AuditServiceI;
+import cn.z201.example.spring.mybatis.audit.config.aspect.annotation.MonitorAnnotation;
+import cn.z201.example.spring.mybatis.audit.domain.param.ApiParam;
+import cn.z201.example.spring.mybatis.audit.service.AuditServiceI;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,12 @@ import java.util.*;
 @RestController
 public class AppApplicationController {
 
+    private final AuditServiceI auditService;
+
     @Autowired
-    private AuditServiceI auditService;
+    public AppApplicationController(AuditServiceI auditService) {
+        this.auditService = auditService;
+    }
 
     /**
      * 无参数

@@ -23,7 +23,7 @@ public class AppApplicationController {
     @RequestMapping(value = "")
     public Object index() {
         List<String> dataBasesList = jdbcTemplate.queryForList("SHOW  DATABASES", String.class);
-        Properties info =  redisTemplate.getConnectionFactory().getConnection().info();
+        Properties info = redisTemplate.getConnectionFactory().getConnection().info();
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
         data.put("db", dataBasesList.toString());
@@ -31,4 +31,5 @@ public class AppApplicationController {
         System.out.println(info.get("redis_version"));
         return data;
     }
+
 }

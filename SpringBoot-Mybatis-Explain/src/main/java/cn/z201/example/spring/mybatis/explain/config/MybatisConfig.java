@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.explain.config;
+package cn.z201.example.spring.mybatis.explain.config;
 
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;

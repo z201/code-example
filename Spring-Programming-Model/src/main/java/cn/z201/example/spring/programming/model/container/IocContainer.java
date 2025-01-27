@@ -1,12 +1,11 @@
-package cn.z201.spring.container;
+package cn.z201.example.spring.programming.model.container;
 
-import cn.z201.spring.injection.domain.SuperInjectionBean;
+import cn.z201.example.spring.programming.model.injection.domain.SuperInjectionBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * @author z201.coding@gmail.com
- * 基于@Component创建
+ * @author z201.coding@gmail.com 基于@Component创建
  **/
 @Component
 public class IocContainer {
@@ -16,7 +15,7 @@ public class IocContainer {
      * @return
      */
     @Bean
-    public SuperInjectionBean superInjectionBean(){
+    public SuperInjectionBean superInjectionBean() {
         SuperInjectionBean superInjectionBean = new SuperInjectionBean();
         superInjectionBean.setName("spring");
         superInjectionBean.setAddress("杭州");

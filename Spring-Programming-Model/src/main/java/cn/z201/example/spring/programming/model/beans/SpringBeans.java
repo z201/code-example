@@ -1,4 +1,4 @@
-package cn.z201.spring.beans;
+package cn.z201.example.spring.programming.model.beans;
 
 /**
  * @author z201.coding@gmail.com
@@ -24,4 +24,5 @@ public class SpringBeans {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

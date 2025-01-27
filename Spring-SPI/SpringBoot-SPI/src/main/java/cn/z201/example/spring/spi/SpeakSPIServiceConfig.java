@@ -1,6 +1,6 @@
-package cn.z201.spi;
+package cn.z201.example.spring.spi;
 
-import cn.z201.example.spring.spi.jdk.SpeakSPIService;
+import cn.z201.example.jdk.spi.SpeakSPIService;
 import org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

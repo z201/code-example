@@ -1,9 +1,9 @@
-package cn.z201.mybatis;
+package cn.z201.example.spring.mybatis.explain;
 
-import cn.z201.example.mybatis.explain.AppApplication;
-import cn.z201.example.mybatis.explain.TestTool;
-import cn.z201.example.mybatis.explain.dao.AccountDao;
-import cn.z201.example.mybatis.explain.entity.Account;
+import cn.z201.example.spring.mybatis.explain.AppApplication;
+import cn.z201.example.spring.mybatis.explain.TestTool;
+import cn.z201.example.spring.mybatis.explain.dao.AccountDao;
+import cn.z201.example.spring.mybatis.explain.entity.Account;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;

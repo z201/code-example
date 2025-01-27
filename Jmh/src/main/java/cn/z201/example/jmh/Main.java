@@ -22,20 +22,17 @@ import java.util.stream.Collectors;
 public class Main {
 
     private final static Integer MEASUREMENT_ITERATIONS = 1;
+
     private final static Integer WARMUP_ITERATIONS = 1;
 
-    @Param(value = {"100", "1000", "10000"})
+    @Param(value = { "100", "1000", "10000" })
     private int size;
 
     public List<Integer> numberList = null;
 
     @Setup(Level.Trial)
     public synchronized void initialize() {
-        numberList = new Random()
-                .ints()
-                .limit(size)
-                .boxed()
-                .collect(Collectors.toList());
+        numberList = new Random().ints().limit(size).boxed().collect(Collectors.toList());
     }
 
     public static void main(String[] args) throws RunnerException {
@@ -49,20 +46,16 @@ public class Main {
                 // 不使用多线程
                 .forks(0) // 进行 fork 的次数。如果 fork 数是2的话，则 JMH 会 fork 出两个进程来进行测试。
                 .threads(8) // 每个进程中的测试线程，这个非常好理解，根据具体情况选择，一般为cpu乘以2。
-                .mode(Mode.AverageTime)
-                .shouldDoGC(true)
-                .shouldFailOnError(true)
-                .resultFormat(ResultFormatType.JSON) // 输出格式化
-//                .result("/dev/null") // set this to a valid filename if you want reports
-                .result("Main.json")
-                .shouldFailOnError(true)
-                .jvmArgs("-server")
-                .build();
+                .mode(Mode.AverageTime).shouldDoGC(true).shouldFailOnError(true).resultFormat(ResultFormatType.JSON) // 输出格式化
+                // .result("/dev/null") // set this to a valid filename if you want
+                // reports
+                .result("Main.json").shouldFailOnError(true).jvmArgs("-server").build();
         new Runner(opt).run();
     }
 
     @Getter
     public static class VolatileLong {
+
         private volatile long value = 0;
 
         public synchronized void add(long amount) {

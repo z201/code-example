@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.locks.LockSupport;
 
-
 /**
  * @author z201.coding@gmail.com
  **/
@@ -18,22 +17,27 @@ import java.util.concurrent.locks.LockSupport;
 public class DistributedLockZookeeperTool {
 
     private final Thread currentThread = Thread.currentThread();
-    private static final String LOCK_ROOT = "/LOCKS";   //锁的根路径
-    private static final String LOCK_NODE_NAME = "/L_";  //锁的名称，使用临时顺序节点
+
+    private static final String LOCK_ROOT = "/LOCKS"; // 锁的根路径
+
+    private static final String LOCK_NODE_NAME = "/L_"; // 锁的名称，使用临时顺序节点
+
     private ZooKeeper zkClient;
+
     private String zNode;
+
     private String watcherKey;
 
     public DistributedLockZookeeperTool(ZooKeeper zooKeeper) {
         this.zkClient = zooKeeper;
     }
 
-    //判断某个元素是否被删除，如果删除了就将当前线程唤醒
+    // 判断某个元素是否被删除，如果删除了就将当前线程唤醒
     Watcher watcher = event -> {
-        //如果获取到删除节点的事件，那么就唤醒当前线程
+        // 如果获取到删除节点的事件，那么就唤醒当前线程
         if (event.getType() == Watcher.Event.EventType.NodeDeleted) {
             if (Objects.equals(watcherKey, event.getPath())) {
-                LockSupport.unpark(currentThread);  //将当前线程唤醒
+                LockSupport.unpark(currentThread); // 将当前线程唤醒
             }
         }
     };
@@ -43,7 +47,7 @@ public class DistributedLockZookeeperTool {
      */
     public boolean tryLock() throws InterruptedException, KeeperException {
         String key = LOCK_ROOT.concat(LOCK_NODE_NAME);
-        //创建临时有序节点，节点为/LOCKS/path_xxxxxxxx
+        // 创建临时有序节点，节点为/LOCKS/path_xxxxxxxx
         this.zNode = zkClient.create(key, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         lock();
         log.info("lock  {} ", zNode);
@@ -51,16 +55,16 @@ public class DistributedLockZookeeperTool {
     }
 
     private void lock() throws InterruptedException, KeeperException {
-        //获取当前锁节点排序之后的下标，截取掉/LOCKS/之后的内容
+        // 获取当前锁节点排序之后的下标，截取掉/LOCKS/之后的内容
         List<String> childrenNodes = zkClient.getChildren(LOCK_ROOT, false);
         Collections.sort(childrenNodes);
-        //获取当前锁节点排序之后的下标，截取掉/LOCKS/之后的内容
+        // 获取当前锁节点排序之后的下标，截取掉/LOCKS/之后的内容
         final int index = childrenNodes.indexOf(zNode.substring(LOCK_ROOT.length() + 1));
-        //如果获取到的index为0，也就是第一个元素
+        // 如果获取到的index为0，也就是第一个元素
         if (index == 0) {
             return;
         }
-        //如果不是第一个元素，获取上一个节点的路径
+        // 如果不是第一个元素，获取上一个节点的路径
         final String firstNode = childrenNodes.get(index - 1);
         if (Objects.equals(LOCK_NODE_NAME, "/" + firstNode)) {
             return;

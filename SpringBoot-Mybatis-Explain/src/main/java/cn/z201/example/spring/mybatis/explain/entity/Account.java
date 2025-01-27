@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.explain.entity;
+package cn.z201.example.spring.mybatis.explain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

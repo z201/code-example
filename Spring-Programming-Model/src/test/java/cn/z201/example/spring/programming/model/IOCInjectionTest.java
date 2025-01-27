@@ -1,7 +1,7 @@
-package cn.z201.spring;
+package cn.z201.example.spring.programming.model;
 
-import cn.z201.spring.injection.domain.InjectionBean;
-import cn.z201.spring.injection.repository.InjectionRepository;
+import cn.z201.example.spring.programming.model.injection.domain.InjectionBean;
+import cn.z201.example.spring.programming.model.injection.repository.InjectionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -18,14 +18,14 @@ public class IOCInjectionTest {
     public void testInjection() {
         // 编辑 ioc-delay-lookup-context.xml 并创建对应bean。
         // 启动 spring 上下文
-        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:META-INF/ioc-delay-injection-context.xml");
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext(
+                "classpath:META-INF/ioc-delay-injection-context.xml");
         lookupType(beanFactory);
         lookupCollectionType(beanFactory);
     }
 
     /**
      * 单一对象注入
-     *
      * @param beanFactory
      */
     private void lookupType(BeanFactory beanFactory) {
@@ -37,17 +37,19 @@ public class IOCInjectionTest {
 
     /**
      * 集合对象注入
-     *
      * @param beanFactory
      */
     private void lookupCollectionType(BeanFactory beanFactory) {
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
-            Map<String, InjectionRepository> delayLookupMap = listableBeanFactory.getBeansOfType(InjectionRepository.class);
-            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value 作为对象
+            Map<String, InjectionRepository> delayLookupMap = listableBeanFactory
+                    .getBeansOfType(InjectionRepository.class);
+            // getBeansOfType 匹配所有类型的 bean，无论是单例、原型还是 FactoryBean , bean name 作为key value
+            // 作为对象
             delayLookupMap.forEach((key, value) -> {
                 System.out.println("集合对象注入  " + key + " " + value);
             });
         }
     }
+
 }

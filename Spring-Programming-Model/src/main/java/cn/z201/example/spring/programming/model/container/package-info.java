@@ -1,4 +1,4 @@
-package cn.z201.spring.container;
+package cn.z201.example.spring.programming.model.container;
 /**
  * @author z201.coding@gmail.com
  **/

@@ -1,4 +1,4 @@
-package cn.z201.example.email;
+package cn.z201.example.spring.email;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -40,7 +40,8 @@ public class MailServiceImpl implements MailServiceI {
         try {
             mailSender.send(message);
             log.info("简单邮件已经发送。");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error("发送简单邮件时发生异常！", e);
         }
     }
@@ -58,7 +59,8 @@ public class MailServiceImpl implements MailServiceI {
             mimeMessageHelper.addAttachment(file.getName(), res);
             mailSender.send(message);
             log.info("简单邮件已经发送。");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error("发送简单邮件时发生异常！", e);
         }
     }
@@ -72,11 +74,13 @@ public class MailServiceImpl implements MailServiceI {
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setSubject(subject);
             String emailContent = springTemplateEngine.process("emailTemplate", context);
-            mimeMessageHelper.setText(emailContent,true);
+            mimeMessageHelper.setText(emailContent, true);
             mailSender.send(message);
             log.info("简单邮件已经发送。");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error("发送简单邮件时发生异常！", e);
         }
     }
+
 }

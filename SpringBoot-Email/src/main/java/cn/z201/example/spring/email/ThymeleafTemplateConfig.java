@@ -1,4 +1,4 @@
-package cn.z201.example.email;
+package cn.z201.example.spring.email;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,9 @@ public class ThymeleafTemplateConfig {
         templateEngine.addTemplateResolver(htmlTemplateResolver());
         return templateEngine;
     }
+
     @Bean
-    public SpringResourceTemplateResolver htmlTemplateResolver(){
+    public SpringResourceTemplateResolver htmlTemplateResolver() {
         SpringResourceTemplateResolver emailTemplateResolver = new SpringResourceTemplateResolver();
         emailTemplateResolver.setPrefix("/templates/");
         emailTemplateResolver.setSuffix(".html");
@@ -29,4 +30,5 @@ public class ThymeleafTemplateConfig {
         emailTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
         return emailTemplateResolver;
     }
+
 }

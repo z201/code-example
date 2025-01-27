@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.snowflake.dao;
+package cn.z201.example.spring.mybatis.snowflake.dao;
 
-import cn.z201.example.mybatis.snowflake.entity.Account;
+import cn.z201.example.spring.mybatis.snowflake.entity.Account;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -1,4 +1,4 @@
-package cn.z201.aop;
+package cn.z201.example.spring.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

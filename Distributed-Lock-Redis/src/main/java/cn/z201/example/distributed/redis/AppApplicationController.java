@@ -23,9 +23,11 @@ public class AppApplicationController {
         data.put("code", "200");
         if (null == id) {
             data.put("data", "请求参数不合法");
-        } else {
+        }
+        else {
             data.put("data", distributedLockRedisTool.lock(id, id, 10000L));
         }
         return data;
     }
+
 }

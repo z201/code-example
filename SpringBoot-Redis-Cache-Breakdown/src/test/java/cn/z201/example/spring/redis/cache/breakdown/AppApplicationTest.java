@@ -1,7 +1,5 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.cache.breakdown;
 
-import cn.z201.example.spring.redis.cache.breakdown.AppApplication;
-import cn.z201.example.spring.redis.cache.breakdown.AppApplicationServiceImpl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

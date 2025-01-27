@@ -1,4 +1,4 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.delayed.queue;
 
 import lombok.Getter;
 import lombok.Setter;

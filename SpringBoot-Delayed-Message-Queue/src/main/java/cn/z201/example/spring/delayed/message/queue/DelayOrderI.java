@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ public interface DelayOrderI<T> {
 
     /**
      * 添加延迟对象到延时队列
-     *
      * @param itemDelayed 延迟对象
      * @return boolean
      */
@@ -17,7 +16,6 @@ public interface DelayOrderI<T> {
 
     /**
      * 根据对象添加到指定延时队列
-     *
      * @param data 数据对象
      * @return boolean
      */
@@ -25,7 +23,6 @@ public interface DelayOrderI<T> {
 
     /**
      * 移除指定的延迟对象从延时队列中
-     *
      * @param data
      */
     void removeToOrderDelayQueue(T data);

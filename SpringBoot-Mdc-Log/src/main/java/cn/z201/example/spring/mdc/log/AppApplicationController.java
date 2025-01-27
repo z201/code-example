@@ -1,4 +1,4 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;

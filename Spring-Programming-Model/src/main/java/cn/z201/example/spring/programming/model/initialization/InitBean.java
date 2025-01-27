@@ -1,5 +1,4 @@
-package cn.z201.spring.initialization;
-
+package cn.z201.example.spring.programming.model.initialization;
 
 /**
  * @author z201.coding@gmail.com
@@ -26,7 +25,7 @@ public class InitBean {
         this.address = address;
     }
 
-    public static InitBean createInitBean(){
+    public static InitBean createInitBean() {
         InitBean initBean = new InitBean();
         initBean.setName("spring");
         initBean.setAddress("杭州");
@@ -35,10 +34,7 @@ public class InitBean {
 
     @Override
     public String toString() {
-        return "InitBean{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return "InitBean{" + "name='" + name + '\'' + ", address='" + address + '\'' + '}';
     }
 
 }

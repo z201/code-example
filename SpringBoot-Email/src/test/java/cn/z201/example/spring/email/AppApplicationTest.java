@@ -1,6 +1,5 @@
-package cn.z201.example.email;
+package cn.z201.example.spring.email;
 
-import cn.z201.example.email.MailServiceI;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,11 +21,11 @@ public class AppApplicationTest {
 
     @Test
     @Disabled
-    public void send(){
-//        mailService.sendSimpleMail("z201.coding@gmail.com","测试邮件是否发送成功","这是一条测试邮件，用户测试内容是否正常显示。");
+    public void send() {
+        // mailService.sendSimpleMail("z201.coding@gmail.com","测试邮件是否发送成功","这是一条测试邮件，用户测试内容是否正常显示。");
         Context context = new Context();
         context.setVariable("id", "882398087");
-        mailService.sendSimpleMail("z201.coding@gmail.com","页面邮件",context);
+        mailService.sendSimpleMail("z201.coding@gmail.com", "页面邮件", context);
     }
 
 }

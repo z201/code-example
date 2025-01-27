@@ -1,7 +1,6 @@
 
 package cn.z201.example.docker;
 
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,18 +22,17 @@ public class RedisConfig {
 
     @Bean
     public RedisTemplate redisTemplate(LettuceConnectionFactory connectionFactory) {
-        RedisTemplate<String,String> template = new RedisTemplate<String,String>();
+        RedisTemplate<String, String> template = new RedisTemplate<String, String>();
         template.setConnectionFactory(connectionFactory);
         /**
-         *  使用Jackson2JsonRedisSerialize
-         * Jackson序列化  json占用的内存最小
+         * 使用Jackson2JsonRedisSerialize Jackson序列化 json占用的内存最小
          */
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        /**String序列化*/
+        /** String序列化 */
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         // key序列化方式
         template.setKeySerializer(stringRedisSerializer);

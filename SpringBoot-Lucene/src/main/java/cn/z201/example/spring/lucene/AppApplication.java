@@ -1,4 +1,4 @@
-package cn.z201.example.spring.lucene.lucene;
+package cn.z201.example.spring.lucene;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.wltea.analyzer.dic.Dictionary;
 /**
  * @author z201.coding@gmail.com
  */
-@SpringBootApplication(scanBasePackages = "cn.z201.example.spring.lucene.lucene")
+@SpringBootApplication(scanBasePackages = "cn.z201.example.spring.lucene")
 public class AppApplication {
 
     public static void main(String[] args) {

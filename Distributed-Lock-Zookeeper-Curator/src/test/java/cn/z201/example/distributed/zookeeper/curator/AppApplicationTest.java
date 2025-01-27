@@ -1,4 +1,4 @@
-package cn.z201.zookeeper.curator;
+package cn.z201.example.distributed.zookeeper.curator;
 
 import cn.z201.example.distributed.zookeeper.curator.AppApplication;
 import cn.z201.example.distributed.zookeeper.curator.DistributedLockZookeeperCuratorTool;
@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.annotation.Resource;
 import java.util.UUID;
 import java.util.concurrent.*;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -54,25 +53,30 @@ public class AppApplicationTest {
                         lock.release();
                         log.info("{} 释放锁", Thread.currentThread().getName());
                         countDownLatch.countDown();
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
 
-                    } finally {
+                    }
+                    finally {
                         try {
                             lock.release();
-                        } catch (Exception e) {
-//                            log.error("release error {}",e.getMessage());
+                        }
+                        catch (Exception e) {
+                            // log.error("release error {}",e.getMessage());
                         }
                     }
                 });
             }
             countDownLatch.await();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         executorService.shutdown();
         try {
             Thread.sleep(10000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -96,29 +100,32 @@ public class AppApplicationTest {
                         lock.release();
                         log.info("{} 释放锁", Thread.currentThread().getName());
                         countDownLatch.countDown();
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
 
-                    } finally {
+                    }
+                    finally {
                         try {
                             lock.release();
-                        } catch (Exception e) {
-//                            log.error("release error {}",e.getMessage());
+                        }
+                        catch (Exception e) {
+                            // log.error("release error {}",e.getMessage());
                         }
                     }
                 });
             }
             countDownLatch.await();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         executorService.shutdown();
         try {
             Thread.sleep(10000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-
 
 }

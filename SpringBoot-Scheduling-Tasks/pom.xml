@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>SpringBoot-Scheduling-Tasks</artifactId>
+    <artifactId>springboot-scheduling-tasks</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

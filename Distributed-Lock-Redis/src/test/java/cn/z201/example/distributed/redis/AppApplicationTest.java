@@ -1,4 +1,4 @@
-package cn.z201.example.distributed;
+package cn.z201.example.distributed.redis;
 
 import cn.z201.example.distributed.redis.AppApplication;
 import cn.z201.example.distributed.redis.DistributedLockRedisTool;
@@ -49,18 +49,18 @@ public class AppApplicationTest {
                 });
             }
             countDownLatch.await();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         Set<String> keys = redisTemplate.keys("*");
         log.info("keys {}", keys.toString());
         for (String item : keys) {
-            item = item.replace("lock:","");
-            log.info("unlock {} {}", distributedLockRedisTool.unlock(item, item),item);
+            item = item.replace("lock:", "");
+            log.info("unlock {} {}", distributedLockRedisTool.unlock(item, item), item);
         }
         executorService.shutdown();
     }
-
 
     @Test
     @Disabled
@@ -69,4 +69,5 @@ public class AppApplicationTest {
         log.info("keys {}", keys.toString());
         redisTemplate.delete(keys);
     }
+
 }

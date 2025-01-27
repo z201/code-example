@@ -1,4 +1,4 @@
-package cn.z201.audit.mybatis;
+package cn.z201.example.spring.mybatis.audit.mybatis;
 
 import java.time.Clock;
 
@@ -17,10 +17,12 @@ public class SnowflakeTool {
      * 机器id所占的位数 5 位
      */
     private final static long WORKER_ID_BITS = 5L;
+
     /**
      * 序列在id中占的位数
      */
     private final static long SEQUENCE_BITS = 12L;
+
     /**
      * 数据标识id所占的位数
      */
@@ -83,7 +85,9 @@ public class SnowflakeTool {
     }
 
     private static class SingletonHolder {
+
         private static final SnowflakeTool INSTANCE = new SnowflakeTool(0, 0);
+
     }
 
     public static final SnowflakeTool getInstance() {
@@ -92,16 +96,17 @@ public class SnowflakeTool {
 
     /**
      * 构造函数
-     *
-     * @param workerId     工作ID (0~31)
+     * @param workerId 工作ID (0~31)
      * @param datacenterId 数据中心ID (0~31)
      */
     private SnowflakeTool(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
-            throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
+            throw new IllegalArgumentException(
+                    String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
+            throw new IllegalArgumentException(
+                    String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
         this.workerId = workerId;
         this.datacenterId = datacenterId;
@@ -109,32 +114,32 @@ public class SnowflakeTool {
 
     /**
      * 获得下一个ID (该方法是线程安全的)
-     *
      * @return SnowflakeId
      */
     public synchronized long nextId() {
         long timestamp = Clock.systemDefaultZone().millis();
-        //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
+        // 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
         if (timestamp < lastTimestamp) {
-            throw new RuntimeException(
-                    String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
+            throw new RuntimeException(String.format(
+                    "Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
         }
-        //如果是同一时间生成的，则进行毫秒内序列
+        // 如果是同一时间生成的，则进行毫秒内序列
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & sequenceMask;
-            //毫秒内序列溢出,序列数已经达到最大
+            // 毫秒内序列溢出,序列数已经达到最大
             if (sequence == 0) {
-                //阻塞到下一个毫秒,获得新的时间戳
+                // 阻塞到下一个毫秒,获得新的时间戳
                 timestamp = tilNextMillis(lastTimestamp);
             }
-        } else {
-            //时间戳改变，毫秒内序列重置
+        }
+        else {
+            // 时间戳改变，毫秒内序列重置
             sequence = 0L;
         }
-        //上次生成ID的时间截
+        // 上次生成ID的时间截
         lastTimestamp = timestamp;
 
-        //移位并通过或运算拼到一起组成64位的ID
+        // 移位并通过或运算拼到一起组成64位的ID
         return ((timestamp - startTime) << timestampLeftShift) // 时间戳部分
                 | (datacenterId << datacenterIdShift) // 数据中心部分
                 | (workerId << workerIdShift) // 机器标识符部分
@@ -143,7 +148,6 @@ public class SnowflakeTool {
 
     /**
      * 阻塞到下一个毫秒，直到获得新的时间戳
-     *
      * @param lastTimestamp 上次生成ID的时间截
      * @return 当前时间戳
      */
@@ -154,6 +158,5 @@ public class SnowflakeTool {
         }
         return timestamp;
     }
-
 
 }

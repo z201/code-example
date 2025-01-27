@@ -1,4 +1,4 @@
-package cn.z201.audit.config.mdc;
+package cn.z201.example.spring.mybatis.audit.config.mdc;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -17,7 +17,8 @@ import java.util.Objects;
 public class MdcTraceContextFilter implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         String readIp = request.getHeader(MdcApiConstant.X_REAL_IP);
         String appTraceId = request.getHeader(MdcApiConstant.HTTP_HEADER_TRACE_ID);
         String authorization = request.getHeader(MdcApiConstant.HTTP_TOKEN_HEADER);
@@ -54,9 +55,9 @@ public class MdcTraceContextFilter implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
+            @Nullable Exception ex) throws Exception {
         MdcTool.getInstance().remote();
     }
 
 }
-

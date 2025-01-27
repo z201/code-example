@@ -1,4 +1,4 @@
-package cn.z201.selenium;
+package cn.z201.example.selenium;
 
 import cn.hutool.core.net.NetUtil;
 
@@ -20,7 +20,7 @@ public class SpiderProxyTools {
     /**
      * 用户代理
      */
-    static final String[] USER_AGENT = new String[]{
+    static final String[] USER_AGENT = new String[] {
             "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",
             "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)",
             "Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)",
@@ -46,8 +46,7 @@ public class SpiderProxyTools {
             "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0",
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11",
             "Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-    };
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36" };
 
     /**
      * 测试代理是否可以用
@@ -58,7 +57,6 @@ public class SpiderProxyTools {
      * 将 ip 字符串转换为 int 类型的数字
      * <p>
      * 思路就是将 ip 的每一段数字转为 8 位二进制数，并将它们放在结果的适当位置上
-     *
      * @param ipString ip字符串，如 127.0.0.1
      * @return ip字符串对应的 int 值
      */
@@ -68,7 +66,6 @@ public class SpiderProxyTools {
 
     /**
      * 将 int 转换为 ip 字符串
-     *
      * @param ipInt 用 int 表示的 ip 值
      * @return ip字符串，如 127.0.0.1
      */
@@ -78,7 +75,6 @@ public class SpiderProxyTools {
 
     /**
      * 随机获取 user agent
-     *
      * @return
      */
     public static String randomUserAgent() {
@@ -89,9 +85,8 @@ public class SpiderProxyTools {
 
     /**
      * 测试某个代理是否可用
-     *
-     * @param ip        ip地址
-     * @param port      端口号
+     * @param ip ip地址
+     * @param port 端口号
      * @param proxyType 代理类型
      * @return 测试结果
      */
@@ -110,9 +105,11 @@ public class SpiderProxyTools {
             connection.setReadTimeout(6 * 1000);
             int resCode = connection.getResponseCode();
             isActive = resCode == 200;
-        } catch (IOException e1) {
+        }
+        catch (IOException e1) {
             isActive = false;
-        } finally {
+        }
+        finally {
             if (connection != null) {
                 connection.disconnect();
             }
@@ -122,7 +119,6 @@ public class SpiderProxyTools {
 
     /**
      * 解析url
-     *
      * @param url
      * @return
      */
@@ -137,11 +133,11 @@ public class SpiderProxyTools {
         }
         String[] urlParts = url.split("\\?");
         String baseUrl = urlParts[0];
-        //没有参数
+        // 没有参数
         if (urlParts.length == 1) {
             return map;
         }
-        //有参数
+        // 有参数
         map = new HashMap<>();
         String[] params = urlParts[1].split("&");
         for (String param : params) {
@@ -152,6 +148,5 @@ public class SpiderProxyTools {
         }
         return map;
     }
-
 
 }

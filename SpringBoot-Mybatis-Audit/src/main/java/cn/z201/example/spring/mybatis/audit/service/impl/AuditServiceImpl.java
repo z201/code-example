@@ -1,7 +1,7 @@
-package cn.z201.audit.service.impl;
+package cn.z201.example.spring.mybatis.audit.service.impl;
 
-import cn.z201.audit.repository.AuditRepository;
-import cn.z201.audit.service.AuditServiceI;
+import cn.z201.example.spring.mybatis.audit.repository.AuditRepository;
+import cn.z201.example.spring.mybatis.audit.service.AuditServiceI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,7 @@ public class AuditServiceImpl implements AuditServiceI {
 
     @Override
     public void test(String key) {
-        auditRepository.add("查看","测试方法写入","#{[0]}",key);
+        auditRepository.add("查看", "测试方法写入", "#{[0]}", key);
     }
+
 }

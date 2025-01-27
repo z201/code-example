@@ -1,16 +1,18 @@
-package cn.z201.example.jdk.spi;
+package cn.z201.example.spring.spi;
 
+import cn.z201.example.jdk.spi.LanguageTypeTool;
+import cn.z201.example.jdk.spi.SpeakSPIService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
-
 class SpeakSPIServiceTest {
 
     @Test
     public void setUp() {
-        ServiceLoader<SpeakSPIService> serviceLoader = ServiceLoader.load(SpeakSPIService.class, Thread.currentThread().getContextClassLoader());
+        ServiceLoader<SpeakSPIService> serviceLoader = ServiceLoader.load(SpeakSPIService.class,
+                Thread.currentThread().getContextClassLoader());
         Iterator<SpeakSPIService> iterator = serviceLoader.iterator();
         while (iterator.hasNext()) {
             SpeakSPIService speakSPIService = iterator.next();

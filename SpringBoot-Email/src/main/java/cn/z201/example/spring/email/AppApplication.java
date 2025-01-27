@@ -1,5 +1,4 @@
-package cn.z201.example.email;
-
+package cn.z201.example.spring.email;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 /**
  * @author z201.coding@gmail.com
  */
-@SpringBootApplication(scanBasePackages = "cn.z201.email")
+@SpringBootApplication(scanBasePackages = "cn.z201.example.spring.email")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppApplication {
 

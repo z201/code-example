@@ -1,7 +1,7 @@
-package cn.z201.spring.config.aspect;
+package cn.z201.example.spring.aop.log.config.aspect;
 
 import cn.hutool.extra.servlet.ServletUtil;
-import cn.z201.spring.config.aspect.annotation.MonitorAnnotation;
+import cn.z201.example.spring.aop.log.config.aspect.annotation.MonitorAnnotation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.aspectj.lang.JoinPoint;
@@ -37,8 +37,8 @@ public class MonitorAnnotationAspect {
 
     private static Logger LOGGER = LoggerFactory.getLogger(MonitorAnnotationAspect.class);
 
-    private static final String EXECUTION_FIX = "execution (* cn.z201.spring..*..*.*(..)) " +
-            "&& @annotation(cn.z201.spring.config.aspect.annotation.MonitorAnnotation)";
+    private static final String EXECUTION_FIX = "execution (* cn.z201.spring..*..*.*(..)) "
+            + "&& @annotation(cn.z201.spring.config.aspect.annotation.MonitorAnnotation)";
 
     private static final String LOCALHOST = "0:0:0:0:0:0:0:1";
 
@@ -49,10 +49,8 @@ public class MonitorAnnotationAspect {
         Object[] args = joinPoint.getArgs();
         Object[] arguments = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof ServletRequest
-                    || args[i] instanceof ServletResponse
-                    || args[i] instanceof HttpServletRequest
-                    || args[i] instanceof HttpServletResponse
+            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse
+                    || args[i] instanceof HttpServletRequest || args[i] instanceof HttpServletResponse
                     || args[i] instanceof MultipartFile) {
                 continue;
             }
@@ -83,16 +81,14 @@ public class MonitorAnnotationAspect {
             response = httpServletRequest.getResponse();
             // 请求的IP地址
             String ip = ServletUtil.getClientIP(request);
-            if (Objects.equals(LOCALHOST,ip)) {
+            if (Objects.equals(LOCALHOST, ip)) {
                 ip = "127.0.0.1";
             }
 
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(" ClassPath#Method#Http#Title  :  {}#{}#{}#{}#{}", joinPoint.getSignature().getDeclaringTypeName(),
-                        joinPoint.getSignature().getName(),
-                        request.getRequestURL().toString(),
-                        request.getMethod(),
-                        monitorAnnotation.title());
+                LOGGER.debug(" ClassPath#Method#Http#Title  :  {}#{}#{}#{}#{}",
+                        joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(),
+                        request.getRequestURL().toString(), request.getMethod(), monitorAnnotation.title());
             }
             if (monitorAnnotation.showRequestData()) {
                 if (LOGGER.isDebugEnabled()) {
@@ -104,7 +100,8 @@ public class MonitorAnnotationAspect {
                 monitorAnnotationAspectPlugI.before(monitorAnnotation, request, response);
                 result = joinPoint.proceed();
                 monitorAnnotationAspectPlugI.after(monitorAnnotation, request, response);
-            } else {
+            }
+            else {
                 result = joinPoint.proceed();
             }
             if (monitorAnnotation.showResponseData()) {
@@ -123,9 +120,10 @@ public class MonitorAnnotationAspect {
                     LOGGER.debug("long enough to execute");
                 }
             }
-        } else {
+        }
+        else {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(" HTTP URL Method  {}#{}",request.getRequestURL().toString(), request.getMethod());
+                LOGGER.debug(" HTTP URL Method  {}#{}", request.getRequestURL().toString(), request.getMethod());
                 LOGGER.debug(" Args   : {}", gson.toJson(arguments));
             }
         }
@@ -134,7 +132,6 @@ public class MonitorAnnotationAspect {
 
     /**
      * 获取方法中声明的注解
-     *
      * @param joinPoint
      * @return
      * @throws NoSuchMethodException
@@ -150,7 +147,8 @@ public class MonitorAnnotationAspect {
         Method objMethod = null;
         try {
             objMethod = targetClass.getMethod(methodName, parameterTypes);
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             return null;
         }
         // 拿到方法定义的注解信息

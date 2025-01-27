@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import cn.hutool.core.util.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,9 @@ public class AppController {
     @RequestMapping(value = "add/{id}")
     public Object add(@PathVariable(required = false) Long id) {
         if (null == id) {
-            id = RandomUtil.randomLong(10,1000);
+            id = RandomUtil.randomLong(10, 1000);
         }
-        OrderBo orderBo = OrderBo.builder()
-                .id(id)
-                .createTime(DateTool.currentTimeMillis())
+        OrderBo orderBo = OrderBo.builder().id(id).createTime(DateTool.currentTimeMillis())
                 .orderDeadlineTime(DateTool.currentTimeMillis() + 1 * 60 * 1000).build();
         delayOrder.addToDelayQueue(orderBo);
         Map<String, Object> data = new HashMap<>();
@@ -40,10 +38,9 @@ public class AppController {
         List<OrderBo> list = delayOrder.all();
         Map<String, Object> data = new HashMap<>();
         data.put("code", "200");
-        data.put("data",list);
+        data.put("data", list);
         return data;
     }
-
 
     @RequestMapping(value = "del/{id}")
     public Object del(@PathVariable(required = false) Long id) {

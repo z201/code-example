@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +33,16 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
      */
     @PostConstruct
     public void init() {
-        /*启动一个线程，去取延迟订单*/
+        /* 启动一个线程，去取延迟订单 */
         threadPoolTaskExecutor.execute(() -> {
             ItemDelayedI<OrderBo> orderDelayed;
-            for (; ; ) {
+            for (;;) {
                 try {
                     orderDelayed = DELAY_QUEUE.take();
-                    //处理超时订单
+                    // 处理超时订单
                     log.info("处理超时订单 {} {}", orderDelayed.getDataId(), DateTool.conversionNowFormat());
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     log.error("执行自营超时订单的_延迟队列_异常:" + e);
                 }
             }
@@ -49,7 +50,7 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
     }
 
     @PreDestroy
-    public void destroy(){
+    public void destroy() {
         DELAY_QUEUE.clear();
         threadPoolTaskExecutor.shutdown();
     }
@@ -67,7 +68,8 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
      **/
     @Override
     public boolean addToDelayQueue(OrderBo order) {
-        ItemDelayedI<OrderBo> orderDelayed = new ItemDelayedI<>(order.getId(), order.getCreateTime(), order.getOrderDeadlineTime());
+        ItemDelayedI<OrderBo> orderDelayed = new ItemDelayedI<>(order.getId(), order.getCreateTime(),
+                order.getOrderDeadlineTime());
         if (DELAY_QUEUE.contains(orderDelayed)) {
             return true;
         }
@@ -77,7 +79,6 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
 
     /**
      * 移除列队
-     *
      * @param order
      */
     @Override
@@ -85,7 +86,7 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
         if (order == null) {
             return;
         }
-        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext();) {
             ItemDelayedI<OrderBo> queue = iterator.next();
             if (queue.getDataId().equals(order.getId())) {
                 log.info("移除订单超时列队 {} {}", order, DateTool.conversionNowFormat());
@@ -99,7 +100,7 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
             return;
         }
         log.info("移除订单超时列队 {} {}", id, DateTool.conversionNowFormat());
-        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext();) {
             ItemDelayedI<OrderBo> queue = iterator.next();
             if (queue.getDataId().equals(id)) {
                 DELAY_QUEUE.remove(queue);
@@ -111,15 +112,13 @@ public class DelayOrderImpl implements DelayOrderI<OrderBo> {
     public List<OrderBo> all() {
         List<OrderBo> list = new ArrayList<>();
         OrderBo orderBoTemp = null;
-        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ItemDelayedI<OrderBo>> iterator = DELAY_QUEUE.iterator(); iterator.hasNext();) {
             ItemDelayedI<OrderBo> queue = iterator.next();
-            orderBoTemp = OrderBo.builder()
-                    .id(queue.getDataId())
-                    .orderDeadlineTime(queue.getExpire())
-                    .createTime(queue.getStartTime())
-                    .build();
+            orderBoTemp = OrderBo.builder().id(queue.getDataId()).orderDeadlineTime(queue.getExpire())
+                    .createTime(queue.getStartTime()).build();
             list.add(orderBoTemp);
         }
         return list;
     }
+
 }

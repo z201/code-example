@@ -1,4 +1,4 @@
-package cn.z201.webclient;
+package cn.z201.example.spring.webclient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

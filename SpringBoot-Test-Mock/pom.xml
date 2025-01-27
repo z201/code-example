@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>SpringBoot-Test-Mock</artifactId>
+    <artifactId>springboot-test-mock</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

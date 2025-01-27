@@ -1,7 +1,7 @@
-package cn.z201.example.mybatis.snowflake;
+package cn.z201.example.spring.mybatis.snowflake;
 
-import cn.z201.example.mybatis.snowflake.dao.AccountDao;
-import cn.z201.example.mybatis.snowflake.entity.Account;
+import cn.z201.example.spring.mybatis.snowflake.dao.AccountDao;
+import cn.z201.example.spring.mybatis.snowflake.entity.Account;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

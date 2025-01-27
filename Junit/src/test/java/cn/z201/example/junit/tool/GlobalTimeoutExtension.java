@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class GlobalTimeoutExtension implements BeforeAllCallback, AfterAllCallback {
 
     private ScheduledExecutorService executor;
+
     private final AtomicBoolean timedOut = new AtomicBoolean(false);
 
     @Override
@@ -34,6 +35,5 @@ public class GlobalTimeoutExtension implements BeforeAllCallback, AfterAllCallba
             throw new RuntimeException("Test suite timed out.");
         }
     }
+
 }
-
-

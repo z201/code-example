@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +11,7 @@ import java.util.Objects;
 public class DateTool {
 
     private final static String DATE_PATTERN = "yyyy-MM-dd";
+
     private final static String DATE_PATTERN_S = "yyyy-MM-dd HH:mm:ss";
 
     public static Long currentTimeMillis() {
@@ -24,12 +25,14 @@ public class DateTool {
 
     public static String conversionNowFormat() {
         Instant instant = Instant.ofEpochMilli(currentTimeMillis());
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(DATE_PATTERN_S));
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+                .format(DateTimeFormatter.ofPattern(DATE_PATTERN_S));
     }
 
     public static String conversionFormat(Long timeMillis) {
         Instant instant = Instant.ofEpochMilli(timeMillis);
-        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(DATE_PATTERN_S));
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+                .format(DateTimeFormatter.ofPattern(DATE_PATTERN_S));
     }
 
     public static LocalDateTime conversion(Long timeMillis) {
@@ -49,5 +52,5 @@ public class DateTool {
         }
         return false;
     }
-}
 
+}

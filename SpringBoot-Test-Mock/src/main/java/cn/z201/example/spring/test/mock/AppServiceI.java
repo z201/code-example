@@ -1,4 +1,4 @@
-package cn.z201.test.mock;
+package cn.z201.example.spring.test.mock;
 
 /**
  * @author z201.coding@gmail.com

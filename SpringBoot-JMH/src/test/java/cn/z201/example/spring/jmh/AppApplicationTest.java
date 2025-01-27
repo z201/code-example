@@ -1,6 +1,5 @@
-package cn.z201.jmh;
+package cn.z201.example.spring.jmh;
 
-import cn.z201.example.spring.jmh.AppApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 public class AppApplicationTest {
 
-
     private final static Integer MEASUREMENT_ITERATIONS = 1;
+
     private final static Integer WARMUP_ITERATIONS = 1;
 
     static ConfigurableApplicationContext context;
@@ -35,8 +34,9 @@ public class AppApplicationTest {
                 context = SpringApplication.run(AppApplication.class, args);
                 activeProfiles = context.getEnvironment().getActiveProfiles();
             }
-            log.info("{}",activeProfiles);
-        } catch (Exception e) {
+            log.info("{}", activeProfiles);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -54,20 +54,15 @@ public class AppApplicationTest {
                 // 不使用多线程
                 .forks(0) // 进行 fork 的次数。如果 fork 数是2的话，则 JMH 会 fork 出两个进程来进行测试。
                 .threads(1) // 每个进程中的测试线程，这个非常好理解，根据具体情况选择，一般为cpu乘以2。
-                .mode(Mode.AverageTime)
-                .shouldDoGC(true)
-                .shouldFailOnError(true)
-                .resultFormat(ResultFormatType.JSON) // 输出格式化
-//                .result("/dev/null") // set this to a valid filename if you want reports
-                .result("benchmark.json")
-                .shouldFailOnError(true)
-                .jvmArgs("-server")
-                .build();
+                .mode(Mode.AverageTime).shouldDoGC(true).shouldFailOnError(true).resultFormat(ResultFormatType.JSON) // 输出格式化
+                // .result("/dev/null") // set this to a valid filename if you want
+                // reports
+                .result("benchmark.json").shouldFailOnError(true).jvmArgs("-server").build();
         new Runner(opt).run();
     }
 
     @Benchmark
-    public void environment(){
+    public void environment() {
 
     }
 

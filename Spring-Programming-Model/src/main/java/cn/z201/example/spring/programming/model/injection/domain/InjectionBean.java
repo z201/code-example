@@ -1,4 +1,4 @@
-package cn.z201.spring.injection.domain;
+package cn.z201.example.spring.programming.model.injection.domain;
 
 /**
  * @author z201.coding@gmail.com
@@ -17,8 +17,7 @@ public class InjectionBean {
 
     @Override
     public String toString() {
-        return "InjectionBean{" +
-                "name='" + name + '\'' +
-                '}';
+        return "InjectionBean{" + "name='" + name + '\'' + '}';
     }
+
 }

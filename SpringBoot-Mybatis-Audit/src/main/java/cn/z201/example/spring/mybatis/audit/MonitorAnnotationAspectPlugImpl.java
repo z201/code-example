@@ -1,10 +1,10 @@
-package cn.z201.example.mybatis.audit;
+package cn.z201.example.spring.mybatis.audit;
 
-import cn.z201.audit.config.aspect.MonitorAnnotationAspectPlugI;
-import cn.z201.audit.config.aspect.annotation.MonitorAnnotation;
-import cn.z201.audit.repository.AuditRepository;
-import cn.z201.audit.utils.AnnotationTools;
-import cn.z201.audit.utils.JsonFormatTool;
+import cn.z201.example.spring.mybatis.audit.config.aspect.MonitorAnnotationAspectPlugI;
+import cn.z201.example.spring.mybatis.audit.config.aspect.annotation.MonitorAnnotation;
+import cn.z201.example.spring.mybatis.audit.repository.AuditRepository;
+import cn.z201.example.spring.mybatis.audit.utils.AnnotationTools;
+import cn.z201.example.spring.mybatis.audit.utils.JsonFormatTool;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +39,14 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
         logArgs(joinPoint);
         Object result = joinPoint.proceed();
         logHttpAfter();
-        auditRepository.add(monitorAnnotation,args);
+        auditRepository.add(monitorAnnotation, args);
         return result;
     }
 
-    private void logHttp(){
+    private void logHttp() {
         startTime = System.currentTimeMillis();
-        ServletRequestAttributes httpServletRequest = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes httpServletRequest = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
         if (null != httpServletRequest) {
             HttpServletRequest request = httpServletRequest.getRequest();
             // 打印请求相关参数
@@ -53,18 +54,18 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
         }
     }
 
-    private void logHttpAfter(){
+    private void logHttpAfter() {
         long consuming = System.currentTimeMillis() - startTime;
         log.info(" Time-Consuming : {} ms", consuming);
     }
 
-    private void logArgs(ProceedingJoinPoint joinPoint){
-        log.info(" Class Method    :  {}#{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
+    private void logArgs(ProceedingJoinPoint joinPoint) {
+        log.info(" Class Method    :  {}#{}", joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName());
         Object[] args = joinPoint.getArgs();
         Object[] arguments = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof ServletRequest
-                    || args[i] instanceof ServletResponse
+            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse
                     || args[i] instanceof MultipartFile) {
                 continue;
             }
@@ -72,8 +73,5 @@ public class MonitorAnnotationAspectPlugImpl implements MonitorAnnotationAspectP
         }
         log.info(" Args   : {}", JsonFormatTool.toString(arguments));
     }
-
-
-
 
 }

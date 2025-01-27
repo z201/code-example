@@ -1,4 +1,4 @@
-package cn.z201.spring.lookup.annotation;
+package cn.z201.example.spring.programming.model.lookup.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

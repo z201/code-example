@@ -1,12 +1,13 @@
-package cn.z201.spring.lookup.domain;
+package cn.z201.example.spring.programming.model.lookup.domain;
 
-import cn.z201.spring.lookup.annotation.Point;
+import cn.z201.example.spring.programming.model.lookup.annotation.Point;
 
 /**
  * @author z201.coding@gmail.com
  **/
 @Point
-public class AnnotationDelayLookup extends DelayLookup{
+public class AnnotationDelayLookup extends DelayLookup {
+
     private String address;
 
     public String getAddress() {
@@ -19,8 +20,7 @@ public class AnnotationDelayLookup extends DelayLookup{
 
     @Override
     public String toString() {
-        return "AnnotationDelayLookup{" +
-                "address='" + address + '\'' +
-                "} " + super.toString();
+        return "AnnotationDelayLookup{" + "address='" + address + '\'' + "} " + super.toString();
     }
+
 }

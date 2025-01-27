@@ -1,4 +1,4 @@
-package cn.z201.example.dynamic.data.manager;
+package cn.z201.example.spring.dynamic.data.manager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +20,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     }
 
     /**
-     /**
-     * 必须执行此操作，才会重新初始化AbstractRoutingDataSource 中的 resolvedDataSources，也只有这样，动态切换才会起效
+     * /** 必须执行此操作，才会重新初始化AbstractRoutingDataSource 中的 resolvedDataSources，也只有这样，动态切换才会起效
      * @param defaultTargetDataSource 默认的数据源
-     * @param targetDataSources       多数据源每个key对应一个数据源
+     * @param targetDataSources 多数据源每个key对应一个数据源
      */
     public void setDynamicRoutingDataSource(DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {
         super.setDefaultTargetDataSource(defaultTargetDataSource);
@@ -38,12 +37,12 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @param key
      * @return
      */
-    public boolean toggleDataSource(String key){
+    public boolean toggleDataSource(String key) {
         if (DynamicDataSourceContextHolder.getInstance().containDataSourceKey(key)) {
             String concurrentDataBase = DynamicDataSourceContextHolder.getInstance().getDataSourceKey();
             DynamicDataSourceContextHolder.getInstance().setDataSourceKey(key);
             determineTargetDataSource();
-            logger.info("toggleDataSource {} -> {}",concurrentDataBase ,key);
+            logger.info("toggleDataSource {} -> {}", concurrentDataBase, key);
             return true;
         }
         return false;

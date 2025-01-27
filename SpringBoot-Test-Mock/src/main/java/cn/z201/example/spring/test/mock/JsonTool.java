@@ -1,4 +1,4 @@
-package cn.z201.test.mock;
+package cn.z201.example.spring.test.mock;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

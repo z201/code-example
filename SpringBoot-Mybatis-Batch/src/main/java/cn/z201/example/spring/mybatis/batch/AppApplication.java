@@ -1,4 +1,4 @@
-package cn.z201.mybatis;
+package cn.z201.example.spring.mybatis.batch;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
  * @author z201.coding@gmail.com
  */
 @SpringBootApplication
-@MapperScan("cn.z201.mybatis.dao")
+@MapperScan("cn.z201.example.spring.mybatis.batch.dao")
 public class AppApplication {
 
     public static void main(String[] args) {

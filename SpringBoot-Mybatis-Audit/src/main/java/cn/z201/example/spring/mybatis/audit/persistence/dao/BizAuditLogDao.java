@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.audit.persistence.dao;
+package cn.z201.example.spring.mybatis.audit.persistence.dao;
 
-import cn.z201.audit.persistence.entity.BizAuditLog;
+import cn.z201.example.spring.mybatis.audit.persistence.entity.BizAuditLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +17,5 @@ import java.util.List;
 public interface BizAuditLogDao extends BaseMapper<BizAuditLog> {
 
     int batchInsert(@Param("bizAuditLogList") List<BizAuditLog> bizAuditLogList);
+
 }

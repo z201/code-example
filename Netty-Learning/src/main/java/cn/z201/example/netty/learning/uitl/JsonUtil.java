@@ -1,4 +1,4 @@
-package cn.z201.example.learning.uitl;
+package cn.z201.example.netty.learning.uitl;
 
 import com.google.gson.Gson;
 
@@ -15,10 +15,10 @@ public class JsonUtil {
     }
 
     public static <T> T fromJson(String jsonString, Class<T> clazz) {
-        return GSON.fromJson(jsonString,clazz);
+        return GSON.fromJson(jsonString, clazz);
     }
 
-    public static String toJson(Object object){
+    public static String toJson(Object object) {
         return GSON.toJson(object);
     }
 

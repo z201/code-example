@@ -1,4 +1,4 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +27,8 @@ import java.io.IOException;
 public class MdcTraceContextFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String readIp = request.getHeader(MdcApiConstant.X_REAL_IP);
         String appTraceId = request.getHeader(MdcApiConstant.HTTP_HEADER_TRACE_ID);
         String authorization = request.getHeader(MdcApiConstant.HTTP_TOKEN_HEADER);
@@ -58,5 +58,5 @@ public class MdcTraceContextFilter extends OncePerRequestFilter {
         MDC.put(MdcApiConstant.HTTP_TOKEN_HEADER, authorization);
         filterChain.doFilter(request, response);
     }
-}
 
+}

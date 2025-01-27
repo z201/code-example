@@ -1,4 +1,4 @@
-package cn.z201.example.blocking.queue;
+package cn.z201.example.spring.blocking.queue;
 
 import cn.hutool.core.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +26,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
     @Autowired
     public AppCommandLineRunner(ArrayBlockingQueueManager arrayBlockingQueueManager,
-                                LinkedBlockingQueueManager linkedBlockingDequeManager,
-                                PriorityBlockingQueueManager priorityBlockingQueueManager) {
+            LinkedBlockingQueueManager linkedBlockingDequeManager,
+            PriorityBlockingQueueManager priorityBlockingQueueManager) {
         this.arrayBlockingQueueManager = arrayBlockingQueueManager;
         this.linkedBlockingDequeManager = linkedBlockingDequeManager;
         this.priorityBlockingQueueManager = priorityBlockingQueueManager;
@@ -37,7 +37,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<BlockingDto> blockingDtoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            blockingDtoList.add(new BlockingDto(RandomUtil.randomLong(Long.valueOf(i),Integer.MAX_VALUE)));
+            blockingDtoList.add(new BlockingDto(RandomUtil.randomLong(Long.valueOf(i), Integer.MAX_VALUE)));
         }
         for (BlockingDto dto : blockingDtoList) {
             arrayBlockingQueueManager.addItem(dto);
@@ -45,4 +45,5 @@ public class AppCommandLineRunner implements CommandLineRunner {
             priorityBlockingQueueManager.addItem(dto);
         }
     }
+
 }

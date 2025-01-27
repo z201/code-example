@@ -1,7 +1,5 @@
-package cn.z201.zookeeper;
+package cn.z201.example.distributed.zookeeper;
 
-import cn.z201.example.distributed.zookeeper.AppApplication;
-import cn.z201.example.distributed.zookeeper.DistributedLockZookeeperTool;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
@@ -40,23 +38,26 @@ public class AppApplicationTest {
             for (int i = 0; i < count; i++) {
                 executorService.execute(() -> {
                     try {
-                        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient);
+                        DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(
+                                zkClient);
                         Thread.sleep(1000);
                         log.info(" lock {} ", distributedLockZookeeperTool.tryLock());
                         distributedLockZookeeperTool.close();
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                     countDownLatch.countDown();
                 });
             }
             countDownLatch.await();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         executorService.shutdown();
         DistributedLockZookeeperTool distributedLockZookeeperTool = new DistributedLockZookeeperTool(zkClient);
-        log.info("{}",distributedLockZookeeperTool.list());
+        log.info("{}", distributedLockZookeeperTool.list());
     }
 
 }

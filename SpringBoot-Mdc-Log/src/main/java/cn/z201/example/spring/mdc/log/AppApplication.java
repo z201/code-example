@@ -1,4 +1,4 @@
-package cn.z201.mdc.log;
+package cn.z201.example.spring.mdc.log;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,8 +24,10 @@ public class AppApplication {
 
     @Bean
     public AsyncTaskExecutor taskExecutor() {
-        ThreadPoolTaskExecutor executor = MdcThreadPoolTaskExecutor.newWithInheritedMdc(8, 32, 2, TimeUnit.MINUTES, 1000, new ThreadPoolExecutor.AbortPolicy());
+        ThreadPoolTaskExecutor executor = MdcThreadPoolTaskExecutor.newWithInheritedMdc(8, 32, 2, TimeUnit.MINUTES,
+                1000, new ThreadPoolExecutor.AbortPolicy());
         executor.setThreadNamePrefix("def-Executor ");
         return executor;
     }
+
 }

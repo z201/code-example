@@ -1,8 +1,8 @@
-package cn.z201.example.dynamic.data;
+package cn.z201.example.spring.dynamic.data;
 
-import cn.z201.example.dynamic.data.manager.DynamicJdbcTemplateManager;
-import cn.z201.example.dynamic.data.manager.DynamicDataSourceConstant;
-import cn.z201.example.dynamic.data.manager.DynamicDataSourceContextHolder;
+import cn.z201.example.spring.dynamic.data.manager.DynamicJdbcTemplateManager;
+import cn.z201.example.spring.dynamic.data.manager.DynamicDataSourceConstant;
+import cn.z201.example.spring.dynamic.data.manager.DynamicDataSourceContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,6 @@ public class AppApplicationController {
 
     /**
      * 所有数据源
-     *
      * @return
      */
     @RequestMapping(value = "")
@@ -36,7 +35,6 @@ public class AppApplicationController {
 
     /**
      * 切换数据源
-     *
      * @param key
      * @return
      */
@@ -45,8 +43,10 @@ public class AppApplicationController {
         List<String> dataBasesList = new ArrayList<>();
         if (DynamicDataSourceContextHolder.getInstance().containDataSourceKey(key)) {
             dynamicJdbcTemplateManager.getDynamicRoutingDataSource().toggleDataSource(key);
-            dataBasesList = dynamicJdbcTemplateManager.dynamicJdbcTemplate().queryForList("SELECT DATABASE()", String.class);
-        } else {
+            dataBasesList = dynamicJdbcTemplateManager.dynamicJdbcTemplate().queryForList("SELECT DATABASE()",
+                    String.class);
+        }
+        else {
             key = DynamicDataSourceConstant.MASTER;
             dataBasesList = dynamicJdbcTemplateManager.jdbcTemplate().queryForList("SELECT DATABASE()", String.class);
         }

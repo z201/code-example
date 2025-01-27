@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.snowflake.entity;
+package cn.z201.example.spring.mybatis.snowflake.entity;
 
-import cn.z201.example.mybatis.snowflake.config.BaseEntity;
+import cn.z201.example.spring.mybatis.snowflake.config.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

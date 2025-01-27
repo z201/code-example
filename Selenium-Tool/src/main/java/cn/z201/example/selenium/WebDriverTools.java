@@ -1,4 +1,4 @@
-package cn.z201.selenium;
+package cn.z201.example.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,10 +17,8 @@ import java.util.List;
  **/
 public class WebDriverTools {
 
-
     /**
-     * 创建Chrome浏览器驱动
-     * 需要系统已经安装好了chrome浏览器和chromedriver已加入到系统PATH环境变量中
+     * 创建Chrome浏览器驱动 需要系统已经安装好了chrome浏览器和chromedriver已加入到系统PATH环境变量中
      * @return
      */
     public static WebDriver chromeDriver() {
@@ -28,8 +26,7 @@ public class WebDriverTools {
     }
 
     /**
-     * 创建Chrome浏览器驱动
-     * 需要系统已经安装好了chrome浏览器和chromedriver已加入到系统PATH环境变量中
+     * 创建Chrome浏览器驱动 需要系统已经安装好了chrome浏览器和chromedriver已加入到系统PATH环境变量中
      * @return
      */
     public static WebDriver chromeDriver(Object proxyServer) {
@@ -37,7 +34,6 @@ public class WebDriverTools {
     }
 
     /**
-     *
      * @param proxyServer 代理地址
      * @param view 是否打开浏览器
      * @return
@@ -52,14 +48,16 @@ public class WebDriverTools {
             path = "/usr/local/bin/chromedriver";
         }
         System.setProperty("webdriver.chrome.chromedriver", path);
-//        ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(new File(path)).usingAnyFreePort().build();
+        // ChromeDriverService service = new
+        // ChromeDriverService.Builder().usingDriverExecutable(new
+        // File(path)).usingAnyFreePort().build();
         ChromeOptions chromeOptions = new ChromeOptions();
         if (null != proxyServer) {
             chromeOptions.addArguments("--proxy-server=http://" + proxyServer);
         }
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--no-sandbox"); //Bypass OS security model
+        chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
         chromeOptions.addArguments("--disable-web-security");
         chromeOptions.addArguments("--ignore-urlfetcher-cert-requests");
         chromeOptions.addArguments("--disable-renderer-backgrounding");
@@ -95,17 +93,21 @@ public class WebDriverTools {
             }
             process.waitFor();
             exitValue = process.exitValue();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             if (bufferedReader != null) {
                 bufferedReader.close();
             }
         }
         if (exitValue == 0) {
             System.out.println("SUCCESS");
-        } else {
+        }
+        else {
             System.out.println("FAIL");
         }
     }
+
 }

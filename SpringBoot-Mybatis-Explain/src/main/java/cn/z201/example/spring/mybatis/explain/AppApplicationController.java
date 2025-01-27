@@ -1,7 +1,7 @@
-package cn.z201.example.mybatis.explain;
+package cn.z201.example.spring.mybatis.explain;
 
-import cn.z201.example.mybatis.explain.dao.AccountDao;
-import cn.z201.example.mybatis.explain.entity.Account;
+import cn.z201.example.spring.mybatis.explain.dao.AccountDao;
+import cn.z201.example.spring.mybatis.explain.entity.Account;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

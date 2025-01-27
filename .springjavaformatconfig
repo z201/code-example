@@ -1,0 +1,4 @@
+# Spring Java Format 使用制表符（  \t  ）进行缩进。如果需要使用空格进行缩进添加以下配置：
+indentation-style=spaces
+# 如果需要指定空格的数量（例如，使用 4 个空格作为缩进），可以进一步配置：
+java-baseline=8

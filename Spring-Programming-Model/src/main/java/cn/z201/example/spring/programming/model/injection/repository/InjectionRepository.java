@@ -1,6 +1,6 @@
-package cn.z201.spring.injection.repository;
+package cn.z201.example.spring.programming.model.injection.repository;
 
-import cn.z201.spring.injection.domain.InjectionBean;
+import cn.z201.example.spring.programming.model.injection.domain.InjectionBean;
 
 import java.util.Collection;
 
@@ -31,8 +31,7 @@ public class InjectionRepository {
 
     @Override
     public String toString() {
-        return "InjectionRepository{" +
-                "beans=" + beans +
-                '}';
+        return "InjectionRepository{" + "beans=" + beans + '}';
     }
+
 }

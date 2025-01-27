@@ -1,4 +1,4 @@
-package cn.z201.example.redis.bloom;
+package cn.z201.example.spring.redis.bloom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

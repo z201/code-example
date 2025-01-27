@@ -1,4 +1,4 @@
-package cn.z201.mybatis.entity;
+package cn.z201.example.spring.mybatis.batch.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

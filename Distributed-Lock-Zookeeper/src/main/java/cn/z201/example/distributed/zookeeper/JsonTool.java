@@ -27,13 +27,12 @@ public class JsonTool {
 
     }
 
-    public static Gson build(){
+    public static Gson build() {
         return gson;
     }
 
     /**
      * 将object对象转成json字符串
-     *
      * @param object
      * @return
      */
@@ -45,10 +44,8 @@ public class JsonTool {
         return gsonString;
     }
 
-
     /**
      * 将gsonString转成泛型bean
-     *
      * @param gsonString
      * @param cls
      * @return
@@ -62,9 +59,7 @@ public class JsonTool {
     }
 
     /**
-     * 转成list
-     * 泛型在编译期类型被擦除导致报错
-     *
+     * 转成list 泛型在编译期类型被擦除导致报错
      * @param gsonString
      * @param cls
      * @return
@@ -78,11 +73,8 @@ public class JsonTool {
         return list;
     }
 
-
     /**
-     * 转成list
-     * 解决泛型问题
-     *
+     * 转成list 解决泛型问题
      * @param json
      * @param cls
      * @param <T>
@@ -98,27 +90,22 @@ public class JsonTool {
         return list;
     }
 
-
     /**
      * 转成list中有map的
-     *
      * @param gsonString
      * @return
      */
     public static <T> List<Map<String, T>> toListMaps(String gsonString) {
         List<Map<String, T>> list = null;
         if (gson != null) {
-            list = gson.fromJson(gsonString,
-                    new TypeToken<List<Map<String, T>>>() {
-                    }.getType());
+            list = gson.fromJson(gsonString, new TypeToken<List<Map<String, T>>>() {
+            }.getType());
         }
         return list;
     }
 
-
     /**
      * 转成map的
-     *
      * @param gsonString
      * @return
      */
@@ -133,11 +120,11 @@ public class JsonTool {
 
     /**
      * 把一个bean（或者其他的字符串什么的）转成json
-     *
      * @param object
      * @return
      */
     public static String beanToJson(Object object) {
         return gson.toJson(object);
     }
+
 }

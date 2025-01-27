@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.snowflake;
+package cn.z201.example.spring.mybatis.snowflake;
 
-import cn.z201.example.mybatis.snowflake.entity.Account;
+import cn.z201.example.spring.mybatis.snowflake.entity.Account;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;

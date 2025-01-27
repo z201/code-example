@@ -1,4 +1,4 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.cache.breakdown;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

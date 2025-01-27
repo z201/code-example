@@ -1,4 +1,4 @@
-package cn.z201.example.delayed.message.queue;
+package cn.z201.example.spring.delayed.message.queue;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author z201.coding@gmail.com
  */
-@SpringBootApplication(scanBasePackages = "cn.z201.delayed")
+@SpringBootApplication(scanBasePackages = "cn.z201.example.spring.delayed.message.queue")
 public class AppApplication {
 
     public static void main(String[] args) {

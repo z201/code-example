@@ -1,4 +1,4 @@
-package cn.z201.scheduling;
+package cn.z201.example.spring.scheduling.tasks;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;

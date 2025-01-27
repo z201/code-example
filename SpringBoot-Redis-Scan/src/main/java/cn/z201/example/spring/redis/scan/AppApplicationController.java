@@ -1,4 +1,4 @@
-package cn.z201.redis;
+package cn.z201.example.spring.redis.scan;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;

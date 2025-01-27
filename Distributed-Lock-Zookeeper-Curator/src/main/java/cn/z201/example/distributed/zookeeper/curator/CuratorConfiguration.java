@@ -30,12 +30,8 @@ public class CuratorConfiguration {
 
     @Bean(name = "curatorFramework", initMethod = "start")
     public CuratorFramework curatorFramework() {
-        return CuratorFrameworkFactory.newClient(
-                connectString,
-                sessionTimeoutMs,
-                connectionTimeoutMs,
-                new RetryNTimes(retryCount, elapsedTimeMs)
-        );
+        return CuratorFrameworkFactory.newClient(connectString, sessionTimeoutMs, connectionTimeoutMs,
+                new RetryNTimes(retryCount, elapsedTimeMs));
     }
 
 }

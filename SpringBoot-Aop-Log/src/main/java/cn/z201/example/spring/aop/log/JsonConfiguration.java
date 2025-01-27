@@ -1,4 +1,4 @@
-package cn.z201.spring;
+package cn.z201.example.spring.aop.log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,4 +26,5 @@ public class JsonConfiguration {
         converters.add(gsonHttpMessageConverter);
         return new HttpMessageConverters(true, converters);
     }
+
 }

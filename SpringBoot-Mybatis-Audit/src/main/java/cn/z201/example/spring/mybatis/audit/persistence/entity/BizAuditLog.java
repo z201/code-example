@@ -1,6 +1,6 @@
-package cn.z201.audit.persistence.entity;
+package cn.z201.example.spring.mybatis.audit.persistence.entity;
 
-import cn.z201.audit.mybatis.BaseEntity;
+import cn.z201.example.spring.mybatis.audit.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -47,6 +47,5 @@ public class BizAuditLog extends BaseEntity {
      * 操作用户id
      */
     private Long userId;
-
 
 }

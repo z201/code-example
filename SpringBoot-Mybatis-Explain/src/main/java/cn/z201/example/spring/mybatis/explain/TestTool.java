@@ -1,6 +1,6 @@
-package cn.z201.example.mybatis.explain;
+package cn.z201.example.spring.mybatis.explain;
 
-import cn.z201.example.mybatis.explain.entity.Account;
+import cn.z201.example.spring.mybatis.explain.entity.Account;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;

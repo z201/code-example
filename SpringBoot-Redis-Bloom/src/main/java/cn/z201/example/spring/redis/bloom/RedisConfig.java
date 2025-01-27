@@ -1,4 +1,4 @@
-package cn.z201.example.redis.bloom;
+package cn.z201.example.spring.redis.bloom;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

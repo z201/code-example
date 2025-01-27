@@ -1,5 +1,4 @@
-package cn.z201.spring.config.core;
-
+package cn.z201.example.spring.aop.log.config.core;
 
 import java.io.Serializable;
 
@@ -13,8 +12,11 @@ public class AjaxResult<T> implements Serializable {
     static final long serialVersionUID = 3320624190109556619L;
 
     private Boolean success;
+
     private Integer code;
+
     private String message;
+
     private T data;
 
     public Boolean getSuccess() {

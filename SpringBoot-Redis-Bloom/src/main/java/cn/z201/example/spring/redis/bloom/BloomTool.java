@@ -1,4 +1,4 @@
-package cn.z201.example.redis.bloom;
+package cn.z201.example.spring.redis.bloom;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

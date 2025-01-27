@@ -1,4 +1,4 @@
-package cn.z201.example.dynamic.data.manager;
+package cn.z201.example.spring.dynamic.data.manager;
 
 import org.springframework.util.ObjectUtils;
 
@@ -10,7 +10,9 @@ import java.util.*;
 public class DynamicDataSourceContextHolder {
 
     private static class SingletonHolder {
+
         private static final DynamicDataSourceContextHolder INSTANCE = new DynamicDataSourceContextHolder();
+
     }
 
     private DynamicDataSourceContextHolder() {
@@ -19,7 +21,6 @@ public class DynamicDataSourceContextHolder {
     public static final DynamicDataSourceContextHolder getInstance() {
         return SingletonHolder.INSTANCE;
     }
-
 
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>() {
         /**
@@ -30,6 +31,7 @@ public class DynamicDataSourceContextHolder {
             return DynamicDataSourceConstant.MASTER;
         }
     };
+
     /**
      * 数据源的 key集合，用于切换时判断数据源是否存在
      */
@@ -37,7 +39,6 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 切换数据源
-     *
      * @param key 数据源
      */
     public void setDataSourceKey(String key) {
@@ -50,7 +51,6 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 获取数据源
-     *
      * @return
      */
     public String getDataSourceKey() {
@@ -66,7 +66,6 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 判断是否包含数据源
-     *
      * @param key 数据源
      * @return
      */
@@ -76,7 +75,6 @@ public class DynamicDataSourceContextHolder {
 
     /**
      * 添加数据源Keys
-     *
      * @param keys
      * @return
      */
@@ -88,7 +86,8 @@ public class DynamicDataSourceContextHolder {
      * 获取全部数据源列表
      * @return
      */
-    public Set<Object> all(){
+    public Set<Object> all() {
         return dataSourceKeys;
     }
+
 }

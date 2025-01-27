@@ -1,4 +1,4 @@
-package cn.z201.audit;
+package cn.z201.example.spring.mybatis.audit;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
@@ -26,21 +26,23 @@ public class AppApplicationTest {
 
     @Test
     @Disabled
-    public void initData(){
+    public void initData() {
         int count = 10;
         CountDownLatch countDownLatch = new CountDownLatch(count);
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         for (int i = 0; i < count; i++) {
             executorService.execute(() -> {
-//                accountDao.insert(accountToolService.create());
+                // accountDao.insert(accountToolService.create());
                 countDownLatch.countDown();
             });
         }
         try {
             countDownLatch.await();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         executorService.shutdown();
     }
+
 }

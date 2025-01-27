@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>SpringBoot-Email</artifactId>
+    <artifactId>springboot-email</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

@@ -1,4 +1,4 @@
-package cn.z201.audit.config.mdc;
+package cn.z201.example.spring.mybatis.audit.config.mdc;
 
 import org.slf4j.MDC;
 import org.springframework.lang.NonNull;
@@ -30,13 +30,14 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
     /**
      * Pool where task threads take MDC from the submitting thread.
      */
-    public static MdcThreadPoolTaskExecutor newWithInheritedMdc(int corePoolSize, int maximumPoolSize, long keepAliveTime,
-                                                                TimeUnit unit, int queueCapacity, RejectedExecutionHandler rejectedExecutionHandler) {
-        return new MdcThreadPoolTaskExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, queueCapacity, rejectedExecutionHandler);
+    public static MdcThreadPoolTaskExecutor newWithInheritedMdc(int corePoolSize, int maximumPoolSize,
+            long keepAliveTime, TimeUnit unit, int queueCapacity, RejectedExecutionHandler rejectedExecutionHandler) {
+        return new MdcThreadPoolTaskExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, queueCapacity,
+                rejectedExecutionHandler);
     }
 
-    private MdcThreadPoolTaskExecutor(int corePoolSize, int maximumPoolSize,
-                                      long keepAliveTime, TimeUnit unit, int queueCapacity, RejectedExecutionHandler rejectedExecutionHandler) {
+    private MdcThreadPoolTaskExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+            int queueCapacity, RejectedExecutionHandler rejectedExecutionHandler) {
         setCorePoolSize(corePoolSize);
         setMaxPoolSize(maximumPoolSize);
         setKeepAliveSeconds((int) unit.toSeconds(keepAliveTime));
@@ -60,7 +61,6 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
     /**
      * 所有线程都会委托给这个execute方法，在这个方法中我们把父线程的MDC内容赋值给子线程
      * https://logback.qos.ch/manual/mdc.html#managedThreads
-     *
      * @param runnable
      */
     @Override
@@ -70,7 +70,6 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
     /**
      * 异步提交
-     *
      * @param task
      * @return
      */
@@ -82,7 +81,6 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
     /**
      * 异步提交
-     *
      * @param task
      * @return
      */
@@ -94,23 +92,24 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
     /**
      * 子线程委托的执行方法s
-     *
      * @param runnable {@link Runnable}
-     * @param context  父线程MDC内容
+     * @param context 父线程MDC内容
      */
     private void run(Runnable runnable, Map<String, String> context) {
         // 将父线程的MDC内容传给子线程
         if (context != null) {
             try {
                 MDC.setContextMap(context);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }
         }
         try {
             // 执行异步操作
             runnable.run();
-        } finally {
+        }
+        finally {
             // 清空MDC内容
             MDC.clear();
         }
@@ -121,18 +120,22 @@ public class MdcThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
             Map<String, String> previous = MDC.getCopyOfContextMap();
             if (context == null) {
                 MDC.clear();
-            } else {
+            }
+            else {
                 MDC.setContextMap(context);
             }
             try {
                 return task.call();
-            } finally {
+            }
+            finally {
                 if (previous == null) {
                     MDC.clear();
-                } else {
+                }
+                else {
                     MDC.setContextMap(previous);
                 }
             }
         };
     }
+
 }

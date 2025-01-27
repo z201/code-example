@@ -1,4 +1,4 @@
-package cn.z201.spring.initialization;
+package cn.z201.example.spring.programming.model.initialization;
 
 import org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -16,4 +16,5 @@ public class ServiceLoaderFactoryBeanConfig {
         serviceLoaderFactoryBean.setServiceType(InitFactory.class);
         return serviceLoaderFactoryBean;
     }
+
 }

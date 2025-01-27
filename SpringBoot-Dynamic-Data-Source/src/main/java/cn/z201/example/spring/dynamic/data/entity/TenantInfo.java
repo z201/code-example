@@ -1,12 +1,12 @@
-package cn.z201.example.dynamic.data.entity;
+package cn.z201.example.spring.dynamic.data.entity;
 
-import cn.z201.example.dynamic.data.mybatis.BaseEntity;
+import cn.z201.example.spring.dynamic.data.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author z201.coding@gmail.com
@@ -62,6 +62,5 @@ public class TenantInfo extends BaseEntity {
      * 系统PROJECT
      */
     private String systemProject;
-
 
 }

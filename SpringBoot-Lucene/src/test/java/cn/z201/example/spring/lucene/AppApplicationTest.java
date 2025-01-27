@@ -1,5 +1,6 @@
-package cn.z201.lucene;
+package cn.z201.example.spring.lucene.lucene;
 
+import cn.z201.example.spring.lucene.AppApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -24,4 +24,5 @@ public class AppApplicationTest {
     public void testContext() {
         Assertions.assertThat(applicationContext).isNotNull();
     }
+
 }

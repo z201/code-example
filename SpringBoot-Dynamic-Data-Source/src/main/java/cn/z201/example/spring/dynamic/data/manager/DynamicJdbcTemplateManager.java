@@ -1,7 +1,6 @@
-package cn.z201.example.dynamic.data.manager;
+package cn.z201.example.spring.dynamic.data.manager;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-
 
 /**
  * @author z201.coding@gmail.com

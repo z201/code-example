@@ -1,4 +1,4 @@
-package cn.z201.spring.config.aspect.annotation;
+package cn.z201.example.spring.aop.log.config.aspect.annotation;
 
 import java.lang.annotation.*;
 
@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * @author z201.coding@gmail.com
  * @date 2020-08-26
  **/
-@Target(value = {ElementType.METHOD})
+@Target(value = { ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MonitorAnnotation {
@@ -28,21 +28,18 @@ public @interface MonitorAnnotation {
 
     /**
      * 是否身份检查
-     *
      * @return
      */
     boolean auth() default true;
 
     /**
      * 预警发送谁
-     *
      * @return
      */
     String[] alarm() default "";
 
     /**
      * 超时时间 0 的时候无效
-     *
      * @return
      */
     long timeout() default 0L;

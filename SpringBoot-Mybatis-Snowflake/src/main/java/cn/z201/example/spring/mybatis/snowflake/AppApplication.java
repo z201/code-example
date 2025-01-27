@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.snowflake;
+package cn.z201.example.spring.mybatis.snowflake;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

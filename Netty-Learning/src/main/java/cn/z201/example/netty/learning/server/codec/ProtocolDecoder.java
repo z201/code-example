@@ -1,6 +1,6 @@
-package cn.z201.example.learning.server.codec;
+package cn.z201.example.netty.learning.server.codec;
 
-import cn.z201.example.learning.protocol.MessageHolder;
+import cn.z201.example.netty.learning.protocol.MessageHolder;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
@@ -14,11 +14,12 @@ import java.util.List;
  **/
 @Slf4j
 public class ProtocolDecoder extends MessageToMessageDecoder<ByteBuf> {
+
     @Override
-    protected void decode(ChannelHandlerContext ctx,
-                          ByteBuf msg, List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
         MessageHolder messageHolder = new MessageHolder();
-        log.info("running {}",messageHolder.toString());
+        log.info("running {}", messageHolder.toString());
         out.add(messageHolder);
     }
+
 }

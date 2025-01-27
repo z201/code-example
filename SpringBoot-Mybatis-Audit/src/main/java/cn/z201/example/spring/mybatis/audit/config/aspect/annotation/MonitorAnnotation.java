@@ -1,4 +1,4 @@
-package cn.z201.example.mybatis.audit.config.aspect.annotation;
+package cn.z201.example.spring.mybatis.audit.config.aspect.annotation;
 
 import java.lang.annotation.*;
 
@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * @author z201.coding@gmail.com
  * @date 2020-08-26
  **/
-@Target(value = {ElementType.METHOD})
+@Target(value = { ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MonitorAnnotation {

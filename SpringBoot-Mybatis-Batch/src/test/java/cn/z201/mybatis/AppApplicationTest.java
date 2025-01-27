@@ -1,8 +1,9 @@
 package cn.z201.mybatis;
 
-import cn.z201.mybatis.dao.BatchDao;
-import cn.z201.mybatis.dao.TableDataDao;
-import cn.z201.mybatis.entity.TableData;
+import cn.z201.example.spring.mybatis.batch.AppApplication;
+import cn.z201.example.spring.mybatis.batch.dao.BatchDao;
+import cn.z201.example.spring.mybatis.batch.dao.TableDataDao;
+import cn.z201.example.spring.mybatis.batch.entity.TableData;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,6 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = AppApplication.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -30,10 +30,10 @@ public class AppApplicationTest {
     protected TableDataDao tableDataDao;
 
     @Autowired
-    protected  BatchDao batchDao;
+    protected BatchDao batchDao;
 
     @Autowired
-    protected  SqlSessionFactory sqlSessionFactory;
+    protected SqlSessionFactory sqlSessionFactory;
 
     @BeforeEach
     public void before() {
@@ -44,7 +44,7 @@ public class AppApplicationTest {
     @AfterEach
     public void after() {
         log.info("after");
-//        tableDataDao.truncate();
+        // tableDataDao.truncate();
     }
 
     private List<TableData> mockData(int size) {
