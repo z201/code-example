@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>SpringBoot-Redis-Cache-Breakdown</artifactId>
+    <artifactId>springboot-redis-cache-breakdown</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

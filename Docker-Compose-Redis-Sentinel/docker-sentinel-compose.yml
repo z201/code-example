@@ -12,9 +12,23 @@ services:
       - network-redis
     ports:
       - '26379:26379'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel.conf:/usr/local/etc/redis/sentinel.conf
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
   sentinel2:
     image: redis:5.0.5
     container_name: redis5.0.6-sentinel-2
@@ -22,9 +36,23 @@ services:
       - network-redis
     ports:
       - '26380:26379'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
   sentinel3:
     image: redis:5.0.5
     container_name: redis5.0.6-sentinel-3
@@ -32,6 +60,20 @@ services:
       - network-redis
     ports:
       - '26381:26379'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
     command: redis-sentinel /usr/local/etc/redis/sentinel.conf
     volumes:
       - ./sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"

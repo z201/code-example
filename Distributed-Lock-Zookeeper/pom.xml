@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>Distributed-Lock-Zookeeper</artifactId>
+    <artifactId>distributed-lock-zookeeper</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

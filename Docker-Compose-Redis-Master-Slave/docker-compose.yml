@@ -12,7 +12,23 @@ services:
       - network-redis
     ports:
       - '6379:6379'
-    command: redis-server --requirepass redis_pwd  --masterauth redis_pwd # 启动redis命令
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+    command: redis-server --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
   slaves1:
     image: redis:5.0.5
     container_name: redis5.0.6-slaves1
@@ -20,7 +36,23 @@ services:
       - network-redis
     ports:
       - '6380:6379'
-    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass redis_pwd --masterauth redis_pwd # 启动redis命令
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
   slaves2:
     image: redis:5.0.5
     container_name: redis5.0.6-slaves2
@@ -28,4 +60,20 @@ services:
       - network-redis
     ports:
       - '6381:6379'
-    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass redis_pwd --masterauth redis_pwd # 启动redis命令
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    environment:
+      - REDIS_PASSWORD=redis_pwd
+    command: redis-server --slaveof redis5.0.6-master 6379 --requirepass ${REDIS_PASSWORD} --masterauth ${REDIS_PASSWORD}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"

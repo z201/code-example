@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>SpringBoot-Redis-Geo</artifactId>
+    <artifactId>springboot-redis-geo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

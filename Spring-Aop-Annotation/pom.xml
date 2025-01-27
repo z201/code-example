@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>Spring-Aop-Annotation</artifactId>
+    <artifactId>spring-aop-annotation</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

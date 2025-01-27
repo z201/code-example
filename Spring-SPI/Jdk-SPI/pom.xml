@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>Jdk-SPI</artifactId>
+    <artifactId>jdk-SPI</artifactId>
 
     <dependencies>
         <!-- 单元测试 -->

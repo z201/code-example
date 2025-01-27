@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>SpringBoot-Lucene</artifactId>
+    <artifactId>springboot-lucene</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
@@ -21,17 +21,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <!-- SpringBoot web undertow -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>wildfly-client-config</artifactId>
-                    <groupId>org.wildfly.client</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- 工具包 https://github.com/looly/hutool/-->
         <dependency>

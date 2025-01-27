@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>SpringBoot-Delayed-Message-Queue</artifactId>
+    <artifactId>springboot-delayed-message-queue</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

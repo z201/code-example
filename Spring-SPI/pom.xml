@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>Spring-SPI</artifactId>
+    <artifactId>spring-spi</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -17,4 +17,5 @@
         <module>Jdk-SPI</module>
         <module>SpringBoot-SPI</module>
     </modules>
+
 </project>

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.z201.example</groupId>
-    <artifactId>Bom</artifactId>
+    <artifactId>bom</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
@@ -201,6 +201,13 @@
                 <version>${hutool.version}</version>
             </dependency>
 
+            <!-- 工具包 https://github.com/looly/hutool/-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
             <!-- JMH基准测试 -->
             <dependency>
                 <groupId>org.openjdk.jmh</groupId>
@@ -246,12 +253,6 @@
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-recipes</artifactId>
                 <version>${zookeeper-curator.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-core</artifactId>
-                <version>${hutool.version}</version>
             </dependency>
 
         </dependencies>

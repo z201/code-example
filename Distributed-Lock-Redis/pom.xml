@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
     <groupId>cn.z201.distributed.lock</groupId>
-    <artifactId>Distributed-Lock-Redis</artifactId>
+    <artifactId>distributed-lock-redis</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>

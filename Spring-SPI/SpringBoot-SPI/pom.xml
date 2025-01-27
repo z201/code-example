@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>SpringBoot-SPI</artifactId>
+    <artifactId>springBoot-SPI</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <!-- 引入的是spring 5.3.6 -->
@@ -33,7 +33,7 @@
 
         <dependency>
             <groupId>cn.z201.example</groupId>
-            <artifactId>Jdk-SPI</artifactId>
+            <artifactId>jdk-SPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 

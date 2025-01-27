@@ -8,7 +8,7 @@
         <artifactId>example-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>SpringBoot-Redis-Bloom</artifactId>
+    <artifactId>springboot-redis-bloom</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
 

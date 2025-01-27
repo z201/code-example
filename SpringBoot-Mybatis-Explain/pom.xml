@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
     <groupId>cn.z201.mybatis.explain</groupId>
-    <artifactId>SpringBoot-Mybatis-Explain</artifactId>
+    <artifactId>springboot-mybatis-explain</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
