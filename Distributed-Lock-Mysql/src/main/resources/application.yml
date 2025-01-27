@@ -14,9 +14,6 @@ server:
     context-path: /lock
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   level:
-    org:
-      springframework:
-        jdbc:
-          core: debug
+    org.springframework.jdbc.core : DEBUG

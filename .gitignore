@@ -47,7 +47,4 @@ logs/
 .gradle
 .apk
 
-# app
-/app-vip/docker-config/mysql/data/**
-/app-vip/docker-config/mysql/log/**
-/app-vip/docker-config/redis/data/**
+

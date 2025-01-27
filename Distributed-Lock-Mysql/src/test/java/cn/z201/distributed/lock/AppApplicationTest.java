@@ -1,5 +1,7 @@
 package cn.z201.distributed.lock;
 
+import cn.z201.example.distributed.lock.AppApplication;
+import cn.z201.example.distributed.lock.DistributedLockTool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;

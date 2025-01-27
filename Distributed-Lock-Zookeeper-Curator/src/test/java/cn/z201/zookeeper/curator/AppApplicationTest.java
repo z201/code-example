@@ -1,9 +1,10 @@
 package cn.z201.zookeeper.curator;
 
+import cn.z201.example.distributed.zookeeper.curator.AppApplication;
+import cn.z201.example.distributed.zookeeper.curator.DistributedLockZookeeperCuratorTool;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
-import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreMutex;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;

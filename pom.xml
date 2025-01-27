@@ -12,20 +12,22 @@
     <description>z201 example project</description>
 
     <modules>
-        <module>bom</module>
-        <module>jmh</module>
-        <module>junit</module>
-        <module>snowflake</module>
-        <!--        <module>Distributed-Lock-Mysql</module>-->
-        <!--        <module>Distributed-Lock-Redis</module>-->
-        <!--        <module>Distributed-Lock-Zookeeper</module>-->
-        <!--        <module>Distributed-Lock-Zookeeper-Curator</module>-->
-        <!--        <module>Distributed-Lock-Zookeeper-Curator</module>-->
-        <module>Mybatis-Explain</module>
-        <module>Mybatis-Snowflake</module>
-        <module>Netty-learning</module>
-        <!--        <module>Redis-Cache-Breakdown</module>-->
-        <!--        <module>Redis-Geo</module>-->
+        <module>Bom</module>
+        <module>Jmh</module>
+        <module>Junit</module>
+        <module>Netty-Learning</module>
+        <module>Snowflake</module>
+        <module>Distributed-Lock-Mysql</module>
+        <module>Distributed-Lock-Redis</module>
+        <module>Distributed-Lock-Zookeeper</module>
+        <module>Distributed-Lock-Zookeeper-Curator</module>
+        <module>Docker-Compose-Mybatis-Explain</module>
+        <module>Docker-Compose-Mybatis-Snowflake</module>
+        <module>Docker-Compose-Redis-Cache-Breakdown</module>
+        <module>Docker-Compose-Redis-Geo</module>
+        <module>Docker-Compose-SpringBoot-Dynamic-Data-Source</module>
+        <module>Docker-Compose-SpringBoot-Mysql-Redis</module>
+        <module>Docker-Compose-SpringBoot-Redis-Bloom</module>
         <!--        <module>Redisson</module>-->
         <!--        <module>Selenium-Tool</module>-->
         <!--        <module>Spring-Aop-Annotation</module>-->
@@ -35,7 +37,7 @@
         <!--        <module>SpringBoot-Blocking-Queue</module>-->
         <!--        <module>SpringBoot-Delayed-Queue</module>-->
         <!--        <module>SpringBoot-Drone-CI</module>-->
-        <!--        <module>SpringBoot-Dynamic-Data-Source</module>-->
+
         <!--        <module>SpringBoot-Email</module>-->
         <!--        <module>SpringBoot-JMH</module>-->
         <!--        <module>SpringBoot-Lucene</module>-->

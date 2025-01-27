@@ -1,5 +1,7 @@
 package cn.z201.redis;
 
+import cn.z201.example.distributed.redis.AppApplication;
+import cn.z201.example.distributed.redis.DistributedLockRedisTool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
