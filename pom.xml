@@ -20,10 +20,10 @@
         <module>Spring-Programming-Model</module>
         <module>Spring-SPI</module>
         <module>Netty-Learning</module>
-        <module>Distributed-Lock-Mysql</module>
-        <module>Distributed-Lock-Redis</module>
-        <module>Distributed-Lock-Zookeeper</module>
-        <module>Distributed-Lock-Zookeeper-Curator</module>
+        <module>SpringBoot-Distributed-Lock-Mysql</module>
+        <module>SpringBoot-Distributed-Lock-Redis</module>
+        <module>SpringBoot-Distributed-Lock-Zookeeper</module>
+        <module>SpringBoot-Distributed-Lock-Zookeeper-Curator</module>
         <module>SpringBoot-Mybatis-Explain</module>
         <module>SpringBoot-Mybatis-Snowflake</module>
         <module>SpringBoot-Redis-Cache-Breakdown</module>
