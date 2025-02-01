@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>springboot-delayed-message-queue</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <!-- SpringBoot web starter -->

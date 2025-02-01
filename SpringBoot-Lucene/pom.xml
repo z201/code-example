@@ -9,7 +9,6 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>springboot-lucene</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <lucene.version>8.4.0</lucene.version>

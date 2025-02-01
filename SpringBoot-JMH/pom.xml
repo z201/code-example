@@ -9,7 +9,6 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>springboot-jmh</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
 
     <dependencies>
