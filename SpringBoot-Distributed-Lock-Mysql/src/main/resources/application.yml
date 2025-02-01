@@ -1,6 +1,6 @@
 spring:
   application:
-    name: distributed-lock-mysql
+    name: springboot-distributed-lock-mysql
   profiles:
     active: dev
   mvc:
@@ -12,7 +12,7 @@ spring:
 server:
   port: 9004
   servlet:
-    context-path: /lock
+    context-path: /
 
 logging:
   config: classpath:logback-spring.xml

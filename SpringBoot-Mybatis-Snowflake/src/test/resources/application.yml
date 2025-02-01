@@ -22,6 +22,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   level:
     cn.z201.example.mybatis.snowflake.dao: debug

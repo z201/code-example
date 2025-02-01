@@ -12,9 +12,9 @@ spring:
 server:
   port: 9009
   servlet:
-    context-path: /redis
+    context-path: /
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
   level:
     cn.z201.example.distributed.redis: DEBUG

@@ -11,7 +11,7 @@ spring:
     resources:
       add-mappings: false # 关闭资源映射
   webflux:
-    base-path: /aop
+    base-path: /
 
 logging:
   config: classpath:logback-spring.xml

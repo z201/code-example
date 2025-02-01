@@ -11,8 +11,8 @@ spring:
 server:
   port: 9010
   servlet:
-    context-path: /zookeeper
+    context-path: /
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
 

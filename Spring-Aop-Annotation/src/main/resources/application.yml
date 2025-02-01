@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-aop
+    name: spring-aop-annotation
   mvc:
     throw-exception-if-no-handler-found: true # 处理404
   web:
@@ -9,8 +9,8 @@ spring:
 server:
   port: 9003
   servlet:
-    context-path: /aop
+    context-path: /
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
 

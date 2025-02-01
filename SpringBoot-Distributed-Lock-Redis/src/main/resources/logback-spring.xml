@@ -6,7 +6,7 @@
     <contextName>springboot-distributed-lock-redis</contextName>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%t]  %msg%n</pattern>
+            <pattern>%date %level %logger{5} [%file : %line] [%X{AppTraceId}] %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -18,7 +18,7 @@
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>[%t] %msg%n</pattern>
+            <pattern>%date %level %logger{5} [%file : %line] [%X{AppTraceId}] %msg%n</pattern>
         </encoder>
     </appender>
 

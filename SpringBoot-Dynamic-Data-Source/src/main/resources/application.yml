@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-dynamic-data
+    name: springboot-dynamic-data-source
   profiles:
     active: dev
   mvc:

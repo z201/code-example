@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-test-mock
+    name: springboot-test-mock
   profiles:
     active: dev
   mvc:
@@ -9,9 +9,9 @@ spring:
     resources:
       add-mappings: false # 关闭资源映射
   webflux:
-    base-path: /test
+    base-path: /
 server:
   port: 9011
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
