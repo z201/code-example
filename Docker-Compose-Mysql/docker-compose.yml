@@ -1,0 +1,66 @@
+# 指定docker-compose版本，3.5版本支持更多高级特性
+version: '3.5'
+
+services:
+  # MySQL服务配置
+  mysql:
+    # 使用MySQL 8.0版本镜像
+    image: mysql:8.0
+    # 指定容器名称
+    container_name: mysql8.0
+    # 设置MySQL使用原生密码认证插件，解决部分客户端连接兼容性问题
+    command: --default-authentication-plugin=mysql_native_password
+    # 容器重启策略为始终重启
+    restart: always
+    # 环境变量配置
+    environment:
+      # MySQL root用户密码
+      - MYSQL_ROOT_PASSWORD=root
+      # 设置时区为上海
+      - TZ=Asia/Shanghai
+    # 端口映射，将容器3306端口映射到主机3306端口
+    ports:
+      - "3306:3306"
+    # 数据卷挂载配置
+    volumes:
+      # 挂载MySQL数据目录，确保数据持久化
+      - ./docker-config/mysql/data:/var/lib/mysql
+      # 挂载MySQL配置文件目录
+      - ./docker-config/mysql/conf:/etc/mysql/conf.d
+      # 挂载MySQL初始化脚本目录
+      - ./docker-config/mysql/init:/docker-entrypoint-initdb.d
+    # 健康检查配置
+    healthcheck:
+      # 使用mysqladmin ping命令检查MySQL是否正常运行
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      # 每5秒检查一次
+      interval: 5s
+      # 检查超时时间为3秒
+      timeout: 3s
+      # 最大重试次数为5次
+      retries: 5
+    # 资源限制配置
+    deploy:
+      resources:
+        # 资源使用上限
+        limits:
+          # CPU使用限制为2核
+          cpus: '1'
+          # 内存使用限制为1GB
+          memory: 1G
+        # 资源预留配置
+        reservations:
+          # 预留0.5核CPU
+          cpus: '0.5'
+          # 预留512MB内存
+          memory: 512M
+    # 网络配置，使用mysql-net网络
+    networks:
+      - mysql-net
+
+# 自定义网络配置
+networks:
+  # 定义mysql-net网络
+  mysql-net:
+    # 使用bridge驱动，创建桥接网络
+    driver: bridge

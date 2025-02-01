@@ -1,0 +1,125 @@
+version: '3.8'
+
+services:
+  zookeeper1:
+    image: zookeeper:3.7.1
+    container_name: zookeeper1
+    restart: always
+    ports:
+      - "2181:2181"
+      - "8081:8080"
+    environment:
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+      - JVMFLAGS=-Djava.security.auth.login.config=/conf/jaas.conf
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - ./docker-config/zookeeper1/zoo.cfg:/conf/zoo.cfg:ro
+      - ./docker-config/zookeeper1/jaas.conf:/conf/jaas.conf:ro
+      - ./docker-config/zookeeper1/log4j.properties:/conf/log4j.properties:ro
+      - zookeeper1_data:/data
+      - zookeeper1_datalog:/datalog
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc localhost 2181 | grep imok"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - zookeeper_net
+
+  zookeeper2:
+    image: zookeeper:3.7.1
+    container_name: zookeeper2
+    restart: always
+    ports:
+      - "2182:2181"
+      - "8082:8080"
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+      - JVMFLAGS=-Djava.security.auth.login.config=/conf/jaas.conf
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - ./docker-config/zookeeper2/zoo.cfg:/conf/zoo.cfg:ro
+      - ./docker-config/zookeeper2/jaas.conf:/conf/jaas.conf:ro
+      - ./docker-config/zookeeper2/log4j.properties:/conf/log4j.properties:ro
+      - zookeeper2_data:/data
+      - zookeeper2_datalog:/datalog
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc localhost 2181 | grep imok"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - zookeeper_net
+
+  zookeeper3:
+    image: zookeeper:3.7.1
+    container_name: zookeeper3
+    restart: always
+    ports:
+      - "2183:2181"
+      - "8083:8080"
+    environment:
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+      - JVMFLAGS=-Djava.security.auth.login.config=/conf/jaas.conf
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - ./docker-config/zookeeper3/zoo.cfg:/conf/zoo.cfg:ro
+      - ./docker-config/zookeeper3/jaas.conf:/conf/jaas.conf:ro
+      - ./docker-config/zookeeper3/log4j.properties:/conf/log4j.properties:ro
+      - zookeeper3_data:/data
+      - zookeeper3_datalog:/datalog
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc localhost 2181 | grep imok"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - zookeeper_net
+
+networks:
+  zookeeper_net:
+    driver: bridge
+
+volumes:
+  zookeeper1_data:
+    driver: local
+  zookeeper1_datalog:
+    driver: local
+  zookeeper2_data:
+    driver: local
+  zookeeper2_datalog:
+    driver: local
+  zookeeper3_data:
+    driver: local
+  zookeeper3_datalog:
+    driver: local
