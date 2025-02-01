@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-aop-log
+    name: springboot-aop-log
   profiles:
     active: dev
   mvc:
@@ -13,20 +13,8 @@ server:
   servlet:
     context-path: /
 
-# sql
-mybatis-plus:
-  configuration:
-    # 指定日志实现
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-    #开启下划线转驼峰
-    map-underscore-to-camel-case: true
-
 logging:
   config: classpath:logback-spring.xml
   level:
-    cn:
-      z201:
-        mybatis:
-          dao: info
-    org:
-      springframework: info
+    cn.z201.example.spring.aop.log: INFO
+    org.springframework: INFO

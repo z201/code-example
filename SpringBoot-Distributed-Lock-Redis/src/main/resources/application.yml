@@ -1,6 +1,6 @@
 spring:
   application:
-    name: distributed-lock-redis
+    name: springboot-distributed-lock-redis
   profiles:
     active: dev
   mvc:
@@ -9,14 +9,6 @@ spring:
     resources:
       add-mappings: false # 关闭资源映射
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-  endpoint:
-    health:
-      show-details: always
 server:
   port: 9009
   servlet:
@@ -25,8 +17,4 @@ server:
 logging:
   config: classpath:logback.xml
   level:
-    cn:
-      z201:
-        redis:
-          RedisAdvice: debug
-
+    cn.z201.example.distributed.redis: DEBUG

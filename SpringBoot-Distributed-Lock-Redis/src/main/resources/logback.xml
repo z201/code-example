@@ -3,7 +3,7 @@
     <!-- 配置参数logDir读取application.yml中的spring.application.name属性，如果没有配置，默认是只logback -->
     <property name="log.path" value="data/logs/"/>
 
-    <contextName>distributed-lock-redis</contextName>
+    <contextName>springboot-distributed-lock-redis</contextName>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>[%t]  %msg%n</pattern>

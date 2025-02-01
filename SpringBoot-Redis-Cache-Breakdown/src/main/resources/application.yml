@@ -1,6 +1,6 @@
 spring:
   application:
-    name: redis-cache-breakdown
+    name: springboot-redis-cache-breakdown
   profiles:
     active: dev
   mvc:

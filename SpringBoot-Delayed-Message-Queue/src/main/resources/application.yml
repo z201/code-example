@@ -1,6 +1,8 @@
+server:
+  port: 9016
 spring:
   application:
-    name: spring-test-delayed
+    name: springboot-delayed-message-queue
   profiles:
     active: dev
   mvc:

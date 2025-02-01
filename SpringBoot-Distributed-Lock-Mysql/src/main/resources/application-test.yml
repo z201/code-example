@@ -13,7 +13,3 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-logging:
-  level:
-    com.example: INFO
-    org.springframework.jdbc.core: INFO

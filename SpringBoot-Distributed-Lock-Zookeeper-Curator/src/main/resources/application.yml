@@ -1,6 +1,6 @@
 spring:
   application:
-    name: distributed-lock-zookeeper-curator
+    name: springboot-distributed-lock-zookeeper-curator
   profiles:
     active: dev
   mvc:

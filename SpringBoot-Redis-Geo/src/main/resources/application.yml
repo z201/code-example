@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-mysql-redis
+    name: spring-boot-redis-geo
   profiles:
     active: dev
   mvc:
