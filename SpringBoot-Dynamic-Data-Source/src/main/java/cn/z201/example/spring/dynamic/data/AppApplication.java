@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
  * @author z201.coding@gmail.com
  */
 @SpringBootApplication
-@MapperScan(basePackages = "cn.z201.dynamic.persistence.dao")
+@MapperScan(basePackages = "cn.z201.example.spring.dynamic.data.dao")
 public class AppApplication {
 
     public static void main(String[] args) {
