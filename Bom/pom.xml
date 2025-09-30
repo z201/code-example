@@ -46,7 +46,7 @@
 
         <!-- Apache Commons 工具库版本 -->
         <commons-io.version>2.15.0</commons-io.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-codec.version>1.13</commons-codec.version>
         <!-- Hutool -->
