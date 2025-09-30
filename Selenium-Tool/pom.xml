@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>eelenium-tool</artifactId>
+    <artifactId>Selenium-Tool</artifactId>
 
     <properties>
         <selenium-java.version>3.14.0</selenium-java.version>
