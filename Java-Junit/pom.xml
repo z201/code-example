@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>Java-Junit</artifactId>
+    <artifactId>java-junit</artifactId>
 
     <dependencies>
         <dependency>
