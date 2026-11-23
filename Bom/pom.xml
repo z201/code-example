@@ -72,7 +72,7 @@
         <!-- slf4j-log4j12 漏洞修复 slf4j-log4j12 依赖替换为 slf4j-reload4j 依赖。 -->
         <slf4j-reload4j.version>1.7.36</slf4j-reload4j.version>
         <!-- zookeeper -->
-        <zookeeper.version>3.8.4</zookeeper.version>
+        <zookeeper.version>3.8.6</zookeeper.version>
         <!-- zookeeper- curator-framework -->
         <zookeeper-curator.version>4.2.0</zookeeper-curator.version>
     </properties>
