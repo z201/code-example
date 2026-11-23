@@ -33,7 +33,7 @@
         <dependency>
             <groupId>cn.z201.example</groupId>
             <artifactId>jdk-spi</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- 单元测试 -->
