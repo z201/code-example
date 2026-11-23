@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>jmh-snowflake</artifactId>
+    <artifactId>Java-Jmh-snowflake</artifactId>
 
     <dependencies>
         <!-- 单元测试 -->
