@@ -13,13 +13,13 @@
 
     <modules>
         <module>Bom</module>
-        <module>Jmh-Snowflake</module>
-        <module>Junit</module>
-        <module>Selenium-Tool</module>
+        <module>Java-Jmh-Snowflake</module>
+        <module>Java-Junit</module>
+        <module>Java-Selenium-Tool</module>
+        <module>Java-Netty-Learning</module>
         <module>Spring-Aop-Annotation</module>
         <module>Spring-Programming-Model</module>
         <module>Spring-SPI</module>
-        <module>Netty-Learning</module>
         <module>SpringBoot-Distributed-Lock-Mysql</module>
         <module>SpringBoot-Distributed-Lock-Redis</module>
         <module>SpringBoot-Distributed-Lock-Zookeeper</module>

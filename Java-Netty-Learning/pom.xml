@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>netty-learning</artifactId>
+    <artifactId>Java-Netty-Learning</artifactId>
 
     <dependencies>
 
