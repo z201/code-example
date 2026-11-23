@@ -13,7 +13,7 @@
 
     <properties>
         <selenium-java.version>3.14.0</selenium-java.version>
-        <jsoup.version>1.15.3</jsoup.version>
+        <jsoup.version>1.23.2</jsoup.version>
     </properties>
 
     <dependencies>
